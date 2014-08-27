@@ -81,6 +81,12 @@
 }
 
 #pragma mark - Table view data delegate
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 70.0f;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [arrData count];
 }
@@ -92,11 +98,12 @@
         cell = [[NSBundle mainBundle] loadNibNamed:@"ProductCellTableViewCell" owner:self options:nil][0];
     }
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     NSDictionary *dictProduct = [arrData objectAtIndex:indexPath.row];
     
-    cell.lblproductInfoId.text = ([dictProduct objectForKey:@"id"])?[NSString stringWithFormat:@"%@",[dictProduct objectForKey:@"id"]]:@"noId";
-    cell.lblproductInfoDescription.text = @"Aqui esta la descripción";
+    cell.lblProductInfoId.text = ([dictProduct objectForKey:@"id"])?[NSString stringWithFormat:@"%@",[dictProduct objectForKey:@"id"]]:@"noId";
+    cell.lblProductInfoDescription.text = @"description // Leo";
+    cell.lblProductDescriptionCategory.text = @"description cat // Paco";
     return cell;
 }
 

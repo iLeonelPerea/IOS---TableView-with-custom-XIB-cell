@@ -10,7 +10,8 @@
 
 @interface ProductCellTableViewCell : UITableViewCell
 
-@property(nonatomic, strong) IBOutlet UILabel *lblproductInfoId;
-@property(nonatomic, strong) IBOutlet UILabel *lblproductInfoDescription;
+@property(nonatomic, strong) IBOutlet UILabel *lblProductInfoId;
+@property(nonatomic, strong) IBOutlet UILabel *lblProductInfoDescription;
+@property(nonatomic, strong) IBOutlet UILabel *lblProductDescriptionCategory;
 
 @end
