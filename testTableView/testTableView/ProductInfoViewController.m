@@ -28,17 +28,21 @@
 {
     [super viewDidLoad];
     NSString *url = ([_dictFinalProduct objectForKey:@"picture"] != [NSNull null])?
-    [NSString stringWithFormat:@"%@",[_dictFinalProduct objectForKey:@"picture"]]:
-    @"http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/thumb/6/60/No_Image_Available.png/480px-No_Image_Available.png";
+        [NSString stringWithFormat:@"%@",[_dictFinalProduct objectForKey:@"picture"]]:@"";
     self.lblProductName.text = ([_dictFinalProduct objectForKey:@"name"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [_dictFinalProduct objectForKey:@"name"]]:@"No Name";
     self.lblProductCategory.text = ([_dictFinalProduct objectForKey:@"category"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [_dictFinalProduct objectForKey:@"category"]]:@"No Category";
     self.txtProductDescription.text = ([_dictFinalProduct objectForKey:@"description"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [_dictFinalProduct objectForKey:@"description"]]:@"No Description";
     
-    [[[AsyncImageDownloader alloc] initWithFileURL:url successBlock:^(NSData *data) {
-        [self.imgProduct setImage:[UIImage imageWithData:data]];
-    } failBlock:^(NSError *error) {
-        NSLog(@"Failed to download image due to %@!", error);
-    }] startDownload];
+    if(![url isEqual:@""]){
+        [[[AsyncImageDownloader alloc] initWithFileURL:url successBlock:^(NSData *data) {
+            [self.imgProduct setImage:[UIImage imageWithData:data]];
+        } failBlock:^(NSError *error) {
+            NSLog(@"Failed to download image due to %@!", error);
+        }] startDownload];
+    }else{
+        [self.imgProduct setImage:[UIImage imageNamed:@"noAvail.png"]];
+    }
+    
 
     // Do any additional setup after loading the view from its nib.
 }
