@@ -6,6 +6,12 @@
 // project.
 
 
+// AsyncImageDownloader
+#define COCOAPODS_POD_AVAILABLE_AsyncImageDownloader
+#define COCOAPODS_VERSION_MAJOR_AsyncImageDownloader 1
+#define COCOAPODS_VERSION_MINOR_AsyncImageDownloader 0
+#define COCOAPODS_VERSION_PATCH_AsyncImageDownloader 0
+
 // JGProgressHUD
 #define COCOAPODS_POD_AVAILABLE_JGProgressHUD
 #define COCOAPODS_VERSION_MAJOR_JGProgressHUD 1

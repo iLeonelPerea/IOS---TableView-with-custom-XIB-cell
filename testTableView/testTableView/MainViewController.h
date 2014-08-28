@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "ProductCellTableViewCell.h"
 #import "ProductInfoViewController.h"
+#import <JGProgressHUD.h>
+#import <AsyncImageDownloader.h>
 
 @interface MainViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic, strong)IBOutlet UITableView *tblView;
+@property (nonatomic, strong) IBOutlet UITableView *tblView;
 @property (nonatomic, strong) NSMutableArray *arrData;
+@property (nonatomic, strong) JGProgressHUD *HUDJMProgress;
 
 @end
