@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ProductCellTableViewCell.h"
+#import "ProductInfoViewController.h"
 
 @interface MainViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
 

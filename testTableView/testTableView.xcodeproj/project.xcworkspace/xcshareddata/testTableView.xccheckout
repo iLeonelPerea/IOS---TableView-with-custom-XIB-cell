@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9F3525F6-267C-4DE3-AF8B-449AAE01065C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>testTableView</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>22113D99-6873-40F6-A526-86892234B9CC</key>
+		<string>ssh://github.com/iLeonelPerea/IOS---TableView-with-custom-XIB-cell.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>testTableView/testTableView.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>22113D99-6873-40F6-A526-86892234B9CC</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/iLeonelPerea/IOS---TableView-with-custom-XIB-cell.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>22113D99-6873-40F6-A526-86892234B9CC</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>22113D99-6873-40F6-A526-86892234B9CC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>IOS---TableView-with-custom-XIB-cell</string>
+		</dict>
+	</array>
+</dict>
+</plist>

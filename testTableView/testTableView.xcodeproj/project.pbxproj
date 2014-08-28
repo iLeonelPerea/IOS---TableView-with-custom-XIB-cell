@@ -24,6 +24,8 @@
 		7DB5B1B719AE2E7E0031619E /* testTableViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB5B1B619AE2E7E0031619E /* testTableViewTests.m */; };
 		7DB5B1C319AE3A760031619E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB5B1C119AE3A760031619E /* MainViewController.m */; };
 		7DB5B1C419AE3A760031619E /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DB5B1C219AE3A760031619E /* MainViewController.xib */; };
+		7DCA9A1A19AF6C08002D19B5 /* ProductInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DCA9A1819AF6C08002D19B5 /* ProductInfoViewController.m */; };
+		7DCA9A1B19AF6C08002D19B5 /* ProductInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DCA9A1919AF6C08002D19B5 /* ProductInfoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,9 @@
 		7DB5B1C019AE3A760031619E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		7DB5B1C119AE3A760031619E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		7DB5B1C219AE3A760031619E /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		7DCA9A1719AF6C08002D19B5 /* ProductInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductInfoViewController.h; sourceTree = "<group>"; };
+		7DCA9A1819AF6C08002D19B5 /* ProductInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductInfoViewController.m; sourceTree = "<group>"; };
+		7DCA9A1919AF6C08002D19B5 /* ProductInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductInfoViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +137,9 @@
 				7D9C89FD19AE8234006F8F45 /* ProductCellTableViewCell.h */,
 				7D9C89FE19AE8234006F8F45 /* ProductCellTableViewCell.m */,
 				7D9C89FF19AE8234006F8F45 /* ProductCellTableViewCell.xib */,
+				7DCA9A1719AF6C08002D19B5 /* ProductInfoViewController.h */,
+				7DCA9A1819AF6C08002D19B5 /* ProductInfoViewController.m */,
+				7DCA9A1919AF6C08002D19B5 /* ProductInfoViewController.xib */,
 			);
 			path = testTableView;
 			sourceTree = "<group>";
@@ -245,6 +253,7 @@
 				7D9C8A0119AE8234006F8F45 /* ProductCellTableViewCell.xib in Resources */,
 				7DB5B1C419AE3A760031619E /* MainViewController.xib in Resources */,
 				7DB5B19619AE2E7E0031619E /* InfoPlist.strings in Resources */,
+				7DCA9A1B19AF6C08002D19B5 /* ProductInfoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DCA9A1A19AF6C08002D19B5 /* ProductInfoViewController.m in Sources */,
 				7DB5B1A219AE2E7E0031619E /* ViewController.m in Sources */,
 				7D9C8A0019AE8234006F8F45 /* ProductCellTableViewCell.m in Sources */,
 				7DB5B19C19AE2E7E0031619E /* AppDelegate.m in Sources */,
