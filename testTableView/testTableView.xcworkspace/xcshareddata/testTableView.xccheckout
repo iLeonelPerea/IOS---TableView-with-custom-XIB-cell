@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>EE2B9A7C-B767-42CD-BCC4-A9F361CD5A66</string>
+	<string>1C8B026E-3012-4369-801C-16E5667C8A17</string>
 	<key>IDESourceControlProjectName</key>
 	<string>testTableView</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>32187F96-5CB3-4D66-874F-CAE2882B5113</key>
-		<string>ssh://github.com/iLeonelPerea/IOS---TableView-with-custom-XIB-cell.git</string>
+		<key>3559386D-2347-4839-9A1E-E27F5F135D70</key>
+		<string>https://github.com/iLeonelPerea/IOS---TableView-with-custom-XIB-cell</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>testTableView/testTableView.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>32187F96-5CB3-4D66-874F-CAE2882B5113</key>
+		<key>3559386D-2347-4839-9A1E-E27F5F135D70</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/iLeonelPerea/IOS---TableView-with-custom-XIB-cell.git</string>
+	<string>https://github.com/iLeonelPerea/IOS---TableView-with-custom-XIB-cell</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>32187F96-5CB3-4D66-874F-CAE2882B5113</string>
+	<string>3559386D-2347-4839-9A1E-E27F5F135D70</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>32187F96-5CB3-4D66-874F-CAE2882B5113</string>
+			<string>3559386D-2347-4839-9A1E-E27F5F135D70</string>
 			<key>IDESourceControlWCCName</key>
 			<string>IOS---TableView-with-custom-XIB-cell</string>
 		</dict>
