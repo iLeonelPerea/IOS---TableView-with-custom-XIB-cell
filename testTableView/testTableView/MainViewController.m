@@ -82,13 +82,29 @@
     }
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	   
-    [[[AsyncImageDownloader alloc] initWithMediaURL:@"https://aroma-bakery-cafe.s3.amazonaws.com/uploads/food/picture/976/thumb_3-Flavours-Suffle.jpg" successBlock:^(UIImage *image)  {
-        [cell.imgProduct setImage:image];
+    
+    //http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/thumb/6/60/No_Image_Available.png/480px-No_Image_Available.png
+    NSDictionary *dictFinalProduct = [arrData objectAtIndex:indexPath.row];
+    NSString *url = ([dictFinalProduct objectForKey:@"picture_thumb"] != [NSNull null])?
+                  [NSString stringWithFormat:@"%@",[dictFinalProduct objectForKey:@"picture_thumb"]]:
+                  @"http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/thumb/6/60/No_Image_Available.png/480px-No_Image_Available.png";
+//    NSData *imgData = [NSData dataWithContentsOfURL:url];
+//    [cell.imgProduct setImage:[UIImage imageWithData:imgData]];
+    cell.lblProductName.text = ([dictFinalProduct objectForKey:@"description"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"description"]]:@"No Description";
+    
+    
+    [[[AsyncImageDownloader alloc] initWithFileURL:url successBlock:^(NSData *data) {
+        [cell.imgProduct setImage:[UIImage imageWithData:data]];
     } failBlock:^(NSError *error) {
         NSLog(@"Failed to download image due to %@!", error);
     }] startDownload];
     
+//    [[[AsyncImageDownloader alloc] initWithMediaURL:[NSURL URLWithString:url] successBlock:^(UIImage *image)  {
+//        [cell.imgProduct setImage:image];
+//    } failBlock:^(NSError *error) {
+//        NSLog(@"Failed to download image due to %@!", error);
+//    }] startDownload];
+//    
     return cell;
 }
 

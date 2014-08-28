@@ -11,5 +11,4 @@
 @implementation ProductCellTableViewCell
 @synthesize lblProductName, imageView;
 
-
 @end
