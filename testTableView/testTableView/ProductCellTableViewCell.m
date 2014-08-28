@@ -9,7 +9,7 @@
 #import "ProductCellTableViewCell.h"
 
 @implementation ProductCellTableViewCell
-@synthesize lblProductDescriptionCategory, lblProductInfoDescription, lblProductInfoId;
+@synthesize lblProductName, imgProduct;
 
 
 @end

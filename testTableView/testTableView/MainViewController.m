@@ -84,9 +84,6 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     NSDictionary *dictProduct = [arrData objectAtIndex:indexPath.row];
     
-    cell.lblProductInfoId.text = ([dictProduct objectForKey:@"id"])?[NSString stringWithFormat:@"%@",[dictProduct objectForKey:@"id"]]:@"noId";
-    cell.lblProductInfoDescription.text = ([dictProduct objectForKey:@"description"]) != [NSNull null] ?[NSString stringWithFormat:@"%@",[dictProduct objectForKey:@"description"]]:@"noDescription";
-    cell.lblProductDescriptionCategory.text = ([dictProduct objectForKey:@"description_category"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictProduct objectForKey:@"description_category"]]:@"No Category";
     
     //http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/thumb/6/60/No_Image_Available.png/480px-No_Image_Available.png
     NSDictionary *dictFinalProduct = [arrData objectAtIndex:indexPath.row];
@@ -94,7 +91,7 @@
                   [NSString stringWithFormat:@"%@",[dictFinalProduct objectForKey:@"picture_thumb"]]:
                   @"http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/thumb/6/60/No_Image_Available.png/480px-No_Image_Available.png"];
     NSData *imgData = [NSData dataWithContentsOfURL:url];
-    [cell.imgProduct setImage:[UIImage imageWithData:[imgData]]];
+    [cell.imgProduct setImage:[UIImage imageWithData:imgData]];
     cell.lblProductName.text = ([dictProduct objectForKey:@"description"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictProduct objectForKey:@"description"]]:@"No Description";
     return cell;
 }
