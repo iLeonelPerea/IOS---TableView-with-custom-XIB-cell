@@ -100,21 +100,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ProductInfoViewController *producInfoViewController = [[ProductInfoViewController alloc] init];
-    
-    NSDictionary *dictFinalProduct = [arrData objectAtIndex:indexPath.row];
-    NSString *url = ([dictFinalProduct objectForKey:@"picture"] != [NSNull null])?
-    [NSString stringWithFormat:@"%@",[dictFinalProduct objectForKey:@"picture"]]:
-    @"http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/thumb/6/60/No_Image_Available.png/480px-No_Image_Available.png";
-    producInfoViewController.lblProductName.text = ([dictFinalProduct objectForKey:@"name"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"name"]]:@"No Name";
-    producInfoViewController.lblProductCategory.text = ([dictFinalProduct objectForKey:@"category"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"category"]]:@"No Category";
-    producInfoViewController.lblProductDescription.text = ([dictFinalProduct objectForKey:@"description"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"description"]]:@"No Description";
-    
-    [[[AsyncImageDownloader alloc] initWithFileURL:url successBlock:^(NSData *data) {
-        [producInfoViewController.imgProduct setImage:[UIImage imageWithData:data]];
-    } failBlock:^(NSError *error) {
-        NSLog(@"Failed to download image due to %@!", error);
-    }] startDownload];
-    
+    producInfoViewController.dictFinalProduct = [arrData objectAtIndex:indexPath.row];    
     [self.navigationController pushViewController:producInfoViewController animated:YES];
     
     //Here

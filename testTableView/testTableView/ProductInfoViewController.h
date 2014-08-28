@@ -7,13 +7,14 @@
 //
 
 #import "ViewController.h"
+#import <AsyncImageDownloader.h>
 
 @interface ProductInfoViewController : ViewController
 
-@property (nonatomic, strong) NSMutableArray *arrData;
+@property (nonatomic, strong) NSMutableDictionary *dictFinalProduct;
 @property(nonatomic, strong) IBOutlet UIImageView *imgProduct;
 @property(nonatomic, strong) IBOutlet UILabel *lblProductName;
 @property(nonatomic, strong) IBOutlet UILabel *lblProductCategory;
-@property(nonatomic, strong) IBOutlet UILabel *lblProductDescription;
+@property(nonatomic, strong) IBOutlet UITextView *txtProductDescription;
 
 @end
