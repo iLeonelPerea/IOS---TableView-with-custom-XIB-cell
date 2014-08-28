@@ -13,6 +13,7 @@
 @end
 
 @implementation ProductInfoViewController
+@synthesize imgProduct, lblProductName, lblProductCategory, lblProductDescription;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

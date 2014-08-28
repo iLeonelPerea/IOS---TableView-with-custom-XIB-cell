@@ -28,6 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.title = @"Product List";
     arrData = [NSMutableArray new];
     [tblView setDelegate:self];
     [tblView setDataSource:self];
@@ -82,13 +83,11 @@
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    //http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/thumb/6/60/No_Image_Available.png/480px-No_Image_Available.png
     NSDictionary *dictFinalProduct = [arrData objectAtIndex:indexPath.row];
     NSString *url = ([dictFinalProduct objectForKey:@"picture_thumb"] != [NSNull null])?
                   [NSString stringWithFormat:@"%@",[dictFinalProduct objectForKey:@"picture_thumb"]]:
                   @"http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/thumb/6/60/No_Image_Available.png/480px-No_Image_Available.png";
-    cell.lblProductName.text = ([dictFinalProduct objectForKey:@"description"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"description"]]:@"No Description";
-    
+    cell.lblProductName.text = ([dictFinalProduct objectForKey:@"name"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"name"]]:@"No Name";
     
     [[[AsyncImageDownloader alloc] initWithFileURL:url successBlock:^(NSData *data) {
         [cell.imgProduct setImage:[UIImage imageWithData:data]];
@@ -101,8 +100,24 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ProductInfoViewController *producInfoViewController = [[ProductInfoViewController alloc] init];
+    
+    NSDictionary *dictFinalProduct = [arrData objectAtIndex:indexPath.row];
+    NSString *url = ([dictFinalProduct objectForKey:@"picture"] != [NSNull null])?
+    [NSString stringWithFormat:@"%@",[dictFinalProduct objectForKey:@"picture"]]:
+    @"http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/thumb/6/60/No_Image_Available.png/480px-No_Image_Available.png";
+    producInfoViewController.lblProductName.text = ([dictFinalProduct objectForKey:@"name"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"name"]]:@"No Name";
+    producInfoViewController.lblProductCategory.text = ([dictFinalProduct objectForKey:@"category"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"category"]]:@"No Category";
+    producInfoViewController.lblProductDescription.text = ([dictFinalProduct objectForKey:@"description"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"description"]]:@"No Description";
+    
+    [[[AsyncImageDownloader alloc] initWithFileURL:url successBlock:^(NSData *data) {
+        [producInfoViewController.imgProduct setImage:[UIImage imageWithData:data]];
+    } failBlock:^(NSError *error) {
+        NSLog(@"Failed to download image due to %@!", error);
+    }] startDownload];
+    
     [self.navigationController pushViewController:producInfoViewController animated:YES];
-    NSLog(@"done..");
+    
+    //Here
 }
 
 - (void)didReceiveMemoryWarning

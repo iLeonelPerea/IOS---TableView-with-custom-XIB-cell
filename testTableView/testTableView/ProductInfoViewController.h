@@ -11,8 +11,9 @@
 @interface ProductInfoViewController : ViewController
 
 @property (nonatomic, strong) NSMutableArray *arrData;
-@property(nonatomic, strong) IBOutlet UILabel *lblProductInfoId;
-@property(nonatomic, strong) IBOutlet UILabel *lblProductInfoDescription;
-@property(nonatomic, strong) IBOutlet UILabel *lblProductDescriptionCategory;
+@property(nonatomic, strong) IBOutlet UIImageView *imgProduct;
+@property(nonatomic, strong) IBOutlet UILabel *lblProductName;
+@property(nonatomic, strong) IBOutlet UILabel *lblProductCategory;
+@property(nonatomic, strong) IBOutlet UILabel *lblProductDescription;
 
 @end
