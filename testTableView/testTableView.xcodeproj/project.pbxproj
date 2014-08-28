@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23A24B1119AFE083002CFF8D /* noAvail.png in Resources */ = {isa = PBXBuildFile; fileRef = 23A24B1019AFE083002CFF8D /* noAvail.png */; };
 		5C7EAC5ED58444E3BC895C88 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 548D203CBDDA448494E1A8F5 /* libPods.a */; };
 		7D9C8A0019AE8234006F8F45 /* ProductCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9C89FE19AE8234006F8F45 /* ProductCellTableViewCell.m */; };
 		7D9C8A0119AE8234006F8F45 /* ProductCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D9C89FF19AE8234006F8F45 /* ProductCellTableViewCell.xib */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		23A24B1019AFE083002CFF8D /* noAvail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noAvail.png; sourceTree = "<group>"; };
 		26ED86350605414ABBCB44E5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		548D203CBDDA448494E1A8F5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D9C89FD19AE8234006F8F45 /* ProductCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCellTableViewCell.h; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		7D4640F019AFA7FD00F7C9BD /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				23A24B1019AFE083002CFF8D /* noAvail.png */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				7D9C8A0119AE8234006F8F45 /* ProductCellTableViewCell.xib in Resources */,
 				7DB5B1C419AE3A760031619E /* MainViewController.xib in Resources */,
 				7DB5B19619AE2E7E0031619E /* InfoPlist.strings in Resources */,
+				23A24B1119AFE083002CFF8D /* noAvail.png in Resources */,
 				7DCA9A1B19AF6C08002D19B5 /* ProductInfoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
