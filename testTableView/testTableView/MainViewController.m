@@ -103,7 +103,7 @@
     
     cell.lblProductInfoId.text = ([dictProduct objectForKey:@"id"])?[NSString stringWithFormat:@"%@",[dictProduct objectForKey:@"id"]]:@"noId";
     cell.lblProductInfoDescription.text = @"description // Leo";
-    cell.lblProductDescriptionCategory.text = @"description cat // Paco";
+    cell.lblProductDescriptionCategory.text = ([dictProduct objectForKey:@"description_category"])?[NSString stringWithFormat:@"%@", [dictProduct objectForKey:@"description_category"]]:@"No Category";
     return cell;
 }
 
