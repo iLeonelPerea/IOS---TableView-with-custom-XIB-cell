@@ -84,9 +84,6 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     NSDictionary *dictProduct = [arrData objectAtIndex:indexPath.row];
     
-    cell.lblProductInfoId.text = ([dictProduct objectForKey:@"id"])?[NSString stringWithFormat:@"%@",[dictProduct objectForKey:@"id"]]:@"noId";
-    cell.lblProductInfoDescription.text = ([dictProduct objectForKey:@"description"]) != [NSNull null] ?[NSString stringWithFormat:@"%@",[dictProduct objectForKey:@"description"]]:@"noDescription";
-    cell.lblProductDescriptionCategory.text = ([dictProduct objectForKey:@"description_category"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictProduct objectForKey:@"description_category"]]:@"No Category";
     return cell;
 }
 
