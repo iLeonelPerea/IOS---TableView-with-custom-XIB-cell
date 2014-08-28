@@ -82,7 +82,12 @@
     }
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    NSDictionary *dictProduct = [arrData objectAtIndex:indexPath.row];
+	   
+    [[[AsyncImageDownloader alloc] initWithMediaURL:@"https://aroma-bakery-cafe.s3.amazonaws.com/uploads/food/picture/976/thumb_3-Flavours-Suffle.jpg" successBlock:^(UIImage *image)  {
+        [cell.imgProduct setImage:image];
+    } failBlock:^(NSError *error) {
+        NSLog(@"Failed to download image due to %@!", error);
+    }] startDownload];
     
     return cell;
 }
