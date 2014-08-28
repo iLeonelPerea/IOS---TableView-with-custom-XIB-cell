@@ -28,56 +28,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    arrData = [NSMutableArray new];
     [tblView setDelegate:self];
     [tblView setDataSource:self];
     UINib *nib = [UINib nibWithNibName:@"ItemCell" bundle:nil];
     [[self tblView] registerNib:nib forCellReuseIdentifier:@"ItemCell"];
     HUDJMProgress = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleExtraLight];
     HUDJMProgress.textLabel.text = @"Loading";
-    [self loadLoginData];
-}
-
--(void)loadLoginData
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSURL *url = [NSURL URLWithString:@"http://jemiza.herokuapp.com/admin/login.json"];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:@"POST"];
-    NSDictionary *jsonDict = @{@"admin_user": @{@"email": @"omar@ievolutioned.com", @"password":@"12345678"}};
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict options:kNilOptions error:nil];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Data-Type"];
-    [request setValue:[NSString stringWithFormat:@"%d",[jsonData length]] forHTTPHeaderField:@"Content-Lenght"];
-    [request setHTTPBody:jsonData];
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
-        NSLog(@"Terminado login");
-        NSDictionary *responseJson = [NSJSONSerialization JSONObjectWithData: data options:kNilOptions error:nil];
-        NSDictionary *result = nil;
-        if(!error && [[responseJson objectForKey:@"success"]boolValue]){
-            NSDictionary *currentUser = [[NSDictionary alloc] initWithDictionary:[responseJson objectForKey:@"user"]];
-            [defaults setObject:[currentUser objectForKey:@"access_token"] forKey:@"currentAccessToken"];
-            [defaults synchronize];
-            [self loadProductsData];
-        }
-        else{
-            result = @{@"result": @NO};
-        }
-    }];
-    [HUDJMProgress showInView:self.view];
+    [self loadProductsData];
 }
 
 -(void)loadProductsData{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://jemiza.herokuapp.com/admin/products.json?access_token=%@", [defaults objectForKey:@"currentAccessToken"]]];
+    [HUDJMProgress showInView:self.view];
+    NSURL *url = [NSURL URLWithString:@"http://aroma-bakery-cafe.herokuapp.com/admin/foods.json"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         NSLog(@"Cargando Datos...");
         if(!error)
         {
-            arrData = [[NSMutableArray alloc]initWithArray:[NSJSONSerialization JSONObjectWithData: data options:kNilOptions error:nil]];
+            NSDictionary * dictFoodsGeneral = [NSJSONSerialization JSONObjectWithData: data options:kNilOptions error:nil];
+            NSArray * arrFoods = [dictFoodsGeneral objectForKey:@"foods"];
+            for (NSDictionary * dictFood in arrFoods)
+            {
+                for(NSDictionary * dictFoodFinal in [dictFood objectForKey:@"foods"])
+                {
+                    [arrData addObject:dictFoodFinal];
+                    //if([dictFoodFinal objectForKey:@"picture_thumb"] != [NSNull null])
+                }
+            }
+            NSLog(@"tu array de datos final tiene: %d registros", [arrData count]);
             [HUDJMProgress dismissAfterDelay:0.1];
             [tblView reloadData];
         }
