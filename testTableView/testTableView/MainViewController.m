@@ -104,6 +104,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ProductInfoViewController *producInfoViewController = [[ProductInfoViewController alloc] init];
     [self.navigationController pushViewController:producInfoViewController animated:YES];
+    NSLog(@"done..");
 }
 
 - (void)didReceiveMemoryWarning
