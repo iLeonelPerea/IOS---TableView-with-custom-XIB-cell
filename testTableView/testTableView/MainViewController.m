@@ -53,7 +53,6 @@
                 for(NSDictionary * dictFoodFinal in [dictFood objectForKey:@"foods"])
                 {
                     [arrData addObject:dictFoodFinal];
-                    //if([dictFoodFinal objectForKey:@"picture_thumb"] != [NSNull null])
                 }
             }
             NSLog(@"tu array de datos final tiene: %d registros", [arrData count]);
@@ -88,8 +87,6 @@
     NSString *url = ([dictFinalProduct objectForKey:@"picture_thumb"] != [NSNull null])?
                   [NSString stringWithFormat:@"%@",[dictFinalProduct objectForKey:@"picture_thumb"]]:
                   @"http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/thumb/6/60/No_Image_Available.png/480px-No_Image_Available.png";
-//    NSData *imgData = [NSData dataWithContentsOfURL:url];
-//    [cell.imgProduct setImage:[UIImage imageWithData:imgData]];
     cell.lblProductName.text = ([dictFinalProduct objectForKey:@"description"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"description"]]:@"No Description";
     
     
@@ -99,12 +96,6 @@
         NSLog(@"Failed to download image due to %@!", error);
     }] startDownload];
     
-//    [[[AsyncImageDownloader alloc] initWithMediaURL:[NSURL URLWithString:url] successBlock:^(UIImage *image)  {
-//        [cell.imgProduct setImage:image];
-//    } failBlock:^(NSError *error) {
-//        NSLog(@"Failed to download image due to %@!", error);
-//    }] startDownload];
-//    
     return cell;
 }
 
