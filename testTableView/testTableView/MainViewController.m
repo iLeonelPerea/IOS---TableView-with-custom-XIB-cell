@@ -14,7 +14,7 @@
 
 @implementation MainViewController
 
-@synthesize tblView, arrData;
+@synthesize tblView, arrData, HUDJMProgress;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,6 +32,8 @@
     [tblView setDataSource:self];
     UINib *nib = [UINib nibWithNibName:@"ItemCell" bundle:nil];
     [[self tblView] registerNib:nib forCellReuseIdentifier:@"ItemCell"];
+    HUDJMProgress = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleExtraLight];
+    HUDJMProgress.textLabel.text = @"Loading";
     [self loadLoginData];
 }
 
@@ -64,6 +66,7 @@
             result = @{@"result": @NO};
         }
     }];
+    [HUDJMProgress showInView:self.view];
 }
 
 -(void)loadProductsData{
@@ -71,10 +74,11 @@
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://jemiza.herokuapp.com/admin/products.json?access_token=%@", [defaults objectForKey:@"currentAccessToken"]]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        NSLog(@"Terminado bajado de info");
+        NSLog(@"Cargando Datos...");
         if(!error)
         {
             arrData = [[NSMutableArray alloc]initWithArray:[NSJSONSerialization JSONObjectWithData: data options:kNilOptions error:nil]];
+            [HUDJMProgress dismissAfterDelay:0.1];
             [tblView reloadData];
         }
     }];
