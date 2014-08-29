@@ -9,6 +9,6 @@
 #import "ProductCellTableViewCell.h"
 
 @implementation ProductCellTableViewCell
-@synthesize lblProductName, imageView;
+@synthesize lblProductName, imageView, loader;
 
 @end

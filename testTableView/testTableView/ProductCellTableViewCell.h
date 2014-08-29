@@ -12,4 +12,5 @@
 
 @property(nonatomic, strong) IBOutlet UILabel *lblProductName;
 @property(nonatomic, strong) IBOutlet UIImageView *imgProduct;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView * loader;
 @end

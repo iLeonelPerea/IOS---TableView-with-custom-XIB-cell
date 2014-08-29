@@ -84,13 +84,11 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     NSDictionary *dictFinalProduct = [arrData objectAtIndex:indexPath.row];
-    cell.lblProductName.text = ([dictFinalProduct objectForKey:@"name"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"name"]]:@"No Name";
+    cell.lblProductName.text = ([dictFinalProduct objectForKey:@"name"]) != [NSNull null]?(![[dictFinalProduct objectForKey:@"name"] isEqual:@""])?[dictFinalProduct objectForKey:@"name"]:@"No Name":@"No Name";
     NSString *url = ([dictFinalProduct objectForKey:@"picture_thumb"] != [NSNull null])? [NSString stringWithFormat:@"%@",[dictFinalProduct objectForKey:@"picture_thumb"]]:@"";
-    
-    cell.lblProductName.text = ([dictFinalProduct objectForKey:@"name"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"name"]]:@"No Name";
-    
     if(![url isEqual:@""]){
         [[[AsyncImageDownloader alloc] initWithFileURL:url successBlock:^(NSData *data) {
+            [cell.loader stopAnimating];
             [cell.imgProduct setImage:[UIImage imageWithData:data]];
         } failBlock:^(NSError *error) {
             NSLog(@"Failed to download image due to %@!", error);
