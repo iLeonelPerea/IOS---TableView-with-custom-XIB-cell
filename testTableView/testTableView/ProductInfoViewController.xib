@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductInfoViewController">
             <connections>
+                <outlet property="btnWriteComment" destination="ngT-kW-dfy" id="XD4-BX-f4x"/>
                 <outlet property="imgProduct" destination="eYP-iS-qWC" id="r7f-Qs-ZcK"/>
                 <outlet property="lblProductCategory" destination="20s-nW-1K2" id="IuF-TN-a0P"/>
                 <outlet property="lblProductName" destination="GbU-Po-sJm" id="SYy-Tq-Bwo"/>
@@ -49,6 +50,17 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </activityIndicatorView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngT-kW-dfy">
+                    <rect key="frame" x="192" y="487" width="121" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="Write a comment">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="doShowCommentsViewController:" destination="-1" eventType="touchUpInside" id="dbb-CO-D0I"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
