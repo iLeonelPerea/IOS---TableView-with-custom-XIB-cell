@@ -42,6 +42,7 @@
         }] startDownload];
     }else{
         [self.imgProduct setImage:[UIImage imageNamed:@"noAvail.png"]];
+        [self.ldrImageIndicator stopAnimating];
     }
     
 
