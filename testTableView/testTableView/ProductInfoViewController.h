@@ -18,6 +18,9 @@
 @property(nonatomic, strong) IBOutlet UILabel *lblProductCategory;
 @property(nonatomic, strong) IBOutlet UITextView *txtProductDescription;
 @property(nonatomic, strong) IBOutlet UIActivityIndicatorView *ldrImageIndicator;
+@property(nonatomic, strong) IBOutlet UIButton *btnWriteComment;
+
+-(IBAction)doShowCommentsViewController:(id)sender;
 
 
 -(IBAction)doShowRateVC:(id)sender;

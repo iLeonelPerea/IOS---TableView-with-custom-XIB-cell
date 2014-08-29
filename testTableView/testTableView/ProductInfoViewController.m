@@ -7,13 +7,14 @@
 //
 
 #import "ProductInfoViewController.h"
+#import "AddCommentViewController.h"
 
 @interface ProductInfoViewController ()
 
 @end
 
 @implementation ProductInfoViewController
-@synthesize imgProduct, lblProductName, lblProductCategory, txtProductDescription, ldrImageIndicator;
+@synthesize imgProduct, lblProductName, lblProductCategory, txtProductDescription, ldrImageIndicator, btnWriteComment;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,6 +59,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)doShowCommentsViewController:(id)sender
+{
+    AddCommentViewController *addCommentViewController = [[AddCommentViewController alloc] init];
+    [self.navigationController pushViewController:addCommentViewController animated:YES];
 }
 
 @end
