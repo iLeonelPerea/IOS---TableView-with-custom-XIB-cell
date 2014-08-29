@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "ProductInfoViewController.h"
 
-@interface AddCommentViewController : ViewController
+@interface AddCommentViewController : ViewController <UITextViewDelegate>
 @property (nonatomic, strong) IBOutlet UITextView *txtComment;
 @property (nonatomic, strong) IBOutlet UIButton *btnSend;
 @property (nonatomic, strong) id<iInfoDelegate> delegate;

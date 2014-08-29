@@ -28,6 +28,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [txtComment setDelegate:self];
+    [btnSend setEnabled:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,11 +39,16 @@
 }
 
 #pragma mark - Comment Delegate
+
 -(IBAction)doSendComment:(id)sender{
     [txtComment resignFirstResponder]; //Oculta el teclado :P
     [self.navigationController popViewControllerAnimated:YES];
     [self.delegate doSetCommentValue:txtComment.text];    
 }
-
+#pragma mark -- UITextView delegate
+-(void)textViewDidChange:(UITextView *)textView
+{
+    [btnSend setEnabled:([txtComment.text length] > 3)?YES:NO];
+}
 
 @end
