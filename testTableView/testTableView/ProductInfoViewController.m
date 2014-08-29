@@ -13,7 +13,7 @@
 @end
 
 @implementation ProductInfoViewController
-@synthesize imgProduct, lblProductName, lblProductCategory, txtProductDescription;
+@synthesize imgProduct, lblProductName, lblProductCategory, txtProductDescription, ldrImageIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,6 +35,7 @@
     
     if(![url isEqual:@""]){
         [[[AsyncImageDownloader alloc] initWithFileURL:url successBlock:^(NSData *data) {
+            [self.ldrImageIndicator stopAnimating];
             [self.imgProduct setImage:[UIImage imageWithData:data]];
         } failBlock:^(NSError *error) {
             NSLog(@"Failed to download image due to %@!", error);
