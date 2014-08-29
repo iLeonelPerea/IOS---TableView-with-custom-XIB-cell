@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <AsyncImageDownloader.h>
+#import "RateProductViewController.h"
 
 @interface ProductInfoViewController : ViewController
 
@@ -18,4 +19,6 @@
 @property(nonatomic, strong) IBOutlet UITextView *txtProductDescription;
 @property(nonatomic, strong) IBOutlet UIActivityIndicatorView *ldrImageIndicator;
 
+
+-(IBAction)doShowRateVC:(id)sender;
 @end

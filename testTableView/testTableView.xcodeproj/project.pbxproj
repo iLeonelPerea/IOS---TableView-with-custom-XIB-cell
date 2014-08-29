@@ -28,6 +28,17 @@
 		7DB5B1C419AE3A760031619E /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DB5B1C219AE3A760031619E /* MainViewController.xib */; };
 		7DCA9A1A19AF6C08002D19B5 /* ProductInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DCA9A1819AF6C08002D19B5 /* ProductInfoViewController.m */; };
 		7DCA9A1B19AF6C08002D19B5 /* ProductInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DCA9A1919AF6C08002D19B5 /* ProductInfoViewController.xib */; };
+		7DE89CD119B0DD6A006E3DED /* StarEmpty.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE89CC919B0DD6A006E3DED /* StarEmpty.png */; };
+		7DE89CD219B0DD6A006E3DED /* StarEmpty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE89CCA19B0DD6A006E3DED /* StarEmpty@2x.png */; };
+		7DE89CD319B0DD6A006E3DED /* StarEmptyLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE89CCB19B0DD6A006E3DED /* StarEmptyLarge.png */; };
+		7DE89CD419B0DD6A006E3DED /* StarEmptyLarge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE89CCC19B0DD6A006E3DED /* StarEmptyLarge@2x.png */; };
+		7DE89CD519B0DD6A006E3DED /* StarFull.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE89CCD19B0DD6A006E3DED /* StarFull.png */; };
+		7DE89CD619B0DD6A006E3DED /* StarFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE89CCE19B0DD6A006E3DED /* StarFull@2x.png */; };
+		7DE89CD719B0DD6A006E3DED /* StarFullLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE89CCF19B0DD6A006E3DED /* StarFullLarge.png */; };
+		7DE89CD819B0DD6A006E3DED /* StarFullLarge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DE89CD019B0DD6A006E3DED /* StarFullLarge@2x.png */; };
+		7DE89CDB19B0DDAB006E3DED /* DYRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE89CDA19B0DDAB006E3DED /* DYRateView.m */; };
+		7DE89CE219B0E050006E3DED /* RateProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE89CE019B0E050006E3DED /* RateProductViewController.m */; };
+		7DE89CE319B0E050006E3DED /* RateProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DE89CE119B0E050006E3DED /* RateProductViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +82,19 @@
 		7DCA9A1719AF6C08002D19B5 /* ProductInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductInfoViewController.h; sourceTree = "<group>"; };
 		7DCA9A1819AF6C08002D19B5 /* ProductInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductInfoViewController.m; sourceTree = "<group>"; };
 		7DCA9A1919AF6C08002D19B5 /* ProductInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductInfoViewController.xib; sourceTree = "<group>"; };
+		7DE89CC919B0DD6A006E3DED /* StarEmpty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarEmpty.png; sourceTree = "<group>"; };
+		7DE89CCA19B0DD6A006E3DED /* StarEmpty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarEmpty@2x.png"; sourceTree = "<group>"; };
+		7DE89CCB19B0DD6A006E3DED /* StarEmptyLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarEmptyLarge.png; sourceTree = "<group>"; };
+		7DE89CCC19B0DD6A006E3DED /* StarEmptyLarge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarEmptyLarge@2x.png"; sourceTree = "<group>"; };
+		7DE89CCD19B0DD6A006E3DED /* StarFull.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarFull.png; sourceTree = "<group>"; };
+		7DE89CCE19B0DD6A006E3DED /* StarFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarFull@2x.png"; sourceTree = "<group>"; };
+		7DE89CCF19B0DD6A006E3DED /* StarFullLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarFullLarge.png; sourceTree = "<group>"; };
+		7DE89CD019B0DD6A006E3DED /* StarFullLarge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarFullLarge@2x.png"; sourceTree = "<group>"; };
+		7DE89CD919B0DDAB006E3DED /* DYRateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYRateView.h; sourceTree = "<group>"; };
+		7DE89CDA19B0DDAB006E3DED /* DYRateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYRateView.m; sourceTree = "<group>"; };
+		7DE89CDF19B0E050006E3DED /* RateProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateProductViewController.h; sourceTree = "<group>"; };
+		7DE89CE019B0E050006E3DED /* RateProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateProductViewController.m; sourceTree = "<group>"; };
+		7DE89CE119B0E050006E3DED /* RateProductViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RateProductViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +125,14 @@
 		7D4640F019AFA7FD00F7C9BD /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				7DE89CC919B0DD6A006E3DED /* StarEmpty.png */,
+				7DE89CCA19B0DD6A006E3DED /* StarEmpty@2x.png */,
+				7DE89CCB19B0DD6A006E3DED /* StarEmptyLarge.png */,
+				7DE89CCC19B0DD6A006E3DED /* StarEmptyLarge@2x.png */,
+				7DE89CCD19B0DD6A006E3DED /* StarFull.png */,
+				7DE89CCE19B0DD6A006E3DED /* StarFull@2x.png */,
+				7DE89CCF19B0DD6A006E3DED /* StarFullLarge.png */,
+				7DE89CD019B0DD6A006E3DED /* StarFullLarge@2x.png */,
 				23A24B1019AFE083002CFF8D /* noAvail.png */,
 			);
 			name = resources;
@@ -141,6 +173,7 @@
 		7DB5B19119AE2E7E0031619E /* testTableView */ = {
 			isa = PBXGroup;
 			children = (
+				7DE89CE419B0E63E006E3DED /* DYRateView */,
 				7D4640F019AFA7FD00F7C9BD /* resources */,
 				7DB5B19A19AE2E7E0031619E /* AppDelegate.h */,
 				7DB5B19B19AE2E7E0031619E /* AppDelegate.m */,
@@ -157,6 +190,9 @@
 				7DCA9A1719AF6C08002D19B5 /* ProductInfoViewController.h */,
 				7DCA9A1819AF6C08002D19B5 /* ProductInfoViewController.m */,
 				7DCA9A1919AF6C08002D19B5 /* ProductInfoViewController.xib */,
+				7DE89CDF19B0E050006E3DED /* RateProductViewController.h */,
+				7DE89CE019B0E050006E3DED /* RateProductViewController.m */,
+				7DE89CE119B0E050006E3DED /* RateProductViewController.xib */,
 			);
 			path = testTableView;
 			sourceTree = "<group>";
@@ -188,6 +224,15 @@
 				7DB5B1B319AE2E7E0031619E /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7DE89CE419B0E63E006E3DED /* DYRateView */ = {
+			isa = PBXGroup;
+			children = (
+				7DE89CD919B0DDAB006E3DED /* DYRateView.h */,
+				7DE89CDA19B0DDAB006E3DED /* DYRateView.m */,
+			);
+			name = DYRateView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,12 +313,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DE89CD419B0DD6A006E3DED /* StarEmptyLarge@2x.png in Resources */,
+				7DE89CD619B0DD6A006E3DED /* StarFull@2x.png in Resources */,
 				7DB5B1A419AE2E7E0031619E /* Images.xcassets in Resources */,
 				7D9C8A0119AE8234006F8F45 /* ProductCellTableViewCell.xib in Resources */,
+				7DE89CD719B0DD6A006E3DED /* StarFullLarge.png in Resources */,
+				7DE89CD819B0DD6A006E3DED /* StarFullLarge@2x.png in Resources */,
 				7DB5B1C419AE3A760031619E /* MainViewController.xib in Resources */,
+				7DE89CD319B0DD6A006E3DED /* StarEmptyLarge.png in Resources */,
 				7DB5B19619AE2E7E0031619E /* InfoPlist.strings in Resources */,
 				23A24B1119AFE083002CFF8D /* noAvail.png in Resources */,
+				7DE89CD119B0DD6A006E3DED /* StarEmpty.png in Resources */,
+				7DE89CD219B0DD6A006E3DED /* StarEmpty@2x.png in Resources */,
 				7DCA9A1B19AF6C08002D19B5 /* ProductInfoViewController.xib in Resources */,
+				7DE89CD519B0DD6A006E3DED /* StarFull.png in Resources */,
+				7DE89CE319B0E050006E3DED /* RateProductViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,11 +380,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DCA9A1A19AF6C08002D19B5 /* ProductInfoViewController.m in Sources */,
+				7DE89CE219B0E050006E3DED /* RateProductViewController.m in Sources */,
 				7DB5B1A219AE2E7E0031619E /* ViewController.m in Sources */,
 				7D9C8A0019AE8234006F8F45 /* ProductCellTableViewCell.m in Sources */,
 				7DB5B19C19AE2E7E0031619E /* AppDelegate.m in Sources */,
 				7DB5B19819AE2E7E0031619E /* main.m in Sources */,
 				7DB5B1C319AE3A760031619E /* MainViewController.m in Sources */,
+				7DE89CDB19B0DDAB006E3DED /* DYRateView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -49,6 +49,11 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+-(void)doShowRateVC:(id)sender{
+    RateProductViewController *rateProductViewController = [[RateProductViewController alloc] init];
+    [self.navigationController pushViewController:rateProductViewController animated:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
