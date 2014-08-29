@@ -96,6 +96,7 @@
     }
     else{
         [cell.imgProduct setImage:[UIImage imageNamed:@"noAvail.png"]];
+        [cell.loader stopAnimating];
     }
     return cell;
 }
