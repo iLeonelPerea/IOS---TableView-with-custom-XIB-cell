@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import <AsyncImageDownloader.h>
-#import "RateProductViewController.h"
 
 @interface ProductInfoViewController : ViewController
 
@@ -19,9 +18,18 @@
 @property(nonatomic, strong) IBOutlet UITextView *txtProductDescription;
 @property(nonatomic, strong) IBOutlet UIActivityIndicatorView *ldrImageIndicator;
 @property(nonatomic, strong) IBOutlet UIButton *btnWriteComment;
+@property(nonatomic, assign) NSInteger receivedRateValue;
+@property(nonatomic, assign) NSInteger receivedCommentValue;
 
 -(IBAction)doShowCommentsViewController:(id)sender;
 
 
 -(IBAction)doShowRateVC:(id)sender;
+@end
+
+@protocol iInfoDelegate <NSObject>
+
+-(void)doSetRateValue:(int)rateValue;
+-(void)doSetCommentValue:(NSString*)commentValue;
+
 @end

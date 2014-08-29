@@ -8,13 +8,14 @@
 
 #import "ProductInfoViewController.h"
 #import "AddCommentViewController.h"
+#import "RateProductViewController.h"
 
 @interface ProductInfoViewController ()
 
 @end
 
 @implementation ProductInfoViewController
-@synthesize imgProduct, lblProductName, lblProductCategory, txtProductDescription, ldrImageIndicator, btnWriteComment;
+@synthesize imgProduct, lblProductName, lblProductCategory, txtProductDescription, ldrImageIndicator, btnWriteComment, receivedRateValue, receivedCommentValue;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,8 +51,23 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (receivedRateValue) {
+        UILabel * lblRateValue = [[UILabel alloc] initWithFrame:CGRectMake(40, 469, 200, 30)];
+        [lblRateValue setText:[NSString stringWithFormat:@"This foods rate is: %d",receivedRateValue]];
+        [self.view addSubview:lblRateValue];
+    }
+    if (receivedCommentValue) {
+        UILabel * lblCommentValue = [[UILabel alloc] initWithFrame:CGRectMake(40, 529, 200, 30)];
+        [lblCommentValue setText:[NSString stringWithFormat:@"This foods comment is: %d",receivedCommentValue]];
+        [self.view addSubview:lblCommentValue];
+    }
+}
+
 -(void)doShowRateVC:(id)sender{
     RateProductViewController *rateProductViewController = [[RateProductViewController alloc] init];
+    [rateProductViewController setDelegate:(id)self];
     [self.navigationController pushViewController:rateProductViewController animated:YES];
 }
 
@@ -64,7 +80,20 @@
 -(void)doShowCommentsViewController:(id)sender
 {
     AddCommentViewController *addCommentViewController = [[AddCommentViewController alloc] init];
+    [addCommentViewController setDelegate:(id)self];
     [self.navigationController pushViewController:addCommentViewController animated:YES];
+}
+
+#pragma mark -- Custom Delegate Methods
+
+-(void)doSetRateValue:(int)rateValue{
+    receivedRateValue = rateValue;
+    NSLog(@"cool %d that's a delegate call method: ",rateValue);
+}
+
+-(void)doSetCommentValue:(NSString*)commentValue{
+    receivedCommentValue = [commentValue length];
+    NSLog(@"cool %d that's a delegate call method: ",receivedCommentValue);
 }
 
 @end

@@ -36,7 +36,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Comment Delegate
 -(IBAction)doSendComment:(id)sender{
+    [txtComment resignFirstResponder]; //Oculta el teclado :P
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.delegate doSetCommentValue:txtComment.text];    
 }
 
 

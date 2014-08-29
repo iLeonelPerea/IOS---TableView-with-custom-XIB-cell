@@ -52,6 +52,8 @@
 #pragma mark - DYRateViewDelegate
 
 - (void)rateView:(DYRateView *)rateView changedToNewRate:(NSNumber *)rate {
+    [self.delegate doSetRateValue:[rate intValue]];
+    [self.navigationController popViewControllerAnimated:YES];
     self.rateLabel.text = [NSString stringWithFormat:@"Rate: %d", rate.intValue];
 }
 

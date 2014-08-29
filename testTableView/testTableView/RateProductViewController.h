@@ -8,9 +8,11 @@
 
 #import "ViewController.h"
 #import "DYRateView.h"
+#import "ProductInfoViewController.h"
 
 @interface RateProductViewController : ViewController <DYRateViewDelegate>
 
 @property (nonatomic, strong) UILabel *rateLabel;
+@property (nonatomic, strong) id<iInfoDelegate> delegate;
 
 @end
