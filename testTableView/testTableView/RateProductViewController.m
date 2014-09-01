@@ -14,7 +14,7 @@
 
 @implementation RateProductViewController
 
-@synthesize rateLabel = _rateLabel;
+@synthesize rateLabel = _rateLabel, rateValue;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,6 +40,9 @@
     rateView.alignment = RateViewAlignmentCenter;
     rateView.editable = YES;
     rateView.delegate = self;
+    if (rateValue) {
+        [rateView setRate:rateValue];
+    }
     [self.view addSubview:rateView];
     
     // Set up a label view to display rate
