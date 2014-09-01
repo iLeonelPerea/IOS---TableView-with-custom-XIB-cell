@@ -15,4 +15,5 @@
 +(void)updateProduct:(NSMutableDictionary *)product;
 +(void)updateProductRate:(int)rate withId:(int)productId;
 +(void)updateProductComment:(NSString*)comment withId:(int)productId;
++(NSString*)getDBPath;
 @end

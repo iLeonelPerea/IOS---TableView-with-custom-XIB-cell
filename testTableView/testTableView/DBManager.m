@@ -13,22 +13,12 @@
 
 +(BOOL)checkOrCreateDataBase{
     BOOL isDbOk;
-    NSString *docsDir;
-    NSArray *dirPaths;
-    NSString *databasePath;
     sqlite3 *inventoryDB;
-    
-    // Get the documents directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docsDir = [dirPaths objectAtIndex:0];
-    
-    // Build the path to the database file
-    databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"Inventory.sqlite3"]];
-    
+
     NSFileManager *filemgr = [NSFileManager defaultManager];
     
-    if([filemgr fileExistsAtPath:databasePath] == NO){
-        const char *dbpath = [databasePath UTF8String];
+    if([filemgr fileExistsAtPath:[DBManager getDBPath]] == NO){
+        const char *dbpath = [[DBManager getDBPath] UTF8String];
         
         if (sqlite3_open(dbpath, &inventoryDB) == SQLITE_OK) {
             char *errMsg;
@@ -46,7 +36,7 @@
             }else{
                 isDbOk = YES;
             }
-            sqlite3_close(inventoryDB);
+            //sqlite3_close(inventoryDB);
         }else{
             NSLog(@"db fail...");
             isDbOk = NO;
@@ -54,21 +44,15 @@
     }else{
         isDbOk = YES; // DB already exists
     }
+    [DBManager finalizeStatements:nil withDB:inventoryDB];
     return isDbOk;
 }
 
 +(void)insertProduct:(NSDictionary*)product{
-    NSString *docsDir;
-    NSArray *dirPaths;
-    NSString *databasePath;
     sqlite3 *inventoryDB = nil;
-    
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docsDir = [dirPaths objectAtIndex:0];
-    databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"Inventory.sqlite3"]];
-    
     sqlite3_stmt *statement;
-    const char *dbpath = [databasePath UTF8String];
+    
+    const char *dbpath = [[DBManager getDBPath] UTF8String];
     
     if (sqlite3_open(dbpath, &inventoryDB) == SQLITE_OK) {
         NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO FOODS (remote_id, name, description, category, menu_type, price, url_pic, url_thumb, local_thumb, local_pic, description_es, description_he, sort_id) VALUES (\"%d\", \"%@\", \"%@\", \"%@\", \"%@\", \"%.2f\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%d\")", [[product objectForKey:@"id"] intValue], [product objectForKey:@"name"], [product objectForKey:@"description"], [product objectForKey:@"category"], [product objectForKey:@"menu"], ([product objectForKey:@"price"] != [NSNull null])?[[product objectForKey:@"price"] floatValue]:0, [product objectForKey:@"picture"], [product objectForKey:@"picture_thumb"], ([product objectForKey:@"picture_thumb"] != [NSNull null])?[NSString stringWithFormat:@"thumb_%@.jpg",[product objectForKey:@"id"]]: [NSNull null], ([product objectForKey:@"picture"] != [NSNull null])?[NSString stringWithFormat:@"pic_%@.jpg", [product objectForKey:@"id"]]: [NSNull null], [product objectForKey:@"description_es"], [product objectForKey:@"description_he"], [[product objectForKey:@"position"] intValue]];
@@ -78,89 +62,82 @@
         if (sqlite3_step(statement) != SQLITE_DONE) {
             NSLog(@"fiel error... %s - %@", sqlite3_errmsg(inventoryDB),[product objectForKey:@"id"]);
         }
-        sqlite3_finalize(statement);
     }
-    sqlite3_close(inventoryDB);
+    [DBManager finalizeStatements:statement withDB:inventoryDB];
 }
 
 +(void)updateProduct:(NSMutableDictionary *)product{
-    NSString *docsDir;
-    NSArray *dirPaths;
-    NSString *databasePath;
-    sqlite3 *inventoryDB = nil;
-    
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docsDir = [dirPaths objectAtIndex:0];
-    databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"Inventory.sqlite3"]];
-    
+    sqlite3 *inventoryDB;
     sqlite3_stmt *statement;
-    const char *dbpath = [databasePath UTF8String];
+    const char *dbpath = [[DBManager getDBPath] UTF8String];
     
     if (sqlite3_open(dbpath, &inventoryDB) == SQLITE_OK) {
-        NSString * updateSQL = [NSString stringWithFormat:@"UPDATE FOODS SET RATE = \"%@\" , COMMENT = \"%@\" WHERE id = \"%d\"", [product objectForKey:@"rate"], [product objectForKey:@"comment"], [[product objectForKey:@"id"] intValue]];
+        NSString * updateSQL = [NSString stringWithFormat:@"UPDATE FOODS SET RATE = \"%@\" , COMMENT = \"%@\" WHERE remote_id = \"%d\"", [product objectForKey:@"rate"], [product objectForKey:@"comment"], [[product objectForKey:@"id"] intValue]];
         const char *insert_stmt = [updateSQL UTF8String];
         
         sqlite3_prepare_v2(inventoryDB, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) != SQLITE_DONE) {
             NSLog(@"fiel error... %s - %@", sqlite3_errmsg(inventoryDB),[product objectForKey:@"id"]);
         }
-        sqlite3_finalize(statement);
     }
-    sqlite3_close(inventoryDB);
+    [DBManager finalizeStatements:statement withDB:inventoryDB];
 }
 
 +(void)updateProductComment:(NSString *)comment withId:(int)productId
 {
-    NSString *docsDir;
-    NSArray *dirPaths;
-    NSString *databasePath;
-    sqlite3 *inventoryDB = nil;
-    
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docsDir = [dirPaths objectAtIndex:0];
-    databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"Inventory.sqlite3"]];
-    
+    sqlite3 *inventoryDB;
     sqlite3_stmt *statement;
-    const char *dbpath = [databasePath UTF8String];
+
+    const char *dbpath = [[DBManager getDBPath] UTF8String];
     
     if (sqlite3_open(dbpath, &inventoryDB) == SQLITE_OK) {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE FOODS SET COMMENT = \"%@\" WHERE id = \"%d\"", comment, productId];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE FOODS SET COMMENT = \"%@\" WHERE remote_id = \"%d\"", comment, productId];
         const char *insert_stmt = [updateSQL UTF8String];
         
         sqlite3_prepare_v2(inventoryDB, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) != SQLITE_DONE) {
             NSLog(@"fiel error... %s - %d", sqlite3_errmsg(inventoryDB), productId);
         }
-        sqlite3_finalize(statement);
     }
-    sqlite3_close(inventoryDB);
+    [DBManager finalizeStatements:statement withDB:inventoryDB];
 }
 
 +(void)updateProductRate:(int)rate withId:(int)productId
 {
-    NSString *docsDir;
-    NSArray *dirPaths;
-    NSString *databasePath;
-    sqlite3 *inventoryDB = nil;
-    
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docsDir = [dirPaths objectAtIndex:0];
-    databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"Inventory.sqlite3"]];
-    
+    sqlite3 *inventoryDB;
     sqlite3_stmt *statement;
-    const char *dbpath = [databasePath UTF8String];
+    
+    const char *dbpath = [[DBManager getDBPath] UTF8String];
     
     if (sqlite3_open(dbpath, &inventoryDB) == SQLITE_OK) {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE FOODS SET RATE = \"%@\" WHERE id = \"%d\"", [NSString stringWithFormat:@"%d", rate], productId];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE FOODS SET RATE = \"%@\" WHERE remote_id = \"%d\"", [NSString stringWithFormat:@"%d", rate], productId];
         const char *insert_stmt = [updateSQL UTF8String];
         
         sqlite3_prepare_v2(inventoryDB, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) != SQLITE_DONE) {
             NSLog(@"fiel error... %s - %d", sqlite3_errmsg(inventoryDB), productId);
         }
-        sqlite3_finalize(statement);
     }
-    sqlite3_close(inventoryDB);
+    [DBManager finalizeStatements:statement withDB:inventoryDB];
+}
+
++(NSString*)getDBPath
+{
+    NSString *docsDir;
+    NSArray *dirPaths;
+    NSString *databasePath;
+    
+    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    docsDir = [dirPaths objectAtIndex:0];
+    databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"Inventory.sqlite3"]];
+    
+    return databasePath;
+}
+
++(void)finalizeStatements:(sqlite3_stmt*)stm withDB:(sqlite3*)DB
+{
+    sqlite3_finalize(stm);
+    sqlite3_close(DB);
 }
 
 @end
