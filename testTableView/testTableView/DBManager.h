@@ -11,6 +11,7 @@
 @interface DBManager : NSObject
 
 +(BOOL)checkOrCreateDataBase;
-+(void)insertProduct:(NSDictionary*)product;
++(void)insertProduct:(NSDictionary *)product;
++(void)updateProduct:(NSMutableDictionary *)product;
 
 @end

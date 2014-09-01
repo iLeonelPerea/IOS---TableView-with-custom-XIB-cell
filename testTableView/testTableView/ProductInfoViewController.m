@@ -9,13 +9,14 @@
 #import "ProductInfoViewController.h"
 #import "AddCommentViewController.h"
 #import "RateProductViewController.h"
+#import "DBManager.h"
 
 @interface ProductInfoViewController ()
 
 @end
 
 @implementation ProductInfoViewController
-@synthesize imgProduct, lblProductName, lblProductCategory, txtProductDescription, ldrImageIndicator, btnWriteComment, receivedRateValue, receivedCommentValue;
+@synthesize imgProduct, lblProductName, lblProductCategory, txtProductDescription, ldrImageIndicator, btnWriteComment, receivedRateValue, receivedCommentValue, dictFinalProduct;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,11 +30,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSString *url = ([_dictFinalProduct objectForKey:@"picture"] != [NSNull null])?
-        [NSString stringWithFormat:@"%@",[_dictFinalProduct objectForKey:@"picture"]]:@"";
-    self.lblProductName.text = ([_dictFinalProduct objectForKey:@"name"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [_dictFinalProduct objectForKey:@"name"]]:@"No Name";
-    self.lblProductCategory.text = ([_dictFinalProduct objectForKey:@"category"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [_dictFinalProduct objectForKey:@"category"]]:@"No Category";
-    self.txtProductDescription.text = ([_dictFinalProduct objectForKey:@"description"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [_dictFinalProduct objectForKey:@"description"]]:@"No Description";
+    NSString *url = ([dictFinalProduct objectForKey:@"picture"] != [NSNull null])?
+        [NSString stringWithFormat:@"%@",[dictFinalProduct objectForKey:@"picture"]]:@"";
+    self.lblProductName.text = ([dictFinalProduct objectForKey:@"name"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"name"]]:@"No Name";
+    self.lblProductCategory.text = ([dictFinalProduct objectForKey:@"category"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"category"]]:@"No Category";
+    self.txtProductDescription.text = ([dictFinalProduct objectForKey:@"description"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"description"]]:@"No Description";
     
     if(![url isEqual:@""]){
         [[[AsyncImageDownloader alloc] initWithFileURL:url successBlock:^(NSData *data) {
@@ -88,11 +89,17 @@
 
 -(void)doSetRateValue:(int)rateValue{
     receivedRateValue = rateValue;
+    [dictFinalProduct setObject:[NSString stringWithFormat:@"%d",rateValue] forKey:@"rate"];
+    (![dictFinalProduct objectForKey:@"comment"])?[dictFinalProduct setObject:@"" forKey:@"comment"]:nil;
+    [DBManager updateProduct:dictFinalProduct];
     NSLog(@"cool %d that's a delegate call method: ",rateValue);
 }
 
 -(void)doSetCommentValue:(NSString*)commentValue{
     receivedCommentValue = [commentValue length];
+    [dictFinalProduct setObject:commentValue forKey:@"comment"];
+    (![dictFinalProduct objectForKey:@"rate"])?[dictFinalProduct setObject:@"" forKey:@"rate"]:nil;
+    [DBManager updateProduct:dictFinalProduct];
     NSLog(@"cool %d that's a delegate call method: ",receivedCommentValue);
 }
 

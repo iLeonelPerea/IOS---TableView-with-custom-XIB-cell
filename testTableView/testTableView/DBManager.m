@@ -31,7 +31,7 @@
         
         if (sqlite3_open(dbpath, &inventoryDB) == SQLITE_OK) {
             char *errMsg;
-            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS FOODS (ID INTEGER PRIMARY KEY AUTOINCREMENT, REMOTE_ID INTEGER, NAME TEXT, DESCRIPTION TEXT, CATEGORY TEXT, MENU_TYPE TEXT, PRICE FLOAT, URL_PIC TEXT, URL_THUMB TEXT, LOCAL_THUMB TEXT, LOCAL_PIC TEXT, RECOMMENDATIONS BLOB, DESCRIPTION_ES TEXT, DESCRIPTION_HE TEXT, NAME_RU TEXT, DESCRIPTION_RU TEXT, NAME_FR TEXT, DESCRIPTION_FR TEXT, NAME_CN TEXT, DESCRIPTION_CN TEXT, NAME_JP TEXT, DESCRIPTION_JP TEXT, NAME_DE TEXT, DESCRIPTION_DE TEXT, NAME_IT TEXT, DESCRIPTION_IT TEXT, NAME_ARABIC TEXT, DESCRIPTION_ARABIC TEXT, NAME_IR TEXT, DESCRIPTION_IR TEXT, NAME_HI TEXT, DESCRIPTION_HI TEXT, SORT_ID INTEGER)";
+            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS FOODS (ID INTEGER PRIMARY KEY AUTOINCREMENT, REMOTE_ID INTEGER, NAME TEXT, DESCRIPTION TEXT, CATEGORY TEXT, MENU_TYPE TEXT, PRICE FLOAT, URL_PIC TEXT, URL_THUMB TEXT, LOCAL_THUMB TEXT, LOCAL_PIC TEXT, RECOMMENDATIONS BLOB, DESCRIPTION_ES TEXT, DESCRIPTION_HE TEXT, NAME_RU TEXT, DESCRIPTION_RU TEXT, NAME_FR TEXT, DESCRIPTION_FR TEXT, NAME_CN TEXT, DESCRIPTION_CN TEXT, NAME_JP TEXT, DESCRIPTION_JP TEXT, NAME_DE TEXT, DESCRIPTION_DE TEXT, NAME_IT TEXT, DESCRIPTION_IT TEXT, NAME_ARABIC TEXT, DESCRIPTION_ARABIC TEXT, NAME_IR TEXT, DESCRIPTION_IR TEXT, NAME_HI TEXT, DESCRIPTION_HI TEXT, SORT_ID INTEGER, RATE TEXT, COMMENT TEXT)";
             if (sqlite3_exec(inventoryDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK){
                 isDbOk = NO;
                 NSLog(@"table fail...");
@@ -71,6 +71,32 @@
     
     if (sqlite3_open(dbpath, &inventoryDB) == SQLITE_OK) {
         NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO FOODS (remote_id, name, description, category, menu_type, price, url_pic, url_thumb, local_thumb, local_pic, description_es, description_he, sort_id) VALUES (\"%d\", \"%@\", \"%@\", \"%@\", \"%@\", \"%.2f\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%d\")", [[product objectForKey:@"id"] intValue], [product objectForKey:@"name"], [product objectForKey:@"description"], [product objectForKey:@"category"], [product objectForKey:@"menu"], ([product objectForKey:@"price"] != [NSNull null])?[[product objectForKey:@"price"] floatValue]:0, [product objectForKey:@"picture"], [product objectForKey:@"picture_thumb"], ([product objectForKey:@"picture_thumb"] != [NSNull null])?[NSString stringWithFormat:@"thumb_%@.jpg",[product objectForKey:@"id"]]: [NSNull null], ([product objectForKey:@"picture"] != [NSNull null])?[NSString stringWithFormat:@"pic_%@.jpg", [product objectForKey:@"id"]]: [NSNull null], [product objectForKey:@"description_es"], [product objectForKey:@"description_he"], [[product objectForKey:@"position"] intValue]];
+        const char *insert_stmt = [insertSQL UTF8String];
+        
+        sqlite3_prepare_v2(inventoryDB, insert_stmt, -1, &statement, NULL);
+        if (sqlite3_step(statement) != SQLITE_DONE) {
+            NSLog(@"fiel error... %s - %@", sqlite3_errmsg(inventoryDB),[product objectForKey:@"id"]);
+        }
+        sqlite3_finalize(statement);
+    }
+    sqlite3_close(inventoryDB);
+}
+
++(void)updateProduct:(NSMutableDictionary *)product{
+    NSString *docsDir;
+    NSArray *dirPaths;
+    NSString *databasePath;
+    sqlite3 *inventoryDB = nil;
+    
+    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    docsDir = [dirPaths objectAtIndex:0];
+    databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"Inventory.sqlite3"]];
+    
+    sqlite3_stmt *statement;
+    const char *dbpath = [databasePath UTF8String];
+    
+    if (sqlite3_open(dbpath, &inventoryDB) == SQLITE_OK) {
+        NSString *insertSQL = [NSString stringWithFormat:@"UPDATE FOODS SET RATE = \"%@\" , COMMENT = \"%@\" WHERE id = \"%d\"", [product objectForKey:@"rate"], [product objectForKey:@"comment"], [[product objectForKey:@"id"] intValue]];
         const char *insert_stmt = [insertSQL UTF8String];
         
         sqlite3_prepare_v2(inventoryDB, insert_stmt, -1, &statement, NULL);
