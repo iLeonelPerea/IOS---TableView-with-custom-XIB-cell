@@ -90,16 +90,14 @@
 -(void)doSetRateValue:(int)rateValue{
     receivedRateValue = rateValue;
     [dictFinalProduct setObject:[NSString stringWithFormat:@"%d",rateValue] forKey:@"rate"];
-    (![dictFinalProduct objectForKey:@"comment"])?[dictFinalProduct setObject:@"" forKey:@"comment"]:nil;
-    [DBManager updateProduct:dictFinalProduct];
+    [DBManager updateProductRate:rateValue withId:[[dictFinalProduct objectForKey:@"id"]intValue]];
     NSLog(@"cool %d that's a delegate call method: ",rateValue);
 }
 
 -(void)doSetCommentValue:(NSString*)commentValue{
     receivedCommentValue = [commentValue length];
     [dictFinalProduct setObject:commentValue forKey:@"comment"];
-    (![dictFinalProduct objectForKey:@"rate"])?[dictFinalProduct setObject:@"" forKey:@"rate"]:nil;
-    [DBManager updateProduct:dictFinalProduct];
+    [DBManager updateProductComment:commentValue withId:[[dictFinalProduct objectForKey:@"id"]intValue]];
     NSLog(@"cool %d that's a delegate call method: ",receivedCommentValue);
 }
 
