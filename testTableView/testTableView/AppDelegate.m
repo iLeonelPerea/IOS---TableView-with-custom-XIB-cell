@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "DBManager.h"
 
 @implementation AppDelegate
 
@@ -18,6 +19,9 @@
     self.navController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
     [self.window setRootViewController:self.navController];
     [self.window makeKeyAndVisible];
+    if([DBManager checkOrCreateDataBase]){
+        NSLog(@"DataBase creation successs");
+    }
     return YES;
 }
 							

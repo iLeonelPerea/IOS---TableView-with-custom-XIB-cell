@@ -11,6 +11,8 @@
 		23B1A7F919B0DA1200FE91C6 /* AddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B1A7F719B0DA1200FE91C6 /* AddCommentViewController.m */; };
 		23B1A7FA19B0DA1200FE91C6 /* AddCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23B1A7F819B0DA1200FE91C6 /* AddCommentViewController.xib */; };
 		5C7EAC5ED58444E3BC895C88 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 548D203CBDDA448494E1A8F5 /* libPods.a */; };
+		7D36BA5819B4C1D000B9EA42 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D36BA5719B4C1D000B9EA42 /* DBManager.m */; };
+		7D36BA5A19B4C24100B9EA42 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D36BA5919B4C24100B9EA42 /* libsqlite3.dylib */; };
 		7D9C8A0019AE8234006F8F45 /* ProductCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9C89FE19AE8234006F8F45 /* ProductCellTableViewCell.m */; };
 		7D9C8A0119AE8234006F8F45 /* ProductCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D9C89FF19AE8234006F8F45 /* ProductCellTableViewCell.xib */; };
 		7DB5B18C19AE2E7E0031619E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DB5B18B19AE2E7E0031619E /* Foundation.framework */; };
@@ -60,6 +62,9 @@
 		23B1A7F819B0DA1200FE91C6 /* AddCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCommentViewController.xib; sourceTree = "<group>"; };
 		26ED86350605414ABBCB44E5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		548D203CBDDA448494E1A8F5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D36BA5619B4C1D000B9EA42 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		7D36BA5719B4C1D000B9EA42 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		7D36BA5919B4C24100B9EA42 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		7D9C89FD19AE8234006F8F45 /* ProductCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCellTableViewCell.h; sourceTree = "<group>"; };
 		7D9C89FE19AE8234006F8F45 /* ProductCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCellTableViewCell.m; sourceTree = "<group>"; };
 		7D9C89FF19AE8234006F8F45 /* ProductCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCellTableViewCell.xib; sourceTree = "<group>"; };
@@ -107,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D36BA5A19B4C24100B9EA42 /* libsqlite3.dylib in Frameworks */,
 				7DB5B18E19AE2E7E0031619E /* CoreGraphics.framework in Frameworks */,
 				7DB5B19019AE2E7E0031619E /* UIKit.framework in Frameworks */,
 				7DB5B18C19AE2E7E0031619E /* Foundation.framework in Frameworks */,
@@ -127,6 +133,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D36BA5519B4C1A400B9EA42 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				7D36BA5619B4C1D000B9EA42 /* DBManager.h */,
+				7D36BA5719B4C1D000B9EA42 /* DBManager.m */,
+			);
+			name = Managers;
+			path = testTableView;
+			sourceTree = "<group>";
+		};
 		7D4640F019AFA7FD00F7C9BD /* resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +162,7 @@
 		7DB5B17F19AE2E7E0031619E = {
 			isa = PBXGroup;
 			children = (
+				7D36BA5519B4C1A400B9EA42 /* Managers */,
 				7DB5B19119AE2E7E0031619E /* testTableView */,
 				7DB5B1B019AE2E7E0031619E /* testTableViewTests */,
 				7DB5B18A19AE2E7E0031619E /* Frameworks */,
@@ -166,6 +183,7 @@
 		7DB5B18A19AE2E7E0031619E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7D36BA5919B4C24100B9EA42 /* libsqlite3.dylib */,
 				7DB5B18B19AE2E7E0031619E /* Foundation.framework */,
 				7DB5B18D19AE2E7E0031619E /* CoreGraphics.framework */,
 				7DB5B18F19AE2E7E0031619E /* UIKit.framework */,
@@ -397,6 +415,7 @@
 				7DB5B19819AE2E7E0031619E /* main.m in Sources */,
 				7DB5B1C319AE3A760031619E /* MainViewController.m in Sources */,
 				7DE89CDB19B0DDAB006E3DED /* DYRateView.m in Sources */,
+				7D36BA5819B4C1D000B9EA42 /* DBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

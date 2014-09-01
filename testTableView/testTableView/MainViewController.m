@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "DBManager.h"
 
 @interface MainViewController ()
 
@@ -54,6 +55,7 @@
                 for(NSDictionary * dictFoodFinal in [dictFood objectForKey:@"foods"])
                 {
                     [arrData addObject:dictFoodFinal];
+                    [DBManager insertProduct:dictFoodFinal];
                 }
             }
             NSLog(@"tu array de datos final tiene: %d registros", [arrData count]);
