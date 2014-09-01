@@ -13,5 +13,6 @@
 +(BOOL)checkOrCreateDataBase;
 +(void)insertProduct:(NSDictionary *)product;
 +(void)updateProduct:(NSMutableDictionary *)product;
-
++(void)updateProductRate:(int)rate withId:(int)productId;
++(void)updateProductComment:(NSString*)comment withId:(int)productId;
 @end
