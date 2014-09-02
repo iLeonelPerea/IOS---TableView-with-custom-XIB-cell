@@ -95,7 +95,7 @@
 #pragma mark -- Custom Delegate Methods
 
 -(void)doSetRateValue:(int)rateValue{
-    receivedRateValue = rateValue;
+    //receivedRateValue = rateValue;
     [dictFinalProduct setObject:[NSString stringWithFormat:@"%d",rateValue] forKey:@"rate"];
     [DBManager updateProductRate:rateValue withId:[[dictFinalProduct objectForKey:@"remote_id"]intValue]];
     NSLog(@"cool %d that's a delegate call method: ",rateValue);
