@@ -8,7 +8,6 @@
 
 #import "MainViewController.h"
 #import "DBManager.h"
-#import "ExampleObject.h"
 
 @interface MainViewController ()
 
@@ -16,7 +15,7 @@
 
 @implementation MainViewController
 
-@synthesize tblView, arrData, HUDJMProgress;
+@synthesize tblView, arrData, HUDJMProgress, productObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -144,11 +143,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ProductInfoViewController *producInfoViewController = [[ProductInfoViewController alloc] init];
-    //NSDictionary * currentProductDict = [arrData objectAtIndex:indexPath.row];
-    producInfoViewController.dictFinalProduct = [[arrData objectAtIndex:indexPath.row] mutableCopy];
+    NSDictionary * currentProductDict = [arrData objectAtIndex:indexPath.row];
+    productObject = [ProductObject new];
+    productObject = [productObject assignProductObject:currentProductDict];
+    producInfoViewController.productObject = productObject;
     [self.navigationController pushViewController:producInfoViewController animated:YES];
-    
-    //Here
 }
 
 - (void)didReceiveMemoryWarning

@@ -137,7 +137,6 @@
             dictToReturn = [NSMutableDictionary new];
             
             while (sqlite3_step(statement) == SQLITE_ROW) {
-                [dictToReturn setObject:[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 2)] forKey:@"name"];
                 [dictToReturn setObject:((char *)sqlite3_column_text(statement, 33))?[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 33)]:@"" forKey:@"rate"];
                 [dictToReturn setObject:((char *)sqlite3_column_text(statement, 34))?[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 34)]:@"" forKey:@"comment"];
             }

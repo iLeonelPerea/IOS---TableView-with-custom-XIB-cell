@@ -9,12 +9,14 @@
 #import "ViewController.h"
 #import "DYRateView.h"
 #import <AsyncImageDownloader.h>
-#import "ExampleObject.h"
+#import "ProductObject.h"
+#import "ProductDetailObject.h"
 
 @interface ProductInfoViewController : ViewController
 
 @property (nonatomic, strong) NSMutableDictionary *dictFinalProduct;
-@property (nonatomic, strong) ExampleObject * exampleObject;
+@property (nonatomic, strong) ProductObject *productObject;
+@property (nonatomic, strong) ProductDetailObject *productDetailObject;
 @property(nonatomic, strong) IBOutlet UIImageView *imgProduct;
 @property(nonatomic, strong) IBOutlet UILabel *lblProductName;
 @property(nonatomic, strong) IBOutlet UILabel *lblProductCategory;
