@@ -91,10 +91,10 @@
     const char *dbpath = [[DBManager getDBPath] UTF8String];
     
     if (sqlite3_open(dbpath, &inventoryDB) == SQLITE_OK) {
-        NSString * updateSQL = [NSString stringWithFormat:@"UPDATE FOODS SET COMMENT = \'%@\' WHERE remote_id = \"%d\"", comment, productId];
-        const char * update_stmt = [updateSQL UTF8String];
+        NSString * updateSQL = [NSString stringWithFormat:@"UPDATE FOODS SET COMMENT = \'%@\' WHERE remote_id = %d", comment, productId];
+        const char * insert_stmt = [updateSQL UTF8String];
         
-        sqlite3_prepare_v2(inventoryDB, update_stmt, -1, &statement, NULL);
+        sqlite3_prepare_v2(inventoryDB, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) != SQLITE_DONE) {
             NSLog(@"Fail error... %s - %d", sqlite3_errmsg(inventoryDB), productId);
         }
