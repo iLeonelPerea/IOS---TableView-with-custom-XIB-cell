@@ -21,6 +21,7 @@
 @property(nonatomic, strong) IBOutlet UIButton *btnWriteComment;
 @property(nonatomic, assign) NSInteger receivedRateValue;
 @property(nonatomic, assign) NSInteger receivedCommentValue;
+@property(nonatomic, strong) DYRateView *rateView;
 
 -(IBAction)doShowCommentsViewController:(id)sender;
 

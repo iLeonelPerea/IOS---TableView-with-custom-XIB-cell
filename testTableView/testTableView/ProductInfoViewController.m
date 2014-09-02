@@ -16,7 +16,7 @@
 @end
 
 @implementation ProductInfoViewController
-@synthesize imgProduct, lblProductName, lblProductCategory, txtProductDescription, ldrImageIndicator, btnWriteComment, receivedRateValue, receivedCommentValue, dictFinalProduct;
+@synthesize imgProduct, lblProductName, lblProductCategory, txtProductDescription, ldrImageIndicator, btnWriteComment, receivedRateValue, receivedCommentValue, dictFinalProduct, rateView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,12 +48,12 @@
         [self.ldrImageIndicator stopAnimating];
     }
     
-    DYRateView *rateView = [[DYRateView alloc] initWithFrame:CGRectMake(0, 80, self.view.bounds.size.width, 20) fullStar:[UIImage imageNamed:@"StarFullLarge.png"] emptyStar:[UIImage imageNamed:@"StarEmptyLarge.png"]];
+    rateView = [[DYRateView alloc] initWithFrame:CGRectMake(0, 80, self.view.bounds.size.width, 20) fullStar:[UIImage imageNamed:@"StarFullLarge.png"] emptyStar:[UIImage imageNamed:@"StarEmptyLarge.png"]];
     rateView.padding = 20;
     rateView.alignment = RateViewAlignmentCenter;
     rateView.editable = YES;
     
-    [rateView setRate:3];
+    rateView.rate = [[dictFinalProduct objectForKey:@"rate"] intValue];
     [self.view addSubview:rateView];
 
     // Do any additional setup after loading the view from its nib.
@@ -62,9 +62,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     if (receivedRateValue) {
-        UILabel * lblRateValue = [[UILabel alloc] initWithFrame:CGRectMake(40, 469, 200, 30)];
-        [lblRateValue setText:[NSString stringWithFormat:@"This foods rate is: %d",receivedRateValue]];
-        [self.view addSubview:lblRateValue];
+        [rateView setRate:receivedRateValue];
     }
     if (receivedCommentValue) {
         UILabel * lblCommentValue = [[UILabel alloc] initWithFrame:CGRectMake(40, 529, 200, 30)];
@@ -76,6 +74,7 @@
 -(void)doShowRateVC:(id)sender{
     RateProductViewController *rateProductViewController = [[RateProductViewController alloc] init];
     [rateProductViewController setDelegate:(id)self];
+    rateProductViewController.rateValue = [[dictFinalProduct objectForKey:@"rate"] intValue];
     [self.navigationController pushViewController:rateProductViewController animated:YES];
 }
 
@@ -89,6 +88,7 @@
 {
     AddCommentViewController *addCommentViewController = [[AddCommentViewController alloc] init];
     [addCommentViewController setDelegate:(id)self];
+    addCommentViewController.commentValue = [dictFinalProduct objectForKey:@"comment"];
     [self.navigationController pushViewController:addCommentViewController animated:YES];
 }
 
@@ -97,14 +97,13 @@
 -(void)doSetRateValue:(int)rateValue{
     receivedRateValue = rateValue;
     [dictFinalProduct setObject:[NSString stringWithFormat:@"%d",rateValue] forKey:@"rate"];
-    [DBManager updateProductRate:rateValue withId:[[dictFinalProduct objectForKey:@"id"]intValue]];
+    [DBManager updateProductRate:rateValue withId:[[dictFinalProduct objectForKey:@"remote_id"]intValue]];
     NSLog(@"cool %d that's a delegate call method: ",rateValue);
 }
 
 -(void)doSetCommentValue:(NSString*)commentValue{
     receivedCommentValue = [commentValue length];
-    [dictFinalProduct setObject:commentValue forKey:@"comment"];
-    [DBManager updateProductComment:commentValue withId:[[dictFinalProduct objectForKey:@"id"]intValue]];
+    [DBManager updateProductComment:commentValue withId:[[dictFinalProduct objectForKey:@"remote_id"]intValue]];
     NSLog(@"cool %d that's a delegate call method: ",receivedCommentValue);
 }
 

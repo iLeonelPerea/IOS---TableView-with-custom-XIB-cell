@@ -153,11 +153,64 @@
 
 +(NSMutableArray *)getProducts
 {
-    //here goes sql code...
+    sqlite3 * inventoryDB;
+    sqlite3_stmt * statement;
+    const char * dbpath = [[DBManager getDBPath] UTF8String];
+    NSMutableDictionary * dictToReturn;
     NSMutableArray * arrToReturn = [NSMutableArray new];
-    //id algoPorMeter;
-    //[arrToReturn addObject:algoPorMeter];
-    return arrToReturn;
+    
+    NSString * selectFoodSQL = [NSString stringWithFormat: @"SELECT * FROM FOODS"];
+    
+    const char * select_stmt = [selectFoodSQL UTF8String];
+    if (sqlite3_open(dbpath, &inventoryDB) == SQLITE_OK) {
+        if(sqlite3_prepare_v2(inventoryDB, select_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                dictToReturn = [NSMutableDictionary new];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 1))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)]:@"" forKey:@"remote_id"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 2))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)]:@"" forKey:@"name"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 3))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)]:@"" forKey:@"description"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 4))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)]:@"" forKey:@"category"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 5))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)]:@"" forKey:@"menu_type"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 6))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)]:@"" forKey:@"price"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 7))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)]:@"" forKey:@"picture"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 8))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)]:@"" forKey:@"picture_thumb"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 9))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)]:@"" forKey:@"local_thumb"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 10))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)]:@"" forKey:@"local_pic"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 11))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)]:@"" forKey:@"recommendations"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 12))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)]:@"" forKey:@"description_es"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 13))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)]:@"" forKey:@"description_he"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 14))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)]:@"" forKey:@"name_ru"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 15))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)]:@"" forKey:@"description_ru"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 16))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)]:@"" forKey:@"name_fr"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 17))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 17)]:@"" forKey:@"description_fr"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 18))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 18)]:@"" forKey:@"name_cn"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 19))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)]:@"" forKey:@"description_cn"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 20))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 20)]:@"" forKey:@"name_jp"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 21))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 21)]:@"" forKey:@"description_jp"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 22))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 22)]:@"" forKey:@"name_de"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 23))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 23)]:@"" forKey:@"description_de"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 24))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 24)]:@"" forKey:@"name_it"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 25))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 25)]:@"" forKey:@"description_it"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 26))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 26)]:@"" forKey:@"name_arabic"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 27))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 27)]:@"" forKey:@"description_arabic"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 28))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 28)]:@"" forKey:@"name_ir"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 29))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 29)]:@"" forKey:@"description_ir"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 30))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 30)]:@"" forKey:@"name_hi"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 31))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 31)]:@"" forKey:@"description_hi"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 32))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 32)]:@"" forKey:@"sort_id"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 33))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 33)]:@"" forKey:@"rate"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 34))?[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 34)]:@"" forKey:@"comment"];
+                [arrToReturn addObject:dictToReturn];
+            }
+            [DBManager finalizeStatements:statement withDB:inventoryDB];
+            return arrToReturn;
+        }
+        else
+            return nil;
+    }
+    else
+        return nil;
 }
 
 

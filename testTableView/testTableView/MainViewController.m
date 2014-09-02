@@ -43,6 +43,8 @@
 -(void)loadProductsData{
     [HUDJMProgress showInView:self.view];
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    //[defaults setObject:nil forKey:@"isDataLoaded"];
+    //[defaults synchronize];
     if(![defaults objectForKey:@"isDataLoaded"])
     {
         NSURL *url = [NSURL URLWithString:@"http://aroma-bakery-cafe.herokuapp.com/admin/foods.json"];
@@ -71,6 +73,7 @@
     else
     {
         // call and fill up array from DBManager
+        arrData = [DBManager getProducts];
     }
     [HUDJMProgress dismissAfterDelay:0.1];
     [tblView reloadData];
@@ -111,6 +114,8 @@
         [cell.imgProduct setImage:[UIImage imageNamed:@"noAvail.png"]];
         [cell.loader stopAnimating];
     }
+    [cell.imgProduct setImage:[UIImage imageNamed:@"noAvail.png"]];
+    [cell.loader stopAnimating];
     return cell;
 }
 
