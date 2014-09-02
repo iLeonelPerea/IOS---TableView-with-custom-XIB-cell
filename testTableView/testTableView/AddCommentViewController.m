@@ -13,7 +13,7 @@
 @end
 
 @implementation AddCommentViewController
-@synthesize txtComment, btnSend;
+@synthesize txtComment, btnSend, commentValue;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,6 +29,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [txtComment setDelegate:self];
+    [txtComment setText:(txtComment)?commentValue:@""];
+    (txtComment) ? [btnSend setTitle:@"Update" forState:UIControlStateNormal]:nil;
     [btnSend setEnabled:NO];
 }
 

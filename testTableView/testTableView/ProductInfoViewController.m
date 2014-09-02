@@ -48,6 +48,13 @@
         [self.ldrImageIndicator stopAnimating];
     }
     
+    DYRateView *rateView = [[DYRateView alloc] initWithFrame:CGRectMake(0, 80, self.view.bounds.size.width, 20) fullStar:[UIImage imageNamed:@"StarFullLarge.png"] emptyStar:[UIImage imageNamed:@"StarEmptyLarge.png"]];
+    rateView.padding = 20;
+    rateView.alignment = RateViewAlignmentCenter;
+    rateView.editable = YES;
+    
+    [rateView setRate:3];
+    [self.view addSubview:rateView];
 
     // Do any additional setup after loading the view from its nib.
 }

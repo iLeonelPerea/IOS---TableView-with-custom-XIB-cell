@@ -13,6 +13,7 @@
 @interface RateProductViewController : ViewController <DYRateViewDelegate>
 
 @property (nonatomic, strong) UILabel *rateLabel;
+@property (nonatomic, assign) NSInteger rateValue;
 @property (nonatomic, strong) id<iInfoDelegate> delegate;
 
 @end
