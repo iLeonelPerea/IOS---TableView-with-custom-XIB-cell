@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "DYRateView.h"
 #import <AsyncImageDownloader.h>
 
 @interface ProductInfoViewController : ViewController

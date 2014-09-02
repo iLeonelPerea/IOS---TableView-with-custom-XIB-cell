@@ -42,19 +42,21 @@
 
 -(void)loadProductsData{
     [HUDJMProgress showInView:self.view];
-    NSURL *url = [NSURL URLWithString:@"http://aroma-bakery-cafe.herokuapp.com/admin/foods.json"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        NSLog(@"Cargando Datos...");
-        if(!error)
-        {
-            NSDictionary * dictFoodsGeneral = [NSJSONSerialization JSONObjectWithData: data options:kNilOptions error:nil];
-            NSArray * arrFoods = [dictFoodsGeneral objectForKey:@"foods"];
-            for (NSDictionary * dictFood in arrFoods)
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    if(![defaults objectForKey:@"isDataLoaded"])
+    {
+        NSURL *url = [NSURL URLWithString:@"http://aroma-bakery-cafe.herokuapp.com/admin/foods.json"];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            NSLog(@"Cargando Datos...");
+            if(!error)
             {
-                for(NSDictionary * dictFoodFinal in [dictFood objectForKey:@"foods"])
+                NSDictionary * dictFoodsGeneral = [NSJSONSerialization JSONObjectWithData: data options:kNilOptions error:nil];
+                NSArray * arrFoods = [dictFoodsGeneral objectForKey:@"foods"];
+                for (NSDictionary * dictFood in arrFoods)
                 {
-                    
+                    for(NSDictionary * dictFoodFinal in [dictFood objectForKey:@"foods"])
+                    {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                         NSString *documentDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -76,12 +78,19 @@
                     //[arrData addObject:dictFoodFinal];
                     [DBManager insertProduct:dictFoodFinal];
                 }
+                }
+                [defaults setObject:@"YES" forKey:@"isDataLoaded"];
+                [defaults synchronize];
+                NSLog(@"tu array de datos final tiene: %d registros", [arrData count]);
             }
-            NSLog(@"tu array de datos final tiene: %d registros", [arrData count]);
-            [HUDJMProgress dismissAfterDelay:0.1];
-            [tblView reloadData];
-        }
-    }];
+        }];
+    }
+    else
+    {
+        // call and fill up array from DBManager
+    }
+    [HUDJMProgress dismissAfterDelay:0.1];
+    [tblView reloadData];
 }
 
 #pragma mark - Table view data delegate
