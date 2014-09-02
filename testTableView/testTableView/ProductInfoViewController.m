@@ -33,8 +33,7 @@
     NSString *url = ([dictFinalProduct objectForKey:@"picture"] != [NSNull null])?
         [NSString stringWithFormat:@"%@",[dictFinalProduct objectForKey:@"picture"]]:@"";
     // now use object property instead of dictionary value for key
-    //self.lblProductName.text = ([dictFinalProduct objectForKey:@"name"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"name"]]:@"No Name";
-    self.lblProductName = self.exampleObject.productName;
+    self.lblProductName.text = ([dictFinalProduct objectForKey:@"name"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"name"]]:@"No Name";
     self.lblProductCategory.text = ([dictFinalProduct objectForKey:@"category"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"category"]]:@"No Category";
     self.txtProductDescription.text = ([dictFinalProduct objectForKey:@"description"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"description"]]:@"No Description";
     
@@ -55,6 +54,14 @@
     rateView.alignment = RateViewAlignmentCenter;
     rateView.editable = NO;
     [self.view addSubview:rateView];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSDictionary * dictInfo = [[NSDictionary alloc] initWithDictionary:[DBManager getProductWithId:[[dictFinalProduct objectForKey:@"remote_id"] intValue]]];
+        
+        if([[dictInfo objectForKey:@"comment"] length] > 0){
+            [btnWriteComment setTitle:@"Edit comment" forState:UIControlStateNormal];
+        }
+    });
 
     // Do any additional setup after loading the view from its nib.
 }
@@ -66,11 +73,13 @@
         NSDictionary * dictInfo = [[NSDictionary alloc] initWithDictionary:[DBManager getProductWithId:[[dictFinalProduct objectForKey:@"remote_id"] intValue]]];
         rateView.rate = [[dictInfo objectForKey:@"rate"] intValue];
     });
-    if (receivedCommentValue) {
-        UILabel * lblCommentValue = [[UILabel alloc] initWithFrame:CGRectMake(40, 529, 200, 30)];
-        [lblCommentValue setText:[NSString stringWithFormat:@"This foods comment is: %d",receivedCommentValue]];
-        [self.view addSubview:lblCommentValue];
-    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSDictionary * dictInfo = [[NSDictionary alloc] initWithDictionary:[DBManager getProductWithId:[[dictFinalProduct objectForKey:@"remote_id"] intValue]]];
+        if([[dictInfo objectForKey:@"comment"] length] > 0){
+            [btnWriteComment setTitle:@"Edit comment" forState:UIControlStateNormal];
+        }
+    });
 }
 
 -(void)doShowRateVC:(id)sender{
@@ -90,6 +99,7 @@
 {
     AddCommentViewController *addCommentViewController = [[AddCommentViewController alloc] init];
     [addCommentViewController setDelegate:(id)self];
+    addCommentViewController.productId = [[dictFinalProduct objectForKey:@"remote_id"] intValue];
     [self.navigationController pushViewController:addCommentViewController animated:YES];
 }
 
@@ -100,9 +110,7 @@
 }
 
 -(void)doSetCommentValue:(NSString*)commentValue{
-    receivedCommentValue = [commentValue length];
     [DBManager updateProductComment:commentValue withId:[[dictFinalProduct objectForKey:@"remote_id"]intValue]];
-    NSLog(@"cool %d that's a delegate call method: ",receivedCommentValue);
 }
 
 @end

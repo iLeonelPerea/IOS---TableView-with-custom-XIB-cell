@@ -13,7 +13,7 @@
 @end
 
 @implementation AddCommentViewController
-@synthesize txtComment, btnSend, commentValue;
+@synthesize txtComment, btnSend, commentValue, productId;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,6 +34,17 @@
     [btnSend setEnabled:NO];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSDictionary * dictInfo = [[NSDictionary alloc] initWithDictionary:[DBManager getProductWithId:productId]];
+        [txtComment setText: [dictInfo objectForKey:@"comment"]];
+        NSLog(@"comment value: %@", [dictInfo objectForKey:@"comment"]);
+    });
+    
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -45,7 +56,7 @@
 -(IBAction)doSendComment:(id)sender{
     [txtComment resignFirstResponder]; //Oculta el teclado :P
     [self.navigationController popViewControllerAnimated:YES];
-    [self.delegate doSetCommentValue:txtComment.text];    
+    [self.delegate doSetCommentValue:txtComment.text];
 }
 #pragma mark -- UITextView delegate
 -(void)textViewDidChange:(UITextView *)textView

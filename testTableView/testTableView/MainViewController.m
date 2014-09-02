@@ -144,15 +144,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ProductInfoViewController *producInfoViewController = [[ProductInfoViewController alloc] init];
-    NSDictionary * currentProductDict = [arrData objectAtIndex:indexPath.row];
-    
-    //ExampleObject * exampleObject = [[ExampleObject alloc] init]; // you can initialize any of both ways.
-    ExampleObject * exampleObject = [ExampleObject new];
-    exampleObject.productId = [currentProductDict objectForKey:@"remote_id"];
-    exampleObject.productName = [currentProductDict objectForKey:@"name"];
-    
-    //producInfoViewController.dictFinalProduct = [[arrData objectAtIndex:indexPath.row] mutableCopy];
-    producInfoViewController.exampleObject = exampleObject;
+    //NSDictionary * currentProductDict = [arrData objectAtIndex:indexPath.row];
+    producInfoViewController.dictFinalProduct = [[arrData objectAtIndex:indexPath.row] mutableCopy];
     [self.navigationController pushViewController:producInfoViewController animated:YES];
     
     //Here
