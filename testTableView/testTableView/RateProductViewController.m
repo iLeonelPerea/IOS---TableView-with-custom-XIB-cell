@@ -68,12 +68,16 @@
     if(isFirstTime)
     {
         isFirstTime = NO;
-        NSLog(@"returned..");
         return;
     }
     [self.delegate doSetRateValue:[rate intValue]];
-    [self.navigationController popViewControllerAnimated:YES];
     self.rateLabel.text = [NSString stringWithFormat:@"Rate: %d", rate.intValue];
+    self.rateLabel.alpha = 0;
+    [UIView animateWithDuration:.73 animations:^{
+        self.rateLabel.alpha = 1;
+    } completion:^(BOOL finished) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,5 +85,4 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 @end

@@ -36,6 +36,7 @@
     self.lblProductCategory.text = [productObject category];
     self.txtProductDescription.text = [productObject description];
     
+    //todo: evaluate if local image has been downloaded
     if(![url isEqual:@""]){
         [[[AsyncImageDownloader alloc] initWithFileURL:url successBlock:^(NSData *data) {
             [self.ldrImageIndicator stopAnimating];
@@ -54,6 +55,7 @@
     rateView.editable = NO;
     [self.view addSubview:rateView];
     
+    // this code is useless...
     dispatch_async(dispatch_get_main_queue(), ^{
         NSDictionary * dictInfo = [[NSDictionary alloc] initWithDictionary:[DBManager getProductWithId:[[dictFinalProduct objectForKey:@"remote_id"] intValue]]];
         
@@ -113,7 +115,6 @@
 -(void)doSetCommentValue:(NSString*)commentValue{
     receivedCommentValue = [commentValue length];
     [DBManager updateProductComment:commentValue withId:[productObject remote_id]];
-    NSLog(@"cool %d that's a delegate call method: ",receivedCommentValue);
 }
 
 @end
