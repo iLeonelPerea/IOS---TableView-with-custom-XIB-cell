@@ -16,7 +16,7 @@
 @end
 
 @implementation ProductInfoViewController
-@synthesize imgProduct, lblProductName, lblProductCategory, txtProductDescription, ldrImageIndicator, btnWriteComment, receivedCommentValue, dictFinalProduct, rateView;
+@synthesize imgProduct, lblProductName, lblProductCategory, txtProductDescription, ldrImageIndicator, btnWriteComment, receivedCommentValue, dictFinalProduct, rateView, productObject, productDetailObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,13 +30,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSString *url = ([dictFinalProduct objectForKey:@"picture"] != [NSNull null])?
-        [NSString stringWithFormat:@"%@",[dictFinalProduct objectForKey:@"picture"]]:@"";
-    // now use object property instead of dictionary value for key
-    //self.lblProductName.text = ([dictFinalProduct objectForKey:@"name"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"name"]]:@"No Name";
-    self.lblProductName = self.exampleObject.productName;
-    self.lblProductCategory.text = ([dictFinalProduct objectForKey:@"category"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"category"]]:@"No Category";
-    self.txtProductDescription.text = ([dictFinalProduct objectForKey:@"description"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"description"]]:@"No Description";
+    
+    NSString *url = [productObject picture];
+    self.lblProductName.text = [productObject name];
+    self.lblProductCategory.text = [productObject category];
+    self.txtProductDescription.text = [productObject description];
     
     if(![url isEqual:@""]){
         [[[AsyncImageDownloader alloc] initWithFileURL:url successBlock:^(NSData *data) {
@@ -63,8 +61,10 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSDictionary * dictInfo = [[NSDictionary alloc] initWithDictionary:[DBManager getProductWithId:[[dictFinalProduct objectForKey:@"remote_id"] intValue]]];
-        rateView.rate = [[dictInfo objectForKey:@"rate"] intValue];
+        NSDictionary * dictInfo = [[NSDictionary alloc] initWithDictionary:[DBManager getProductWithId:[productObject remote_id]]];
+        productDetailObject = [ProductDetailObject new];
+        productDetailObject = [productDetailObject assignProductDetailObject:dictInfo];
+        rateView.rate = [[productDetailObject rate] intValue];
     });
     if (receivedCommentValue) {
         UILabel * lblCommentValue = [[UILabel alloc] initWithFrame:CGRectMake(40, 529, 200, 30)];
@@ -76,7 +76,7 @@
 -(void)doShowRateVC:(id)sender{
     RateProductViewController *rateProductViewController = [[RateProductViewController alloc] init];
     [rateProductViewController setDelegate:(id)self];
-    rateProductViewController.productId = [[dictFinalProduct objectForKey:@"remote_id"] intValue];
+    rateProductViewController.productId = [productObject remote_id];
     [self.navigationController pushViewController:rateProductViewController animated:YES];
 }
 
@@ -96,12 +96,12 @@
 #pragma mark -- Custom Delegate Methods
 
 -(void)doSetRateValue:(int)rateValue{
-    [DBManager updateProductRate:rateValue withId:[[dictFinalProduct objectForKey:@"remote_id"] intValue]];
+    [DBManager updateProductRate:rateValue withId:[productObject remote_id]];
 }
 
 -(void)doSetCommentValue:(NSString*)commentValue{
     receivedCommentValue = [commentValue length];
-    [DBManager updateProductComment:commentValue withId:[[dictFinalProduct objectForKey:@"remote_id"]intValue]];
+    [DBManager updateProductComment:commentValue withId:[productObject remote_id]];
     NSLog(@"cool %d that's a delegate call method: ",receivedCommentValue);
 }
 

@@ -13,6 +13,8 @@
 		5C7EAC5ED58444E3BC895C88 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 548D203CBDDA448494E1A8F5 /* libPods.a */; };
 		7D36BA5819B4C1D000B9EA42 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D36BA5719B4C1D000B9EA42 /* DBManager.m */; };
 		7D36BA5A19B4C24100B9EA42 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D36BA5919B4C24100B9EA42 /* libsqlite3.dylib */; };
+		7D8C185519B62D1100AD502C /* ProductObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8C185419B62D1100AD502C /* ProductObject.m */; };
+		7D8C185819B6392D00AD502C /* ProductDetailObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8C185719B6392D00AD502C /* ProductDetailObject.m */; };
 		7D9C8A0019AE8234006F8F45 /* ProductCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9C89FE19AE8234006F8F45 /* ProductCellTableViewCell.m */; };
 		7D9C8A0119AE8234006F8F45 /* ProductCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D9C89FF19AE8234006F8F45 /* ProductCellTableViewCell.xib */; };
 		7DB5B18C19AE2E7E0031619E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DB5B18B19AE2E7E0031619E /* Foundation.framework */; };
@@ -43,7 +45,6 @@
 		7DE89CDB19B0DDAB006E3DED /* DYRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE89CDA19B0DDAB006E3DED /* DYRateView.m */; };
 		7DE89CE219B0E050006E3DED /* RateProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE89CE019B0E050006E3DED /* RateProductViewController.m */; };
 		7DE89CE319B0E050006E3DED /* RateProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DE89CE119B0E050006E3DED /* RateProductViewController.xib */; };
-		C8D5B88F19B628EF008E09DF /* ExampleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D5B88E19B628EF008E09DF /* ExampleObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,10 @@
 		7D36BA5619B4C1D000B9EA42 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		7D36BA5719B4C1D000B9EA42 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		7D36BA5919B4C24100B9EA42 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		7D8C185319B62D1100AD502C /* ProductObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductObject.h; sourceTree = "<group>"; };
+		7D8C185419B62D1100AD502C /* ProductObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductObject.m; sourceTree = "<group>"; };
+		7D8C185619B6392D00AD502C /* ProductDetailObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductDetailObject.h; sourceTree = "<group>"; };
+		7D8C185719B6392D00AD502C /* ProductDetailObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductDetailObject.m; sourceTree = "<group>"; };
 		7D9C89FD19AE8234006F8F45 /* ProductCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCellTableViewCell.h; sourceTree = "<group>"; };
 		7D9C89FE19AE8234006F8F45 /* ProductCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCellTableViewCell.m; sourceTree = "<group>"; };
 		7D9C89FF19AE8234006F8F45 /* ProductCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCellTableViewCell.xib; sourceTree = "<group>"; };
@@ -106,8 +111,6 @@
 		7DE89CDF19B0E050006E3DED /* RateProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateProductViewController.h; sourceTree = "<group>"; };
 		7DE89CE019B0E050006E3DED /* RateProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateProductViewController.m; sourceTree = "<group>"; };
 		7DE89CE119B0E050006E3DED /* RateProductViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RateProductViewController.xib; sourceTree = "<group>"; };
-		C8D5B88D19B628EF008E09DF /* ExampleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleObject.h; sourceTree = "<group>"; };
-		C8D5B88E19B628EF008E09DF /* ExampleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,8 +271,10 @@
 		C8D5B88C19B628C0008E09DF /* VO */ = {
 			isa = PBXGroup;
 			children = (
-				C8D5B88D19B628EF008E09DF /* ExampleObject.h */,
-				C8D5B88E19B628EF008E09DF /* ExampleObject.m */,
+				7D8C185319B62D1100AD502C /* ProductObject.h */,
+				7D8C185419B62D1100AD502C /* ProductObject.m */,
+				7D8C185619B6392D00AD502C /* ProductDetailObject.h */,
+				7D8C185719B6392D00AD502C /* ProductDetailObject.m */,
 			);
 			name = VO;
 			sourceTree = "<group>";
@@ -424,6 +429,7 @@
 			files = (
 				7DCA9A1A19AF6C08002D19B5 /* ProductInfoViewController.m in Sources */,
 				7DE89CE219B0E050006E3DED /* RateProductViewController.m in Sources */,
+				7D8C185819B6392D00AD502C /* ProductDetailObject.m in Sources */,
 				7DB5B1A219AE2E7E0031619E /* ViewController.m in Sources */,
 				23B1A7F919B0DA1200FE91C6 /* AddCommentViewController.m in Sources */,
 				7D9C8A0019AE8234006F8F45 /* ProductCellTableViewCell.m in Sources */,
@@ -431,7 +437,7 @@
 				7DB5B19819AE2E7E0031619E /* main.m in Sources */,
 				7DB5B1C319AE3A760031619E /* MainViewController.m in Sources */,
 				7DE89CDB19B0DDAB006E3DED /* DYRateView.m in Sources */,
-				C8D5B88F19B628EF008E09DF /* ExampleObject.m in Sources */,
+				7D8C185519B62D1100AD502C /* ProductObject.m in Sources */,
 				7D36BA5819B4C1D000B9EA42 /* DBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

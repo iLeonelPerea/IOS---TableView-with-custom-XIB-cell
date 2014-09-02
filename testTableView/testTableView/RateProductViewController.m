@@ -15,7 +15,7 @@
 
 @implementation RateProductViewController
 
-@synthesize rateLabel = _rateLabel, rateValue, rateView, productId, isFirstTime;
+@synthesize rateLabel = _rateLabel, rateValue, rateView, productId, isFirstTime, productDetailObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,7 +55,9 @@
     [super viewDidAppear:animated];
     dispatch_async(dispatch_get_main_queue(), ^{
         NSDictionary * dictInfo = [[NSDictionary alloc] initWithDictionary:[DBManager getProductWithId:productId]];
-        rateView.rate = [[dictInfo objectForKey:@"rate"] intValue];
+        productDetailObject = [ProductDetailObject new];
+        productDetailObject = [productDetailObject assignProductDetailObject:dictInfo];
+        rateView.rate = [[productDetailObject rate] intValue];
         NSLog(@"rate value: %@", [dictInfo objectForKey:@"rate"]);
     });
 }

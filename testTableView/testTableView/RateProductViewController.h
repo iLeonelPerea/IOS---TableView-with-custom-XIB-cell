@@ -9,9 +9,11 @@
 #import "ViewController.h"
 #import "DYRateView.h"
 #import "ProductInfoViewController.h"
+#import "ProductDetailObject.h"
 
 @interface RateProductViewController : ViewController <DYRateViewDelegate>
 
+@property (nonatomic, strong) ProductDetailObject *productDetailObject;
 @property (nonatomic, strong) UILabel *rateLabel;
 @property (nonatomic, assign) NSInteger rateValue;
 @property (nonatomic, strong) id<iInfoDelegate> delegate;

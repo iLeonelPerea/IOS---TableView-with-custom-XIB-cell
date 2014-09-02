@@ -16,7 +16,7 @@
 
 @implementation MainViewController
 
-@synthesize tblView, arrData, HUDJMProgress;
+@synthesize tblView, arrData, HUDJMProgress, productObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -146,16 +146,11 @@
     ProductInfoViewController *producInfoViewController = [[ProductInfoViewController alloc] init];
     NSDictionary * currentProductDict = [arrData objectAtIndex:indexPath.row];
     
-    //ExampleObject * exampleObject = [[ExampleObject alloc] init]; // you can initialize any of both ways.
-    ExampleObject * exampleObject = [ExampleObject new];
-    exampleObject.productId = [currentProductDict objectForKey:@"remote_id"];
-    exampleObject.productName = [currentProductDict objectForKey:@"name"];
+    productObject = [ProductObject new];
+    productObject = [productObject assignProductObject:currentProductDict];
     
-    //producInfoViewController.dictFinalProduct = [[arrData objectAtIndex:indexPath.row] mutableCopy];
-    producInfoViewController.exampleObject = exampleObject;
+    producInfoViewController.productObject = productObject;
     [self.navigationController pushViewController:producInfoViewController animated:YES];
-    
-    //Here
 }
 
 - (void)didReceiveMemoryWarning
