@@ -59,13 +59,30 @@
                 {
                     for(NSDictionary * dictFoodFinal in [dictFood objectForKey:@"foods"])
                     {
-                        [arrData addObject:dictFoodFinal];
-                        [DBManager insertProduct:dictFoodFinal];
-                    }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        NSString *documentDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                        NSString *filePathAndDirectory = [documentDirectoryPath stringByAppendingString:@"/images/thumbs/"];
+                        [[NSFileManager defaultManager] createDirectoryAtPath:filePathAndDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+                        NSString * fileName = [NSString stringWithFormat:@"%@.jpg", [dictFoodFinal objectForKey:@"id"]];
+                        NSString * fullPath = [NSString stringWithFormat:@"%@/%@", filePathAndDirectory, fileName];
+                        
+                        NSString *url = ([dictFoodFinal objectForKey:@"picture_thumb"] != [NSNull null])? [NSString stringWithFormat:@"%@",[dictFoodFinal objectForKey:@"picture_thumb"]]:@"";
+                        if(![url isEqual:@""]){
+                            [[[AsyncImageDownloader alloc] initWithFileURL:url successBlock:^(NSData *data) {
+                                NSData *dataPic = [NSData dataWithData:UIImageJPEGRepresentation([UIImage imageWithData:data], 1.0f)];
+                                [dataPic writeToFile:fullPath atomically:YES];
+                            } failBlock:^(NSError *error) {
+                                NSLog(@"Failed to download image due to %@!", error);
+                            }] startDownload];
+                        }
+                    });
+                    //[arrData addObject:dictFoodFinal];
+                    [DBManager insertProduct:dictFoodFinal];
+                }
                 }
                 [defaults setObject:@"YES" forKey:@"isDataLoaded"];
                 [defaults synchronize];
-                NSDictionary * tmpD = [[NSDictionary alloc] initWithDictionary:[DBManager getProductWithId:204]];
                 NSLog(@"tu array de datos final tiene: %d registros", [arrData count]);
             }
         }];
