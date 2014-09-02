@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "DBManager.h"
+#import "ExampleObject.h"
 
 @interface MainViewController ()
 
@@ -43,8 +44,11 @@
 -(void)loadProductsData{
     [HUDJMProgress showInView:self.view];
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    //[defaults setObject:nil forKey:@"isDataLoaded"];
-    //[defaults synchronize];
+    /*
+    [defaults setObject:nil forKey:@"isDataLoaded"];
+    [defaults synchronize];
+    return;
+    */
     if(![defaults objectForKey:@"isDataLoaded"])
     {
         NSURL *url = [NSURL URLWithString:@"http://aroma-bakery-cafe.herokuapp.com/admin/foods.json"];
@@ -77,7 +81,7 @@
                             }] startDownload];
                         }
                     });
-                    //[arrData addObject:dictFoodFinal];
+                    [arrData addObject:dictFoodFinal];
                     [DBManager insertProduct:dictFoodFinal];
                 }
                 }
@@ -85,15 +89,17 @@
                 [defaults synchronize];
                 NSLog(@"tu array de datos final tiene: %d registros", [arrData count]);
             }
+            [HUDJMProgress dismissAfterDelay:0.1];
+            [tblView reloadData];
         }];
     }
     else
     {
         // call and fill up array from DBManager
         arrData = [DBManager getProducts];
+        [HUDJMProgress dismissAfterDelay:0.1];
+        [tblView reloadData];
     }
-    [HUDJMProgress dismissAfterDelay:0.1];
-    [tblView reloadData];
 }
 
 #pragma mark - Table view data delegate
@@ -138,7 +144,15 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ProductInfoViewController *producInfoViewController = [[ProductInfoViewController alloc] init];
-    producInfoViewController.dictFinalProduct = [[arrData objectAtIndex:indexPath.row] mutableCopy];
+    NSDictionary * currentProductDict = [arrData objectAtIndex:indexPath.row];
+    
+    //ExampleObject * exampleObject = [[ExampleObject alloc] init]; // you can initialize any of both ways.
+    ExampleObject * exampleObject = [ExampleObject new];
+    exampleObject.productId = [currentProductDict objectForKey:@"remote_id"];
+    exampleObject.productName = [currentProductDict objectForKey:@"name"];
+    
+    //producInfoViewController.dictFinalProduct = [[arrData objectAtIndex:indexPath.row] mutableCopy];
+    producInfoViewController.exampleObject = exampleObject;
     [self.navigationController pushViewController:producInfoViewController animated:YES];
     
     //Here

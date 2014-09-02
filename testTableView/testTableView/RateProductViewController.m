@@ -7,6 +7,7 @@
 //
 
 #import "RateProductViewController.h"
+#import "DBManager.h"
 
 @interface RateProductViewController ()
 
@@ -14,7 +15,7 @@
 
 @implementation RateProductViewController
 
-@synthesize rateLabel = _rateLabel, rateValue, rateView;
+@synthesize rateLabel = _rateLabel, rateValue, rateView, productId, isFirstTime;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,7 +31,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    isFirstTime = YES;
     [self setUpEditableRateView];
 }
 
@@ -49,9 +50,25 @@
     [self.view addSubview:self.rateLabel];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSDictionary * dictInfo = [[NSDictionary alloc] initWithDictionary:[DBManager getProductWithId:productId]];
+        rateView.rate = [[dictInfo objectForKey:@"rate"] intValue];
+        NSLog(@"rate value: %@", [dictInfo objectForKey:@"rate"]);
+    });
+}
+
 #pragma mark - DYRateViewDelegate
 
 - (void)rateView:(DYRateView *)rateView changedToNewRate:(NSNumber *)rate {
+    if(isFirstTime)
+    {
+        isFirstTime = NO;
+        NSLog(@"returned..");
+        return;
+    }
     [self.delegate doSetRateValue:[rate intValue]];
     [self.navigationController popViewControllerAnimated:YES];
     self.rateLabel.text = [NSString stringWithFormat:@"Rate: %d", rate.intValue];

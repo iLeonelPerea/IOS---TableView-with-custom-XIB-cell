@@ -16,7 +16,7 @@
 @end
 
 @implementation ProductInfoViewController
-@synthesize imgProduct, lblProductName, lblProductCategory, txtProductDescription, ldrImageIndicator, btnWriteComment, receivedRateValue, receivedCommentValue, dictFinalProduct, rateView;
+@synthesize imgProduct, lblProductName, lblProductCategory, txtProductDescription, ldrImageIndicator, btnWriteComment, receivedCommentValue, dictFinalProduct, rateView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,7 +32,9 @@
     [super viewDidLoad];
     NSString *url = ([dictFinalProduct objectForKey:@"picture"] != [NSNull null])?
         [NSString stringWithFormat:@"%@",[dictFinalProduct objectForKey:@"picture"]]:@"";
-    self.lblProductName.text = ([dictFinalProduct objectForKey:@"name"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"name"]]:@"No Name";
+    // now use object property instead of dictionary value for key
+    //self.lblProductName.text = ([dictFinalProduct objectForKey:@"name"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"name"]]:@"No Name";
+    self.lblProductName = self.exampleObject.productName;
     self.lblProductCategory.text = ([dictFinalProduct objectForKey:@"category"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"category"]]:@"No Category";
     self.txtProductDescription.text = ([dictFinalProduct objectForKey:@"description"]) != [NSNull null] ?[NSString stringWithFormat:@"%@", [dictFinalProduct objectForKey:@"description"]]:@"No Description";
     
@@ -51,19 +53,19 @@
     rateView = [[DYRateView alloc] initWithFrame:CGRectMake(0, 80, self.view.bounds.size.width, 20) fullStar:[UIImage imageNamed:@"StarFullLarge.png"] emptyStar:[UIImage imageNamed:@"StarEmptyLarge.png"]];
     rateView.padding = 20;
     rateView.alignment = RateViewAlignmentCenter;
-    rateView.editable = YES;
-    
-    rateView.rate = [[dictFinalProduct objectForKey:@"rate"] intValue];
+    rateView.editable = NO;
     [self.view addSubview:rateView];
 
     // Do any additional setup after loading the view from its nib.
 }
 
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if (receivedRateValue) {
-        [rateView setRate:receivedRateValue];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSDictionary * dictInfo = [[NSDictionary alloc] initWithDictionary:[DBManager getProductWithId:[[dictFinalProduct objectForKey:@"remote_id"] intValue]]];
+        rateView.rate = [[dictInfo objectForKey:@"rate"] intValue];
+    });
     if (receivedCommentValue) {
         UILabel * lblCommentValue = [[UILabel alloc] initWithFrame:CGRectMake(40, 529, 200, 30)];
         [lblCommentValue setText:[NSString stringWithFormat:@"This foods comment is: %d",receivedCommentValue]];
@@ -74,7 +76,7 @@
 -(void)doShowRateVC:(id)sender{
     RateProductViewController *rateProductViewController = [[RateProductViewController alloc] init];
     [rateProductViewController setDelegate:(id)self];
-    rateProductViewController.rateValue = [[dictFinalProduct objectForKey:@"rate"] intValue];
+    rateProductViewController.productId = [[dictFinalProduct objectForKey:@"remote_id"] intValue];
     [self.navigationController pushViewController:rateProductViewController animated:YES];
 }
 
@@ -88,17 +90,13 @@
 {
     AddCommentViewController *addCommentViewController = [[AddCommentViewController alloc] init];
     [addCommentViewController setDelegate:(id)self];
-    addCommentViewController.commentValue = [dictFinalProduct objectForKey:@"comment"];
     [self.navigationController pushViewController:addCommentViewController animated:YES];
 }
 
 #pragma mark -- Custom Delegate Methods
 
 -(void)doSetRateValue:(int)rateValue{
-    //receivedRateValue = rateValue;
-    [dictFinalProduct setObject:[NSString stringWithFormat:@"%d",rateValue] forKey:@"rate"];
-    [DBManager updateProductRate:rateValue withId:[[dictFinalProduct objectForKey:@"remote_id"]intValue]];
-    NSLog(@"cool %d that's a delegate call method: ",rateValue);
+    [DBManager updateProductRate:rateValue withId:[[dictFinalProduct objectForKey:@"remote_id"] intValue]];
 }
 
 -(void)doSetCommentValue:(NSString*)commentValue{

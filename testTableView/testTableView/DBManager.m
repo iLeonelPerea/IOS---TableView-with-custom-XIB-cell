@@ -128,7 +128,7 @@
     const char * dbpath = [[DBManager getDBPath] UTF8String];
     NSMutableDictionary * dictToReturn;
     
-    NSString * selectFoodSQL = [NSString stringWithFormat: @"SELECT * FROM FOODS WHERE id = \"%d\"", productId];
+    NSString * selectFoodSQL = [NSString stringWithFormat: @"SELECT * FROM FOODS WHERE remote_id = \"%d\"", productId];
     
     const char * select_stmt = [selectFoodSQL UTF8String];
     if (sqlite3_open(dbpath, &inventoryDB) == SQLITE_OK) {
@@ -138,8 +138,8 @@
             
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 [dictToReturn setObject:[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 2)] forKey:@"name"];
-                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 14))?[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 14)]:@"" forKey:@"rate"];
-                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 15))?[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 15)]:@"" forKey:@"comment"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 33))?[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 33)]:@"" forKey:@"rate"];
+                [dictToReturn setObject:((char *)sqlite3_column_text(statement, 34))?[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 34)]:@"" forKey:@"comment"];
             }
             [DBManager finalizeStatements:statement withDB:inventoryDB];
             return dictToReturn;
