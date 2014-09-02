@@ -157,6 +157,7 @@
     NSMutableArray * arrToReturn = [NSMutableArray new];
     //id algoPorMeter;
     //[arrToReturn addObject:algoPorMeter];
+    return arrToReturn;
 }
 
 
