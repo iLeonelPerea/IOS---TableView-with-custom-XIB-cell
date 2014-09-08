@@ -28,6 +28,22 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    // try to store array on userDefaults
+    // Example on hot to store and read array from NSUserDefaults
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults]; //defaults instance
+    NSMutableArray * localArrUsers = [NSMutableArray new]; // array to store users
+    int userCount = 0; // users counter
+    if([defaults objectForKey:@"arrUsers"]) // ask for arrUsers from defaults
+    {
+        localArrUsers = [defaults objectForKey:@"arrUsers"]; // set local array with defaults array
+        userCount = [localArrUsers count]; // check how many 'users' are stored on array
+    }
+    userCount ++; // increment users
+    NSMutableDictionary * dictNewUser = [NSMutableDictionary new]; // create new user as dictionary
+    [dictNewUser setObject:[NSString stringWithFormat:@"My New User %d", userCount] forKey:@"user"]; // set value for user key
+    [localArrUsers addObject:dictNewUser]; // add object to local array
+    [defaults setObject:localArrUsers forKey:@"arrUsers"]; // set defaults with new array
+    [defaults synchronize]; // save defaults.
     isPageControlInUse = NO;
     //NSMutableArray initialization
     arrDataMonday = [NSMutableArray new];
