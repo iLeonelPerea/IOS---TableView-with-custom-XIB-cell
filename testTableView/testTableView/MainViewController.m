@@ -37,11 +37,86 @@
     [[self tblView] registerNib:nib forCellReuseIdentifier:@"ItemCell"];
     HUDJMProgress = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleExtraLight];
     HUDJMProgress.textLabel.text = @"Loading";
-    [self loadProductsData];
+    //[self loadProductsData];
+    self.accessToken = [[NSDictionary alloc] initWithObjects:@[@"5e06dc07fda2b1e4b6ba792ba18e5d964d567cf33a575f55"] forKeys:@[@"accessToken"]];
+    [self loadNewData];
+}
+
+-(void)loadNewData
+{
+    /*
+    NSString * username = @"spree@example.com";
+    NSString * password = @"spree123";
+    //NSMutableDictionary *jsonDict = [NSMutableDictionary dictionaryWithDictionary:@{@"data":@{@"spree_user":@{@"email": username, @"password": password}}}];
+    NSMutableDictionary *jsonDict = [NSMutableDictionary dictionaryWithDictionary:@{@"spree_user":@{@"email": username, @"password": password}}];
+    [self sendData:jsonDict toService:@"authorizations" withMethod:@"POST" withAccessToken:nil toCallback:^(id result) {
+        self.accessToken = [result[@"status"] isEqual:@"ok"] ? [result valueForKeyPath:@"user.spree_api_key"] : nil;
+        NSLog(@"done...");
+    }];
+    */
+    [self sendData:nil toService:@"products" withMethod:@"GET" withAccessToken:[self.accessToken objectForKey:@"accessToken"] toCallback:^(id result){
+        NSLog(@"done... with dictionary: %@", result);
+    }];
+    
+}
+
+-(void)sendData:(NSMutableDictionary *)data toService:(NSString *)service withMethod:(NSString *)method withAccessToken:(NSString *)accessToken toCallback:(void (^)(id))callback
+{
+    NSURL *url = nil;
+    NSMutableURLRequest *request;
+    
+    if(![method isEqual: @"GET"])
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"http://spree-demo-store.herokuapp.com/api/v1/%@", service]];
+    else
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"http://spree-demo-store.herokuapp.com/api/%@.json?token=%@", service, accessToken]];
+    
+    request = [NSMutableURLRequest requestWithURL:url];
+    if(accessToken && data)
+    {
+        [data setObject:accessToken forKey:@"access_token"];
+    }
+    
+    if(data)
+    {
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:nil];
+        
+        NSString *JSONString = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
+        NSLog(@"json string: %@", JSONString);
+        [request setValue:[NSString stringWithFormat:@"%d", [jsonData length]] forHTTPHeaderField:@"Content-Length"];
+        [request setHTTPBody:jsonData];
+    }
+    
+    [request setHTTPMethod:method];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    [request setValue:@"json" forHTTPHeaderField:@"Data-Type"];
+    
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if(httpResponse.statusCode == 204)
+        {
+            callback(@{@"success": @YES});
+        }
+        else if(!error && response != nil)
+        {
+            NSDictionary *responseJson = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+            callback(responseJson);
+        }
+        else
+        {
+            callback(nil);
+        }
+    }];
 }
 
 -(void)loadProductsData{
     [HUDJMProgress showInView:self.view];
+    
+    
+    
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
     /*
     [defaults setObject:nil forKey:@"isDataLoaded"];
@@ -50,8 +125,9 @@
     */
     if(![defaults objectForKey:@"isDataLoaded"])
     {
-        NSURL *url = [NSURL URLWithString:@"http://aroma-bakery-cafe.herokuapp.com/admin/foods.json"];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSURL *url = [NSURL URLWithString:@"https://spree-demo-store.herokuapp.com/api/products.json?key=5e06dc07fda2b1e4b6ba792ba18e5d964d567cf33a575f55"];
+    
+        NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
             NSLog(@"Cargando Datos...");
             if(!error)

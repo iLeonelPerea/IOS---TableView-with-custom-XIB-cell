@@ -15,8 +15,9 @@
 {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
-    self.navController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
+    self.myMenuViewController = [[MyMenuViewController alloc] initWithNibName:@"MyMenuViewController" bundle:nil];
+    //self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+    self.navController = [[UINavigationController alloc] initWithRootViewController:self.myMenuViewController];
     [self.window setRootViewController:self.navController];
     [self.window makeKeyAndVisible];
     if([DBManager checkOrCreateDataBase]){

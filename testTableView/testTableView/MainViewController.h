@@ -19,5 +19,6 @@
 @property (nonatomic, strong) IBOutlet UITableView *tblView;
 @property (nonatomic, strong) NSMutableArray *arrData;
 @property (nonatomic, strong) JGProgressHUD *HUDJMProgress;
+@property (nonatomic, strong) NSDictionary * accessToken;
 
 @end

@@ -45,6 +45,8 @@
 		7DE89CDB19B0DDAB006E3DED /* DYRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE89CDA19B0DDAB006E3DED /* DYRateView.m */; };
 		7DE89CE219B0E050006E3DED /* RateProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE89CE019B0E050006E3DED /* RateProductViewController.m */; };
 		7DE89CE319B0E050006E3DED /* RateProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DE89CE119B0E050006E3DED /* RateProductViewController.xib */; };
+		C8F35A0719BBE9E700BC8029 /* MyMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F35A0519BBE9E700BC8029 /* MyMenuViewController.m */; };
+		C8F35A0819BBE9E700BC8029 /* MyMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8F35A0619BBE9E700BC8029 /* MyMenuViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +113,9 @@
 		7DE89CDF19B0E050006E3DED /* RateProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateProductViewController.h; sourceTree = "<group>"; };
 		7DE89CE019B0E050006E3DED /* RateProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateProductViewController.m; sourceTree = "<group>"; };
 		7DE89CE119B0E050006E3DED /* RateProductViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RateProductViewController.xib; sourceTree = "<group>"; };
+		C8F35A0419BBE9E700BC8029 /* MyMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMenuViewController.h; sourceTree = "<group>"; };
+		C8F35A0519BBE9E700BC8029 /* MyMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMenuViewController.m; sourceTree = "<group>"; };
+		C8F35A0619BBE9E700BC8029 /* MyMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyMenuViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +173,9 @@
 		7DB5B17F19AE2E7E0031619E = {
 			isa = PBXGroup;
 			children = (
+				C8F35A0419BBE9E700BC8029 /* MyMenuViewController.h */,
+				C8F35A0519BBE9E700BC8029 /* MyMenuViewController.m */,
+				C8F35A0619BBE9E700BC8029 /* MyMenuViewController.xib */,
 				C8D5B88C19B628C0008E09DF /* VO */,
 				7D36BA5519B4C1A400B9EA42 /* Managers */,
 				7DB5B19119AE2E7E0031619E /* testTableView */,
@@ -375,6 +383,7 @@
 				7DE89CD219B0DD6A006E3DED /* StarEmpty@2x.png in Resources */,
 				7DCA9A1B19AF6C08002D19B5 /* ProductInfoViewController.xib in Resources */,
 				7DE89CD519B0DD6A006E3DED /* StarFull.png in Resources */,
+				C8F35A0819BBE9E700BC8029 /* MyMenuViewController.xib in Resources */,
 				7DE89CE319B0E050006E3DED /* RateProductViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,6 +446,7 @@
 				7DB5B19819AE2E7E0031619E /* main.m in Sources */,
 				7DB5B1C319AE3A760031619E /* MainViewController.m in Sources */,
 				7DE89CDB19B0DDAB006E3DED /* DYRateView.m in Sources */,
+				C8F35A0719BBE9E700BC8029 /* MyMenuViewController.m in Sources */,
 				7D8C185519B62D1100AD502C /* ProductObject.m in Sources */,
 				7D36BA5819B4C1D000B9EA42 /* DBManager.m in Sources */,
 			);
