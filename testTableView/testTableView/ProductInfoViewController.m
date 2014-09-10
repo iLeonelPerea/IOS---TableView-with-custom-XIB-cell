@@ -57,10 +57,9 @@
     
     // this code is useless...
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSDictionary * dictInfo = [[NSDictionary alloc] initWithDictionary:[DBManager getProductWithId:[productObject remote_id]]];
-        productDetailObject = [ProductDetailObject new];
-        productDetailObject = [productDetailObject assignProductDetailObject:dictInfo];
-        if([[productDetailObject comment] length] > 0){
+        NSDictionary * dictInfo = [[NSDictionary alloc] initWithDictionary:[DBManager getProductWithId:[[dictFinalProduct objectForKey:@"remote_id"] intValue]]];
+        
+        if([[dictInfo objectForKey:@"comment"] length] > 0){
             [btnWriteComment setTitle:@"Edit comment" forState:UIControlStateNormal];
         }
     });
@@ -79,10 +78,8 @@
     });
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSDictionary * dictInfo = [[NSDictionary alloc] initWithDictionary:[DBManager getProductWithId:[productObject remote_id]]];
-        productDetailObject = [ProductDetailObject new];
-        productDetailObject = [productDetailObject assignProductDetailObject:dictInfo];
-        if([[productDetailObject comment]length] > 0){
+        NSDictionary * dictInfo = [[NSDictionary alloc] initWithDictionary:[DBManager getProductWithId:[[dictFinalProduct objectForKey:@"remote_id"] intValue]]];
+        if([[dictInfo objectForKey:@"comment"] length] > 0){
             [btnWriteComment setTitle:@"Edit comment" forState:UIControlStateNormal];
         }
     });
@@ -105,7 +102,7 @@
 {
     AddCommentViewController *addCommentViewController = [[AddCommentViewController alloc] init];
     [addCommentViewController setDelegate:(id)self];
-    addCommentViewController.productId = [productObject remote_id];
+    addCommentViewController.productId = [[dictFinalProduct objectForKey:@"remote_id"] intValue];
     [self.navigationController pushViewController:addCommentViewController animated:YES];
 }
 

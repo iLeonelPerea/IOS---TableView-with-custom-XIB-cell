@@ -13,7 +13,7 @@
 @end
 
 @implementation AddCommentViewController
-@synthesize txtComment, btnSend, commentValue, productId, productDetailObject;
+@synthesize txtComment, btnSend, commentValue, productId;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,9 +39,7 @@
     [super viewDidAppear:animated];
     dispatch_async(dispatch_get_main_queue(), ^{
         NSDictionary * dictInfo = [[NSDictionary alloc] initWithDictionary:[DBManager getProductWithId:productId]];
-        productDetailObject = [ProductDetailObject new];
-        productDetailObject = [productDetailObject assignProductDetailObject:dictInfo];
-        [txtComment setText:[productDetailObject comment]];
+        [txtComment setText: [dictInfo objectForKey:@"comment"]];
         NSLog(@"comment value: %@", [dictInfo objectForKey:@"comment"]);
     });
     

@@ -9,10 +9,9 @@
 #import "ViewController.h"
 #import "ProductInfoViewController.h"
 #import "DBManager.h"
-#import "ProductDetailObject.h"
+
 
 @interface AddCommentViewController : ViewController <UITextViewDelegate>
-@property (nonatomic, strong) ProductDetailObject *productDetailObject;
 @property (nonatomic, strong) NSString *commentValue;
 @property (nonatomic, strong) IBOutlet UITextView *txtComment;
 @property (nonatomic, strong) IBOutlet UIButton *btnSend;
@@ -20,5 +19,7 @@
 @property (nonatomic, assign) int productId;
 
 -(IBAction)doSendComment:(id)sender;
+
+
 
 @end
