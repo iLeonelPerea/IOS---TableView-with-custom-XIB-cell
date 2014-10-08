@@ -20,9 +20,12 @@ PODS:
   - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - APLKeyboardControls (0.1.2):
+    - NSData+Base64 (~> 1.0.0)
   - IOSLinkedInAPI (2.0.0):
     - AFNetworking (>= 2.0.0)
   - JGProgressHUD (1.1.4)
+  - NSData+Base64 (1.0.0)
   - NZCircularImageView (0.0.5):
     - UIActivityIndicator-for-SDWebImage (~> 1.2)
   - SDWebImage (3.7.1):
@@ -32,6 +35,7 @@ PODS:
     - SDWebImage (~> 3.7)
 
 DEPENDENCIES:
+  - APLKeyboardControls (~> 0.1.2)
   - IOSLinkedInAPI (from `https://github.com/jeyben/IOSLinkedInAPI`, commit `7b777b16867c713ed660c1d3711f83b76388ea99`)
   - JGProgressHUD (~> 1.1.4)
   - NZCircularImageView (~> 0.0.5)
@@ -43,8 +47,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  APLKeyboardControls: e2e61708b87ce24bb7daeb06b03888f54a97a67a
   IOSLinkedInAPI: 1c1b1bc3fcf21607225d2b9cd704bffab0abfbe1
   JGProgressHUD: 119c482bc7574c422a4edded34be357b10481dc2
+  NSData+Base64: aae92a2e3f0bd88b29fe6093551ded3f5c062548
   NZCircularImageView: 5c92097f2df91f561c501724a4f2dc64841a6ad0
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   UIActivityIndicator-for-SDWebImage: 8bd92c15280fbe54816448c6b14674145eee05c7

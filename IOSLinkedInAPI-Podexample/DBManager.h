@@ -16,5 +16,6 @@
 +(NSString*)getDBPath;
 +(void)insertUser:(UserObject *)user;
 +(void)insertSkill:(UserObject *)user withSkill:(SkillObject *)skill;
++(NSMutableArray*)getSkills;
 
 @end

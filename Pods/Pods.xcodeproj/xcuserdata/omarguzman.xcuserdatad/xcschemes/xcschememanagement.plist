@@ -9,12 +9,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-APLKeyboardControls.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-IOSLinkedInAPI.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-JGProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-NSData+Base64.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,37 +52,47 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>08BDC99F067C427DBC173280</key>
+		<key>297402EFCFBF484BB34EAB0E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>34A10F5A092C41A89823AAC4</key>
+		<key>3AEC9348FF1944BD98D178D4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4B945EFAE24C49A5B2AF5A15</key>
+		<key>585C90FCA9CC42988961E18A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>69E8C1C3FDC74B078D43725D</key>
+		<key>66933AA69B8F409F9FD735DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>76D28BEE896843B2A7DDDDE8</key>
+		<key>89CB78A96BF94C7C975DE2B4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8DD415277F864A72BF57F33A</key>
+		<key>ABF72C91343442CBA6871631</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9E210068D4404980903DDD97</key>
+		<key>B136010CFE47491CAA8B5F10</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CF3FF9306E8F4DD98E5ACC1E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FBE3B2A5DE5E48EA908C88B4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
