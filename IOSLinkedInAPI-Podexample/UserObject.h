@@ -13,6 +13,8 @@
 @property(nonatomic, assign) int idUser;
 @property(nonatomic, strong) NSString * firstName;
 @property(nonatomic, strong) NSString * lastName;
+@property(nonatomic, strong) NSString * company;
+@property(nonatomic, strong) NSString * position;
 @property(nonatomic, strong) NSMutableArray * skills;
 
 @end
