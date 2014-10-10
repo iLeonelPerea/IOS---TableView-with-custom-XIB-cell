@@ -1,4 +1,7 @@
 .DS_Store 
 Pods/
 IOSLinkedInAPI-Podexample.xcworkspace/
+IOSLinkedInAPI-Podexample.xcworkspace/*
+IOSLinkedInAPI-Podexample.xcodeproj/
+IOSLinkedInAPI-Podexample.xcodeproj/*
 testTableView/.DS_Store
