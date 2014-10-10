@@ -71,6 +71,7 @@
 		7D218DAF19E886BA00F94B9B /* QuestionAnswerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionAnswerObject.m; sourceTree = "<group>"; };
 		7D218DB119E88A7D00F94B9B /* FeedbackObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackObject.h; sourceTree = "<group>"; };
 		7D218DB219E88A7D00F94B9B /* FeedbackObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackObject.m; sourceTree = "<group>"; };
+		7D218DB519E89A0300F94B9B /* razorfish.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = razorfish.sqlite3; sourceTree = "<group>"; };
 		7DE1E4F319E4972F0022DDD2 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		7DE1E4F419E4972F0022DDD2 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		7DE1E4F619E49A0A0022DDD2 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -153,6 +154,7 @@
 		33AE6581185FA2E400981915 /* IOSLinkedInAPI-Podexample */ = {
 			isa = PBXGroup;
 			children = (
+				7D218DB419E899F700F94B9B /* Resources */,
 				C8244A7519E5AAD9001A3854 /* ViewControllers */,
 				7DE1E4F219E4971D0022DDD2 /* Managers */,
 				7DF9483B19E4539300E0716A /* VO */,
@@ -193,6 +195,14 @@
 				33AE65A6185FA2E500981915 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7D218DB419E899F700F94B9B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7D218DB519E89A0300F94B9B /* razorfish.sqlite3 */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		7DE1E4F219E4971D0022DDD2 /* Managers */ = {

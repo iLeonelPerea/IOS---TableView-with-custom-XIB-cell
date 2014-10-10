@@ -10,6 +10,6 @@
 
 @implementation UserObject
 
-@synthesize idUser, firstName, lastName, skills, company, position;
+@synthesize idUser, firstName, lastName, skills, company, position, feedbacks;
 
 @end

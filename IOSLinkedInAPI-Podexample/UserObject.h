@@ -16,5 +16,6 @@
 @property(nonatomic, strong) NSString * company;
 @property(nonatomic, strong) NSString * position;
 @property(nonatomic, strong) NSMutableArray * skills;
+@property(nonatomic, strong) NSMutableArray * feedbacks;
 
 @end
