@@ -21,7 +21,7 @@
         const char *dbpath = [[DBManager getDBPath] UTF8String];
         if (sqlite3_open(dbpath, &inventoryDB) == SQLITE_OK) {
             char *errMsg;
-            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS USERS (ID INTEGER PRIMARY KEY AUTOINCREMENT, ID_USER INTEGER, FIRST_NAME TEXT, LAST_NAME TEXT); CREATE TABLE IF NOT EXISTS SKILS (ID INTEGER PRIMARY KEY AUTOINCREMENT, ID_USER INTEGER, ID_SKILL INTEGER, SKILL TEXT);";
+            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS USERS (ID_USER INTEGER PRIMARY KEY AUTOINCREMENT, FIRST_NAME TEXT, LAST_NAME TEXT, COMPANY TEXT, POSITION TEXT); CREATE TABLE IF NOT EXISTS USER_SKIlLS (ID_USER INTEGER, ID_SKILL INTEGER); CREATE TABLE IF NOT EXISTS FEEDBACK (ID_FEEDBACK INTEGER PRIMARY KEY AUTOINCREMENT, ID_USER INTEGER, ID_INTERVIEWER INTEGER, DATE_FEEDBACK DOUBLE); CREATE TABLE IF NOT EXISTS FEEDBACK_DETAIL (ID_FEEDBACK INTEGER, ID_QUESTION INTEGER, ID_ANSWER INTEGER); CREATE TABLE IF NOT EXISTS FEEDBACK_QUESTIONS (ID_QUESTION INTEGER PRIMARY KEY AUTOINCREMENT, QUESTION_DESCRIPTION TEXT NOT NULL); CREATE TABLE IF NOT EXISTS FEEDBACK_QUESTIONS_ANSWERS (ID_QUESTION INTEGER, ID_ANSWER INTEGER, ANSWER_DESCRIPTION TEXT NOT NULL); CREATE TABLE IF NOT EXISTS SKILLS (ID_SKILL INTEGER PRIMARY KEY AUTOINCREMENT, ID_CATEGORY INTEGER, SKILL_NAME TEXT NOT NULL); CREATE TABLE IF NOT EXISTS SKILLS_CATEGORIES (ID_CATEGORY INTEGER PRIMARY KEY AUTOINCREMENT, CATEGORY_DESCRIPTION TEXT NOT NULL);";
             if (sqlite3_exec(inventoryDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK){
                 isDbOk = NO;
                 NSLog(@"table fail...");
@@ -46,7 +46,7 @@
     NSString *databasePath;
     dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     docsDir = [dirPaths objectAtIndex:0];
-    databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"Linkedin.sqlite3"]];
+    databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"razorfish.sqlite3"]];
     
     return databasePath;
 }
@@ -57,6 +57,7 @@
     sqlite3_close(DB);
 }
 
+/*
 #pragma mark -- User methods
 +(void)insertUser:(UserObject *)user{
     sqlite3 *inventoryDB = nil;
@@ -113,6 +114,6 @@
 {
     NSMutableArray * arrToRet = [NSMutableArray new];
     return arrToRet;
-}
+}*/
 
 @end

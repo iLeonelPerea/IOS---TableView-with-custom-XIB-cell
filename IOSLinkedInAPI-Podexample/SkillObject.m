@@ -10,6 +10,6 @@
 
 @implementation SkillObject
 
-@synthesize idSkill, skill;
+@synthesize idSkill, skill_name, idCategory;
 
 @end
