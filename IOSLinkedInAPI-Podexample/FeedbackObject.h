@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "QuestionObject.h"
+#import "QuestionAnswerObject.h"
 
 @interface FeedbackObject : NSObject
 
@@ -14,6 +16,7 @@
 @property (nonatomic, assign) int idUser;
 @property (nonatomic, assign) int idInterview;
 @property (nonatomic, strong) NSString * date;
-@property (nonatomic, strong) NSMutableArray * feedbacks;
+@property (nonatomic, strong) QuestionObject * questionObject;
+@property (nonatomic, strong) QuestionAnswerObject * questionAnswerObject;
 
 @end
