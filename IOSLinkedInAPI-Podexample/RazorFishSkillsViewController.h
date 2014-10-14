@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ManualProfileViewController.h"
 
 @interface RazorFishSkillsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 // properties
 @property (nonatomic, strong) NSMutableArray * arrSkills;
 @property (nonatomic, strong) IBOutlet UITableView * tblSkills;
+@property (nonatomic, strong) id<iInfoDelegate> delegate;
+
 @end

@@ -15,6 +15,7 @@
 
 @implementation RazorFishSkillsViewController
 @synthesize tblSkills, arrSkills;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -34,6 +35,8 @@
 
 -(void)doSaveSelectedSkills:(UIBarButtonItem*)sender
 {
+    [self.delegate doSetSelectedSkills:arrSkills];
+    [self.navigationController popViewControllerAnimated:YES];
     NSLog(@"do save selected skills");
 }
 
@@ -41,7 +44,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return (NSInteger)[arrSkills count];
+    return [arrSkills count];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -51,16 +54,40 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    static NSString *CellIdentifier = @"CellSkill";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    cell = nil;
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    
+    //Extract SkillObject from arrSkills
+    SkillObject *skillObject = [[SkillObject alloc] init];
+    skillObject = [arrSkills objectAtIndex:[indexPath row]];
+    
+    UILabel *lblSkillName = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 280, 21)];
+    [lblSkillName setText:[skillObject skillName]];
+    [cell addSubview:lblSkillName];
+    
+    UISwitch *schSelect = [[UISwitch alloc] initWithFrame:CGRectMake(240, 5, 20, 21)];
+    [schSelect setTag:[indexPath row]];
+    [schSelect setOn:[skillObject isSelected]];
+    [schSelect addTarget:self action:@selector(didSelectedSkill:) forControlEvents:UIControlEventTouchUpInside];
+    [cell addSubview:schSelect];
+    
+    return cell;
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark -- Switch select skill delegate
+-(void)didSelectedSkill:(id)sender
+{
+    UISwitch *senderSwitch = (UISwitch*)sender;
+    //SkillObject *selectedSkill = [SkillObject new];
+    SkillObject * selectedSkill = [arrSkills objectAtIndex:[senderSwitch tag]];
+    [selectedSkill setIsSelected:[senderSwitch isOn]];
 }
-*/
 
 @end

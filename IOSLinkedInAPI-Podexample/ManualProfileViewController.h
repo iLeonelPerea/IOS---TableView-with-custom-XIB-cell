@@ -10,4 +10,12 @@
 
 @interface ManualProfileViewController : UIViewController
 
+@property (nonatomic, strong) NSMutableArray *arrSelectedSkills;
+
+@end
+
+@protocol iInfoDelegate <NSObject>
+
+-(void)doSetSelectedSkills:(NSMutableArray*)arrReceivedSelectedSkills;
+
 @end
