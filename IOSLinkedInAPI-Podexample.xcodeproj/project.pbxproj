@@ -29,6 +29,7 @@
 		7DE1E4F719E49A0A0022DDD2 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE1E4F619E49A0A0022DDD2 /* libsqlite3.0.dylib */; };
 		7DE1E4FA19E49AFD0022DDD2 /* UserObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE1E4F919E49AFD0022DDD2 /* UserObject.m */; };
 		7DE1E4FD19E49B770022DDD2 /* SkillObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE1E4FC19E49B770022DDD2 /* SkillObject.m */; };
+		C816DD7E19ED6E4400012352 /* razorfish.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D218DB519E89A0300F94B9B /* razorfish.sqlite3 */; };
 		C8244A7819E5AB04001A3854 /* MainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8244A7719E5AB04001A3854 /* MainScreenViewController.m */; };
 		C8244A7B19E5B049001A3854 /* ManualProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8244A7A19E5B049001A3854 /* ManualProfileViewController.m */; };
 		C8244A7E19E5B92E001A3854 /* LinkedInProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8244A7D19E5B92E001A3854 /* LinkedInProfileViewController.m */; };
@@ -328,6 +329,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C816DD7E19ED6E4400012352 /* razorfish.sqlite3 in Resources */,
 				33AE6592185FA2E400981915 /* Main_iPad.storyboard in Resources */,
 				33AE6597185FA2E400981915 /* Images.xcassets in Resources */,
 				33AE658F185FA2E400981915 /* Main_iPhone.storyboard in Resources */,

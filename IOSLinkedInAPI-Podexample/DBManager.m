@@ -14,6 +14,22 @@
 #pragma mark -- DB base methods
 +(BOOL)checkOrCreateDataBase{
     BOOL isDbOk;
+    NSFileManager *fmngr = [[NSFileManager alloc] init];
+    if([fmngr fileExistsAtPath:[DBManager getDBPath]])
+    {
+        isDbOk = YES;
+        return isDbOk;
+    }
+    NSString * filePath=[[NSBundle mainBundle] pathForResource:@"razorfish" ofType:@"sqlite3"];
+    NSError *error;
+    isDbOk = [fmngr copyItemAtPath:filePath toPath:[NSString stringWithFormat:@"%@/Documents/razorfish.sqlite3", NSHomeDirectory()] error:&error];
+    if(!isDbOk) {
+        // handle the error
+        NSLog(@"Error creating the database: %@", [error description]);
+        
+    }
+    return isDbOk;
+    /*
     sqlite3 *inventoryDB;
     NSFileManager *filemgr = [NSFileManager defaultManager];
     //const char *dbpath = [[DBManager getDBPath] UTF8String];
@@ -36,7 +52,7 @@
     }else{
         isDbOk = YES; // DB already exists
     }
-    return isDbOk;
+     */
 }
 
 +(NSString*)getDBPath
@@ -47,7 +63,7 @@
     dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"razorfish.sqlite3"]];
-    
+    NSLog(@"db path: %@", databasePath);
     return databasePath;
 }
 
