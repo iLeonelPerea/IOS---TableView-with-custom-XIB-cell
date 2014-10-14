@@ -22,10 +22,14 @@
 		33AE65A0185FA2E500981915 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AE657F185FA2E400981915 /* UIKit.framework */; };
 		33AE65A8185FA2E500981915 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 33AE65A6185FA2E500981915 /* InfoPlist.strings */; };
 		33AE65AA185FA2E500981915 /* IOSLinkedInAPI_PodexampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AE65A9185FA2E500981915 /* IOSLinkedInAPI_PodexampleTests.m */; };
+		7D218DAD19E8868B00F94B9B /* QuestionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D218DAC19E8868B00F94B9B /* QuestionObject.m */; };
+		7D218DB019E886BA00F94B9B /* QuestionAnswerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D218DAF19E886BA00F94B9B /* QuestionAnswerObject.m */; };
+		7D218DB319E88A7D00F94B9B /* FeedbackObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D218DB219E88A7D00F94B9B /* FeedbackObject.m */; };
 		7DE1E4F519E4972F0022DDD2 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE1E4F419E4972F0022DDD2 /* DBManager.m */; };
 		7DE1E4F719E49A0A0022DDD2 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE1E4F619E49A0A0022DDD2 /* libsqlite3.0.dylib */; };
 		7DE1E4FA19E49AFD0022DDD2 /* UserObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE1E4F919E49AFD0022DDD2 /* UserObject.m */; };
 		7DE1E4FD19E49B770022DDD2 /* SkillObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DE1E4FC19E49B770022DDD2 /* SkillObject.m */; };
+		C816DD7E19ED6E4400012352 /* razorfish.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D218DB519E89A0300F94B9B /* razorfish.sqlite3 */; };
 		C8244A7819E5AB04001A3854 /* MainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8244A7719E5AB04001A3854 /* MainScreenViewController.m */; };
 		C8244A7B19E5B049001A3854 /* ManualProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8244A7A19E5B049001A3854 /* ManualProfileViewController.m */; };
 		C8244A7E19E5B92E001A3854 /* LinkedInProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8244A7D19E5B92E001A3854 /* LinkedInProfileViewController.m */; };
@@ -64,6 +68,13 @@
 		33AE65A7185FA2E500981915 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		33AE65A9185FA2E500981915 /* IOSLinkedInAPI_PodexampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IOSLinkedInAPI_PodexampleTests.m; sourceTree = "<group>"; };
 		35282DA869D54E88A071E44A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D218DAB19E8868B00F94B9B /* QuestionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionObject.h; sourceTree = "<group>"; };
+		7D218DAC19E8868B00F94B9B /* QuestionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionObject.m; sourceTree = "<group>"; };
+		7D218DAE19E886BA00F94B9B /* QuestionAnswerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionAnswerObject.h; sourceTree = "<group>"; };
+		7D218DAF19E886BA00F94B9B /* QuestionAnswerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionAnswerObject.m; sourceTree = "<group>"; };
+		7D218DB119E88A7D00F94B9B /* FeedbackObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackObject.h; sourceTree = "<group>"; };
+		7D218DB219E88A7D00F94B9B /* FeedbackObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackObject.m; sourceTree = "<group>"; };
+		7D218DB519E89A0300F94B9B /* razorfish.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = razorfish.sqlite3; sourceTree = "<group>"; };
 		7DE1E4F319E4972F0022DDD2 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		7DE1E4F419E4972F0022DDD2 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		7DE1E4F619E49A0A0022DDD2 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -152,6 +163,7 @@
 		33AE6581185FA2E400981915 /* IOSLinkedInAPI-Podexample */ = {
 			isa = PBXGroup;
 			children = (
+				7D218DB419E899F700F94B9B /* Resources */,
 				C8244A7519E5AAD9001A3854 /* ViewControllers */,
 				7DE1E4F219E4971D0022DDD2 /* Managers */,
 				7DF9483B19E4539300E0716A /* VO */,
@@ -194,6 +206,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		7D218DB419E899F700F94B9B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7D218DB519E89A0300F94B9B /* razorfish.sqlite3 */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		7DE1E4F219E4971D0022DDD2 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +230,12 @@
 				7DE1E4F919E49AFD0022DDD2 /* UserObject.m */,
 				7DE1E4FB19E49B770022DDD2 /* SkillObject.h */,
 				7DE1E4FC19E49B770022DDD2 /* SkillObject.m */,
+				7D218DAB19E8868B00F94B9B /* QuestionObject.h */,
+				7D218DAC19E8868B00F94B9B /* QuestionObject.m */,
+				7D218DAE19E886BA00F94B9B /* QuestionAnswerObject.h */,
+				7D218DAF19E886BA00F94B9B /* QuestionAnswerObject.m */,
+				7D218DB119E88A7D00F94B9B /* FeedbackObject.h */,
+				7D218DB219E88A7D00F94B9B /* FeedbackObject.m */,
 			);
 			name = VO;
 			sourceTree = "<group>";
@@ -288,6 +314,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Eyben Consult ApS";
 				TargetAttributes = {
+					33AE6577185FA2E400981915 = {
+						DevelopmentTeam = D7848S8M4T;
+					};
 					33AE659B185FA2E400981915 = {
 						TestTargetID = 33AE6577185FA2E400981915;
 					};
@@ -317,6 +346,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C816DD7E19ED6E4400012352 /* razorfish.sqlite3 in Resources */,
 				33AE6592185FA2E400981915 /* Main_iPad.storyboard in Resources */,
 				33AE6597185FA2E400981915 /* Images.xcassets in Resources */,
 				33AE658F185FA2E400981915 /* Main_iPhone.storyboard in Resources */,
@@ -378,6 +408,9 @@
 				C8244A8119E5CA84001A3854 /* RazorFishSkillsViewController.m in Sources */,
 				7DE1E4FA19E49AFD0022DDD2 /* UserObject.m in Sources */,
 				7DE1E4FD19E49B770022DDD2 /* SkillObject.m in Sources */,
+				7D218DB019E886BA00F94B9B /* QuestionAnswerObject.m in Sources */,
+				7D218DB319E88A7D00F94B9B /* FeedbackObject.m in Sources */,
+				7D218DAD19E8868B00F94B9B /* QuestionObject.m in Sources */,
 				C8244A7E19E5B92E001A3854 /* LinkedInProfileViewController.m in Sources */,
 				C8244A7B19E5B049001A3854 /* ManualProfileViewController.m in Sources */,
 				7DE1E4F519E4972F0022DDD2 /* DBManager.m in Sources */,
@@ -519,10 +552,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IOSLinkedInAPI-Podexample/IOSLinkedInAPI-Podexample-Prefix.pch";
 				INFOPLIST_FILE = "IOSLinkedInAPI-Podexample/IOSLinkedInAPI-Podexample-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -533,10 +569,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IOSLinkedInAPI-Podexample/IOSLinkedInAPI-Podexample-Prefix.pch";
 				INFOPLIST_FILE = "IOSLinkedInAPI-Podexample/IOSLinkedInAPI-Podexample-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

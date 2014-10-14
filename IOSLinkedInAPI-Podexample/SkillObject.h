@@ -11,6 +11,7 @@
 @interface SkillObject : NSObject
 
 @property(nonatomic, assign) int idSkill;
-@property(nonatomic, strong) NSString * skill;
+@property(nonatomic, assign) int idCategory;
+@property(nonatomic, strong) NSString * skill_name;
 
 @end

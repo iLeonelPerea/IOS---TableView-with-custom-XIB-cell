@@ -22,6 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIBarButtonItem * btnSave = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(doSaveProfile:)];
+    self.navigationItem.rightBarButtonItem = btnSave;
     client = [self client];
     [self setTitle:@"Linked In Profile"];
     //todo: check collection view logic
@@ -47,6 +49,19 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)doSaveProfile:(id)sender
+{
+    NSLog(@"do save and post notification...");
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.fireDate = [[NSDate alloc] initWithTimeIntervalSinceNow:10];
+    notification.alertBody = @"Feedback on your recent Razorfish interview.";
+    notification.soundName = UILocalNotificationDefaultSoundName;
+    notification.alertAction = @"View";
+    notification.hasAction = YES;
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)requestMe
