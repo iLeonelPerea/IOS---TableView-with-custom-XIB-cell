@@ -125,11 +125,12 @@
         return NO;
     return NO;
 }
+ */
 
 +(NSMutableArray *)getSkills
 {
     NSMutableArray * arrToRet = [NSMutableArray new];
     return arrToRet;
-}*/
+}
 
 @end
