@@ -57,6 +57,35 @@
     sqlite3_close(DB);
 }
 
+#pragma mark -- Get skills from database
+//Get the skills store in local DB.
++(NSMutableArray*)getSkills
+{
+    sqlite3 *appDB = nil;
+    sqlite3_stmt *statement;
+    const char *dbPath = [[DBManager getDBPath] UTF8String] ;
+    NSMutableArray *dictToReturn = [[NSMutableArray alloc] init];
+    
+    if (sqlite3_open(dbPath, &appDB) == SQLITE_OK) {
+        NSString *selectSQL = @"SELECT A.ID_SKILL, A.SKILL_NAME, A.ID_CATEGORY, B.CATEGORY_DESCRIPTION FROM SKILLS AS A LEFT JOIN SKILLS_CATEGORIES AS B ON B.ID_CATEGORY = A.ID_CATEGORY";
+        const char *selectStmt = [selectSQL UTF8String];
+        sqlite3_prepare_v2(appDB, selectStmt, -1, &statement, nil);
+        while (sqlite3_step(statement) != SQLITE_DONE) {
+            SkillObject *newSkillObject = [[SkillObject alloc] init];
+            [newSkillObject setIdSkill:sqlite3_column_int(statement, 0)];
+            [newSkillObject setSkillName:[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 1)]];
+            SkillCategoryObject *newSkillCategoryObject =  [[SkillCategoryObject alloc] init];
+            [newSkillCategoryObject setIdSkillCategory:sqlite3_column_int(statement, 2)];
+            [newSkillCategoryObject setSkillCategoryDescription:[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 3)]];
+            [newSkillObject setSkillCategoryObject:newSkillCategoryObject];
+            [dictToReturn addObject:newSkillObject];
+        }
+        [DBManager finalizeStatements:statement withDB:appDB];
+    }
+    
+    return dictToReturn;
+}
+
 /*
 #pragma mark -- User methods
 +(void)insertUser:(UserObject *)user{
@@ -109,11 +138,6 @@
         return NO;
     return NO;
 }
-
-+(NSMutableArray *)getSkills
-{
-    NSMutableArray * arrToRet = [NSMutableArray new];
-    return arrToRet;
-}*/
+*/
 
 @end

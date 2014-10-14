@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		16AD612F556B4B92ADB38EEF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35282DA869D54E88A071E44A /* libPods.a */; };
+		235DF07219EC52C4009F5815 /* SkillCategoryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 235DF07119EC52C4009F5815 /* SkillCategoryObject.m */; };
 		33AE657C185FA2E400981915 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AE657B185FA2E400981915 /* Foundation.framework */; };
 		33AE657E185FA2E400981915 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AE657D185FA2E400981915 /* CoreGraphics.framework */; };
 		33AE6580185FA2E400981915 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AE657F185FA2E400981915 /* UIKit.framework */; };
@@ -43,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		235DF07019EC52C4009F5815 /* SkillCategoryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillCategoryObject.h; sourceTree = "<group>"; };
+		235DF07119EC52C4009F5815 /* SkillCategoryObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkillCategoryObject.m; sourceTree = "<group>"; };
 		33AE6578185FA2E400981915 /* IOSLinkedInAPI-Podexample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOSLinkedInAPI-Podexample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33AE657B185FA2E400981915 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		33AE657D185FA2E400981915 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -202,6 +205,8 @@
 				7DE1E4F919E49AFD0022DDD2 /* UserObject.m */,
 				7DE1E4FB19E49B770022DDD2 /* SkillObject.h */,
 				7DE1E4FC19E49B770022DDD2 /* SkillObject.m */,
+				235DF07019EC52C4009F5815 /* SkillCategoryObject.h */,
+				235DF07119EC52C4009F5815 /* SkillCategoryObject.m */,
 			);
 			name = VO;
 			sourceTree = "<group>";
@@ -357,6 +362,7 @@
 			files = (
 				C8244A7819E5AB04001A3854 /* MainScreenViewController.m in Sources */,
 				33AE6588185FA2E400981915 /* main.m in Sources */,
+				235DF07219EC52C4009F5815 /* SkillCategoryObject.m in Sources */,
 				33AE658C185FA2E400981915 /* LIAAppDelegate.m in Sources */,
 				C8244A8119E5CA84001A3854 /* RazorFishSkillsViewController.m in Sources */,
 				7DE1E4FA19E49AFD0022DDD2 /* UserObject.m in Sources */,

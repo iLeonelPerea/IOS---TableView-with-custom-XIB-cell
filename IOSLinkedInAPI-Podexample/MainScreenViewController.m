@@ -9,6 +9,7 @@
 #import "MainScreenViewController.h"
 #import "LinkedInProfileViewController.h"
 #import "DBManager.h"
+#import "SkillObject.h"
 
 @interface MainScreenViewController ()
 
@@ -19,7 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [DBManager checkOrCreateDataBase];
+    NSMutableArray *testArray = [DBManager getSkills];
+    NSLog(@"%@", testArray);
 }
 
 - (void)didReceiveMemoryWarning {

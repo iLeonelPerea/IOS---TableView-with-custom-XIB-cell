@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SkillCategoryObject.h"
 
 @interface SkillObject : NSObject
 
-@property(nonatomic, assign) int idSkill;
-@property(nonatomic, assign) int idCategory;
-@property(nonatomic, strong) NSString * skill_name;
+@property (nonatomic, assign) int idSkill;
+@property (nonatomic, strong) NSString *skillName;
+@property (nonatomic, strong) SkillCategoryObject *skillCategoryObject;
 
 @end
