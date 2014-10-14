@@ -13,7 +13,7 @@
 #import <NZCircularImageView.h>
 #import <JGProgressHUD.h>
 
-@interface LinkedInProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface LinkedInProfileViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIAlertViewDelegate>
 @property (nonatomic, strong) NSString * accessToken;
 @property (nonatomic, strong) LIALinkedInHttpClient * client;
 @property (nonatomic, strong) IBOutlet NZCircularImageView * imgProfile;
@@ -21,6 +21,6 @@
 @property (nonatomic, strong) IBOutlet UILabel * lblPosition;
 @property (nonatomic, strong) IBOutlet UILabel * lblCurrentSkills;
 @property (nonatomic, strong) JGProgressHUD * progressHUD;
-@property (nonatomic, strong) IBOutlet UITableView * tblSkills;
+@property (nonatomic, strong) IBOutlet UICollectionView * collSkills;
 @property (nonatomic, strong) NSMutableArray * arrSkills;
 @end

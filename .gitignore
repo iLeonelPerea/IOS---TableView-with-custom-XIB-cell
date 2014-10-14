@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .DS_Store 
 Pods/
 IOSLinkedInAPI-Podexample.xcworkspace/
@@ -6,3 +7,24 @@ IOSLinkedInAPI-Podexample.xcodeproj/
 IOSLinkedInAPI-Podexample.xcodeproj/*
 IOSLinkedInAPI-Podexample.xcworkspace/xcuserdata/leonelrobertopereatrejo.xcuserdatad/UserInterfaceState.xcuserstate
 testTableView/.DS_Store
+=======
+.DS_Store
+testTableView/.DS_Store
+IOSLinkedInAPI-Podexample.xcworkspace/xcshareddata/
+Pods/APLKeyboardControls/
+Pods/BuildHeaders/APLKeyboardControls/
+Pods/BuildHeaders/NSData+Base64/
+Pods/Headers/APLKeyboardControls/
+Pods/Headers/NSData+Base64/
+Pods/NSData+Base64/
+Pods/Pods-APLKeyboardControls-Private.xcconfig
+Pods/Pods-APLKeyboardControls-dummy.m
+Pods/Pods-APLKeyboardControls-prefix.pch
+Pods/Pods-APLKeyboardControls.xcconfig
+Pods/Pods-NSData+Base64-Private.xcconfig
+Pods/Pods-NSData+Base64-dummy.m
+Pods/Pods-NSData+Base64-prefix.pch
+Pods/Pods-NSData+Base64.xcconfig
+Pods/Pods.xcodeproj/xcuserdata/omarguzman.xcuserdatad/xcschemes/Pods-APLKeyboardControls.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/omarguzman.xcuserdatad/xcschemes/Pods-NSData+Base64.xcscheme
+>>>>>>> master
