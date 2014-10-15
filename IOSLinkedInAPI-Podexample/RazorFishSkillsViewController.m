@@ -14,13 +14,14 @@
 @end
 
 @implementation RazorFishSkillsViewController
-@synthesize tblSkills, arrSkills;
+@synthesize tblSkills, arrSkills, arrSkillsSearched, isSearching, isSearchVisible, searchBar;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     UIBarButtonItem * btnSave = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(doSaveSelectedSkills:)];
     self.navigationItem.rightBarButtonItem = btnSave;
+    [searchBar setDelegate:self];
     [tblSkills setDelegate:self];
     [tblSkills setDataSource:self];
     [tblSkills reloadData];
@@ -48,13 +49,15 @@
             }
         }
     }
+    //arrSkills store all the skills from database and arrSkillsSearched store all or seearched skills by user
     arrSkills = [arrAllSkills mutableCopy];
+    arrSkillsSearched = [arrSkills mutableCopy];
 }
 
 #pragma mark -- UITableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [arrSkills count];
+    return [arrSkillsSearched count];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -74,9 +77,9 @@
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     cell.accessoryType = UITableViewCellAccessoryNone;
     
-    //Extract SkillObject from arrSkills
+    //Extract SkillObject from arrSkillsSearched
     SkillObject *skillObject = [[SkillObject alloc] init];
-    skillObject = [arrSkills objectAtIndex:[indexPath row]];
+    skillObject = [arrSkillsSearched objectAtIndex:[indexPath row]];
     
     UILabel *lblSkillName = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 280, 21)];
     [lblSkillName setText:[skillObject skillName]];
@@ -95,11 +98,39 @@
 -(void)didSelectedSkill:(id)sender
 {
     UISwitch *senderSwitch = (UISwitch*)sender;
-    //SkillObject *selectedSkill = [SkillObject new];
-    SkillObject * selectedSkill = [arrSkills objectAtIndex:[senderSwitch tag]];
+    SkillObject * selectedSkill = [arrSkillsSearched objectAtIndex:[senderSwitch tag]];
     [selectedSkill setIsSelected:[senderSwitch isOn]];
 }
 
+#pragma mark -- Search bar delegate
+-(void)searchBar:(UISearchBar*)searchBar textDidChange:(NSString*)searchText
+{
+    if (searchText && [searchText length] > 2) {
+        [arrSkillsSearched removeAllObjects];
+        for (SkillObject *skillObjectSearched in arrSkills) {
+            if ([[skillObjectSearched skillName] rangeOfString:searchText options:NSCaseInsensitiveSearch].location != NSNotFound) {
+                [arrSkillsSearched addObject:skillObjectSearched];
+            }
+        }
+        isSearching = YES;
+    }else{
+        arrSkillsSearched = [arrSkills mutableCopy];
+        isSearching = NO;
+    }
+    [tblSkills reloadData];
+}
 
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    isSearching = YES;
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [[self searchBar] resignFirstResponder];
+    isSearching = NO;
+    arrSkillsSearched = [arrSkills mutableCopy];
+    [tblSkills reloadData];
+}
 
 @end
