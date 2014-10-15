@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doOpenFeedbackView) name:@"feedbackNotification" object:nil];
     [DBManager checkOrCreateDataBase];
 }
 
@@ -33,6 +34,14 @@
 {
     LinkedInProfileViewController * lipVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LinkedInProfile"];
     [self.navigationController pushViewController:lipVC animated:YES];
+}
+
+-(void)doOpenFeedbackView
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"feedbackNotification" object:nil];
+    FeedbackViewController * feedbackViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackViewController"];
+    [self.navigationController pushViewController:feedbackViewController animated:YES];
+
 }
 /*
 #pragma mark - Navigation
