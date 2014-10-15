@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FeedbackViewController.h"
 
 @interface MainScreenViewController : UIViewController
 // Methods
 - (IBAction)didTapConnectWithLinkedIn:(id)sender;
+- (void)doOpenFeedbackView;
 @end
