@@ -16,8 +16,6 @@
 		33AE6586185FA2E400981915 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 33AE6584185FA2E400981915 /* InfoPlist.strings */; };
 		33AE6588185FA2E400981915 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AE6587185FA2E400981915 /* main.m */; };
 		33AE658C185FA2E400981915 /* LIAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AE658B185FA2E400981915 /* LIAAppDelegate.m */; };
-		33AE658F185FA2E400981915 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33AE658D185FA2E400981915 /* Main_iPhone.storyboard */; };
-		33AE6592185FA2E400981915 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33AE6590185FA2E400981915 /* Main_iPad.storyboard */; };
 		33AE6597185FA2E400981915 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33AE6596185FA2E400981915 /* Images.xcassets */; };
 		33AE659E185FA2E500981915 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AE659D185FA2E400981915 /* XCTest.framework */; };
 		33AE659F185FA2E500981915 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AE657B185FA2E400981915 /* Foundation.framework */; };
@@ -34,6 +32,8 @@
 		C8244A8119E5CA84001A3854 /* RazorFishSkillsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8244A8019E5CA84001A3854 /* RazorFishSkillsViewController.m */; };
 		C8A95D8C19E88F7900557122 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8A95D8B19E88F7900557122 /* QuartzCore.framework */; };
 		C8A95D9019E899A100557122 /* SkillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8A95D8F19E899A100557122 /* SkillCell.m */; };
+		C8CF46E719EEB5AA00B039BC /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8CF46E619EEB5AA00B039BC /* FeedbackViewController.m */; };
+		C8CF46E819EEB82F00B039BC /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33AE658D185FA2E400981915 /* Main_iPhone.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +88,8 @@
 		C8A95D8B19E88F7900557122 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C8A95D8E19E899A100557122 /* SkillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillCell.h; sourceTree = "<group>"; };
 		C8A95D8F19E899A100557122 /* SkillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkillCell.m; sourceTree = "<group>"; };
+		C8CF46E519EEB5AA00B039BC /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		C8CF46E619EEB5AA00B039BC /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		E0CD15D06FF04FF5977479E5 /* Pods-IOSLinkedInAPI-Podexample.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOSLinkedInAPI-Podexample.xcconfig"; path = "Pods/Pods-IOSLinkedInAPI-Podexample.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -241,6 +243,8 @@
 				C8244A7D19E5B92E001A3854 /* LinkedInProfileViewController.m */,
 				C8244A7F19E5CA84001A3854 /* RazorFishSkillsViewController.h */,
 				C8244A8019E5CA84001A3854 /* RazorFishSkillsViewController.m */,
+				C8CF46E519EEB5AA00B039BC /* FeedbackViewController.h */,
+				C8CF46E619EEB5AA00B039BC /* FeedbackViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -336,10 +340,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23487DD019EEC0E90086BC7F /* razorfish.sqlite3 in Resources */,
-				33AE6592185FA2E400981915 /* Main_iPad.storyboard in Resources */,
+				C8CF46E819EEB82F00B039BC /* Main_iPhone.storyboard in Resources */,
+				C816DD7E19ED6E4400012352 /* razorfish.sqlite3 in Resources */,
 				33AE6597185FA2E400981915 /* Images.xcassets in Resources */,
-				33AE658F185FA2E400981915 /* Main_iPhone.storyboard in Resources */,
 				33AE6586185FA2E400981915 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,6 +399,7 @@
 				33AE6588185FA2E400981915 /* main.m in Sources */,
 				235DF07219EC52C4009F5815 /* SkillCategoryObject.m in Sources */,
 				33AE658C185FA2E400981915 /* LIAAppDelegate.m in Sources */,
+				C8CF46E719EEB5AA00B039BC /* FeedbackViewController.m in Sources */,
 				C8244A8119E5CA84001A3854 /* RazorFishSkillsViewController.m in Sources */,
 				7DE1E4FA19E49AFD0022DDD2 /* UserObject.m in Sources */,
 				7DE1E4FD19E49B770022DDD2 /* SkillObject.m in Sources */,
