@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "SkillObject.h"
 #import "DBManager.h"
+#import "SkillCell.h"
 
 @protocol iInfoDelegate <NSObject>
 -(void)doSetSelectedSkills:(NSMutableArray*)arrReceivedSelectedSkills;
 @end
 
-@interface ManualProfileViewController : UIViewController
+@interface ManualProfileViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIAlertViewDelegate>
 @property (nonatomic, strong) NSMutableArray *arrSelectedSkills;
+@property (nonatomic, strong) IBOutlet UICollectionView *collSkills;
 @end
