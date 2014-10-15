@@ -42,9 +42,8 @@
 {
     if(segue.identifier != nil)
     {
-        NSLog(@"not nil");
         RazorFishSkillsViewController * rfSVC = [segue destinationViewController];
-        [rfSVC setDelegate:self];
+        [rfSVC setDelegate:(id)self];
         [rfSVC doLoadSkills:[DBManager getSkills] withSelectedSkills:arrSelectedSkills];
     }
 }
