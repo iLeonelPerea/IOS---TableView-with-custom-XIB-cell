@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		16AD612F556B4B92ADB38EEF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35282DA869D54E88A071E44A /* libPods.a */; };
+		23487DD019EEC0E90086BC7F /* razorfish.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 23487DCF19EEC0CF0086BC7F /* razorfish.sqlite3 */; };
 		235DF07219EC52C4009F5815 /* SkillCategoryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 235DF07119EC52C4009F5815 /* SkillCategoryObject.m */; };
 		33AE657C185FA2E400981915 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AE657B185FA2E400981915 /* Foundation.framework */; };
 		33AE657E185FA2E400981915 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AE657D185FA2E400981915 /* CoreGraphics.framework */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		23487DCF19EEC0CF0086BC7F /* razorfish.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = razorfish.sqlite3; sourceTree = "<group>"; };
 		235DF07019EC52C4009F5815 /* SkillCategoryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillCategoryObject.h; sourceTree = "<group>"; };
 		235DF07119EC52C4009F5815 /* SkillCategoryObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkillCategoryObject.m; sourceTree = "<group>"; };
 		33AE6578185FA2E400981915 /* IOSLinkedInAPI-Podexample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOSLinkedInAPI-Podexample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +118,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23487DCE19EEC0A80086BC7F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				23487DCF19EEC0CF0086BC7F /* razorfish.sqlite3 */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		33AE656F185FA2E400981915 = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +165,7 @@
 		33AE6581185FA2E400981915 /* IOSLinkedInAPI-Podexample */ = {
 			isa = PBXGroup;
 			children = (
+				23487DCE19EEC0A80086BC7F /* Resources */,
 				C8244A7519E5AAD9001A3854 /* ViewControllers */,
 				7DE1E4F219E4971D0022DDD2 /* Managers */,
 				7DF9483B19E4539300E0716A /* VO */,
@@ -325,6 +336,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23487DD019EEC0E90086BC7F /* razorfish.sqlite3 in Resources */,
 				33AE6592185FA2E400981915 /* Main_iPad.storyboard in Resources */,
 				33AE6597185FA2E400981915 /* Images.xcassets in Resources */,
 				33AE658F185FA2E400981915 /* Main_iPhone.storyboard in Resources */,
