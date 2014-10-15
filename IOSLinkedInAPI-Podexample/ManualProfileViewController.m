@@ -14,7 +14,7 @@
 @end
 
 @implementation ManualProfileViewController
-@synthesize arrSelectedSkills, collSkills;
+@synthesize arrSelectedSkills, collSkills, lblTitle;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,6 +28,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [collSkills reloadData];
+    [lblTitle setHidden:([arrSelectedSkills count] > 0)?NO:YES];
 }
 
 - (void)didReceiveMemoryWarning {

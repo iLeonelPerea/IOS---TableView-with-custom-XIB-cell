@@ -18,4 +18,6 @@
 @interface ManualProfileViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIAlertViewDelegate>
 @property (nonatomic, strong) NSMutableArray *arrSelectedSkills;
 @property (nonatomic, strong) IBOutlet UICollectionView *collSkills;
+@property (nonatomic, strong) IBOutlet UILabel *lblTitle;
+
 @end
