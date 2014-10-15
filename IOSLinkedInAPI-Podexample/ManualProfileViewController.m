@@ -40,4 +40,14 @@
     NSLog(@"%@",arrReceivedSelectedSkills);
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if(segue.identifier != nil)
+    {
+        NSLog(@"not nil");
+        RazorFishSkillsViewController * rfSVC = [segue destinationViewController];
+        [rfSVC setDelegate:self];
+    }
+}
+
 @end

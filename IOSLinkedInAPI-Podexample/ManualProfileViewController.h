@@ -8,14 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ManualProfileViewController : UIViewController
-
-@property (nonatomic, strong) NSMutableArray *arrSelectedSkills;
-
+@protocol iInfoDelegate <NSObject>
+-(void)doSetSelectedSkills:(NSMutableArray*)arrReceivedSelectedSkills;
 @end
 
-@protocol iInfoDelegate <NSObject>
-
--(void)doSetSelectedSkills:(NSMutableArray*)arrReceivedSelectedSkills;
-
+@interface ManualProfileViewController : UIViewController
+@property (nonatomic, strong) NSMutableArray *arrSelectedSkills;
 @end
