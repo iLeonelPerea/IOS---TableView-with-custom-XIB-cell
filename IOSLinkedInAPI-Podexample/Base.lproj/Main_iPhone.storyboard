@@ -132,14 +132,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="6ky-Pf-BTE">
-                                <rect key="frame" x="0.0" y="76" width="320" height="472"/>
+                                <rect key="frame" x="0.0" y="108" width="320" height="440"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WIm-zg-bcG">
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="WhT-2i-zSr"/>
                     <connections>
+                        <outlet property="searchBar" destination="WIm-zg-bcG" id="lTd-vV-Tha"/>
                         <outlet property="tblSkills" destination="6ky-Pf-BTE" id="JcY-kv-w5t"/>
                     </connections>
                 </viewController>

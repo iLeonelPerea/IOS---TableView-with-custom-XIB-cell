@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SkillObject.h"
+#import "DBManager.h"
 
 @protocol iInfoDelegate <NSObject>
 -(void)doSetSelectedSkills:(NSMutableArray*)arrReceivedSelectedSkills;
