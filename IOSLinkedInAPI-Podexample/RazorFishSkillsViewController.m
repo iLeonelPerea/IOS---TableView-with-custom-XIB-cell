@@ -23,8 +23,6 @@
     self.navigationItem.rightBarButtonItem = btnSave;
     [tblSkills setDelegate:self];
     [tblSkills setDataSource:self];
-    arrSkills = [NSMutableArray new];
-    arrSkills = [DBManager getSkills];
     [tblSkills reloadData];
 }
 
@@ -32,16 +30,28 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+#pragma mark -- Save button delegate
 -(void)doSaveSelectedSkills:(UIBarButtonItem*)sender
 {
     [self.delegate doSetSelectedSkills:arrSkills];
     [self.navigationController popViewControllerAnimated:YES];
-    NSLog(@"do save selected skills");
+}
+
+#pragma mark -- Load skills delegate
+-(void)doLoadSkills:(NSMutableArray*)arrAllSkills withSelectedSkills:(NSMutableArray*)arrSelectedSkills;
+{
+    //Receive all the skills from the DB and check and mark the selected skills specified in arrSelectedSkills. Store all the skills into arrSkills to display them.
+    if ([arrSelectedSkills count] > 0) {
+        for (SkillObject *selectedSkilObject in arrSelectedSkills) {
+            for (SkillObject *originalSkillObject in arrAllSkills) {
+                ([selectedSkilObject idSkill] == [originalSkillObject idSkill])?[originalSkillObject setIsSelected:YES]:nil;
+            }
+        }
+    }
+    arrSkills = [arrAllSkills mutableCopy];
 }
 
 #pragma mark -- UITableViewDelegate
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [arrSkills count];
@@ -89,5 +99,7 @@
     SkillObject * selectedSkill = [arrSkills objectAtIndex:[senderSwitch tag]];
     [selectedSkill setIsSelected:[senderSwitch isOn]];
 }
+
+
 
 @end

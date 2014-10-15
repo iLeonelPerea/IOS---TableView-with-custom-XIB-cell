@@ -15,4 +15,6 @@
 @property (nonatomic, strong) IBOutlet UITableView * tblSkills;
 @property (nonatomic, strong) id<iInfoDelegate> delegate;
 
+-(void)doLoadSkills:(NSMutableArray*)arrAllSkills withSelectedSkills:(NSMutableArray*)arrSelectedSkills;
+
 @end

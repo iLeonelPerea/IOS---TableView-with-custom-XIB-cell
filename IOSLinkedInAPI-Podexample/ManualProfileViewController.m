@@ -28,16 +28,14 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    NSLog(@"Test text");
-    NSLog(@"%@",arrSelectedSkills);
-}
-
 -(void)doSetSelectedSkills:(NSMutableArray*)arrReceivedSelectedSkills;
 {
-    arrSelectedSkills = arrReceivedSelectedSkills;
-    NSLog(@"%@",arrReceivedSelectedSkills);
+    //Check for selected Skills from arrReceivedSelectedSkills which cointans all the skills displayed to select by user
+    for (SkillObject *skillObject in arrReceivedSelectedSkills) {
+        if ([skillObject isSelected]) {
+            [arrSelectedSkills addObject:skillObject];
+        }
+    }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -47,6 +45,7 @@
         NSLog(@"not nil");
         RazorFishSkillsViewController * rfSVC = [segue destinationViewController];
         [rfSVC setDelegate:self];
+        [rfSVC doLoadSkills:[DBManager getSkills] withSelectedSkills:arrSelectedSkills];
     }
 }
 
