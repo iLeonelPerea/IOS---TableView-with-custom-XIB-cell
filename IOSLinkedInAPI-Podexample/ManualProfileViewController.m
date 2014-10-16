@@ -71,6 +71,14 @@
             UIAlertView *alertInsertError = [[UIAlertView alloc] initWithTitle:@"Attention" message:@"Check your information to perform the action again" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] ;
             [alertInsertError show];
         }else{
+            //Create a local notification
+            UILocalNotification *notification = [[UILocalNotification alloc] init];
+            [notification setFireDate:[[NSDate alloc] initWithTimeIntervalSinceNow:10]];
+            [notification setAlertBody:@"Your profile has been seen"];
+            [notification setSoundName:UILocalNotificationDefaultSoundName];
+            [notification setHasAction:YES];
+            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+            //Returns to previous screen
             [[self navigationController] popViewControllerAnimated:YES];
         }
     }else{
