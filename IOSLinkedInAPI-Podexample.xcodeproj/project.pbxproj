@@ -33,6 +33,7 @@
 		C8244A7B19E5B049001A3854 /* ManualProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8244A7A19E5B049001A3854 /* ManualProfileViewController.m */; };
 		C8244A7E19E5B92E001A3854 /* LinkedInProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8244A7D19E5B92E001A3854 /* LinkedInProfileViewController.m */; };
 		C8244A8119E5CA84001A3854 /* RazorFishSkillsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8244A8019E5CA84001A3854 /* RazorFishSkillsViewController.m */; };
+		C88085D119F08D2C0098E229 /* profileLeo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C88085D019F08D2C0098E229 /* profileLeo.jpg */; };
 		C8A95D8C19E88F7900557122 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8A95D8B19E88F7900557122 /* QuartzCore.framework */; };
 		C8A95D9019E899A100557122 /* SkillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8A95D8F19E899A100557122 /* SkillCell.m */; };
 		C8CF46E719EEB5AA00B039BC /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8CF46E619EEB5AA00B039BC /* FeedbackViewController.m */; };
@@ -94,6 +95,7 @@
 		C8244A7D19E5B92E001A3854 /* LinkedInProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkedInProfileViewController.m; sourceTree = "<group>"; };
 		C8244A7F19E5CA84001A3854 /* RazorFishSkillsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RazorFishSkillsViewController.h; sourceTree = "<group>"; };
 		C8244A8019E5CA84001A3854 /* RazorFishSkillsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RazorFishSkillsViewController.m; sourceTree = "<group>"; };
+		C88085D019F08D2C0098E229 /* profileLeo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profileLeo.jpg; sourceTree = "<group>"; };
 		C8A95D8B19E88F7900557122 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C8A95D8E19E899A100557122 /* SkillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillCell.h; sourceTree = "<group>"; };
 		C8A95D8F19E899A100557122 /* SkillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkillCell.m; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		23487DCE19EEC0A80086BC7F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C88085D019F08D2C0098E229 /* profileLeo.jpg */,
 				23487DCF19EEC0CF0086BC7F /* razorfish.sqlite3 */,
 			);
 			name = Resources;
@@ -359,6 +362,7 @@
 				C8CF46E819EEB82F00B039BC /* Main_iPhone.storyboard in Resources */,
 				33AE6597185FA2E400981915 /* Images.xcassets in Resources */,
 				33AE6586185FA2E400981915 /* InfoPlist.strings in Resources */,
+				C88085D119F08D2C0098E229 /* profileLeo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

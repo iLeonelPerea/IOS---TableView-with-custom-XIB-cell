@@ -35,7 +35,7 @@
     [vFeedback addGestureRecognizer:gestureL];
     [vFeedback addGestureRecognizer:gestureR];
     arrButtons = [[NSMutableArray alloc] initWithObjects:btnFirstAnswer,btnSecondAnswer,btnThirdAnswer,nil];
-    [imgProfile setImage:[UIImage imageNamed:@"profileLeo"]];
+    [imgProfile setImage:[UIImage imageNamed:@"profileLeo.jpg"]];
     [imgProfile setHidden:NO];
     [self fillQuestions];
 }
@@ -111,16 +111,15 @@
 
 #pragma mark -- LoadQuestions
 - (void)fillQuestions{
-    // Fill Questions from the Array of the current pageControl
-    for (UIButton * btnAnswers in arrButtons) { // Hide all buttons (if one or more questions have only 2 answers)
-        [btnAnswers setTitle:@"" forState:UIControlStateNormal];
-        [btnAnswers setHidden:YES];
-    }
+    // set buttons hidden
+    [btnFirstAnswer setHidden:YES];
+    [btnSecondAnswer setHidden:YES];
+    [btnThirdAnswer setHidden:YES];
     QuestionObject *questionObject = [arrQuestions objectAtIndex:pageControl.currentPage];
     int indexButton = 0; // To change the button
     [lblQuestion setText:questionObject.description];
     for (QuestionAnswerObject *questionAnswer in questionObject.arrQuestionAnswerObject) {
-        [(UIButton *)[arrButtons objectAtIndex:indexButton] setTitle:questionAnswer.answerDescription forState:UIControlStateNormal]; // Change teh Answer Description
+        [(UIButton *)[arrButtons objectAtIndex:indexButton] setTitle:questionAnswer.answerDescription forState:UIControlStateNormal]; // Change the Answer Description
         [(UIButton *)[arrButtons objectAtIndex:indexButton] setHidden:NO];
         indexButton ++;
     }
