@@ -16,7 +16,6 @@
 @property (nonatomic, assign) int idUser;
 @property (nonatomic, assign) int idInterview;
 @property (nonatomic, strong) NSString * date;
-@property (nonatomic, strong) QuestionObject * questionObject;
-@property (nonatomic, strong) QuestionAnswerObject * questionAnswerObject;
+@property (nonatomic, strong) NSMutableArray * questionObject;
 
 @end
