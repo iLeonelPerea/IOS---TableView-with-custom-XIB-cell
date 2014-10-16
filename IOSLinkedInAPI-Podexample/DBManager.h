@@ -16,9 +16,9 @@
 
 +(BOOL)checkOrCreateDataBase;
 +(NSString*)getDBPath;
-//+(void)insertUser:(UserObject *)user;
-//+(void)insertSkill:(UserObject *)user withSkill:(SkillObject *)skill;
 +(NSMutableArray*)getSkills;
++(UserObject*)insertUser:(UserObject*)userObject;
++(void)insertUserSkills:(NSMutableArray*)arrUserSkills withUserId:(int)userId;
 +(NSMutableArray*)getQuestions;
 +(NSMutableArray*)getQuestionsAnswers:(int)idQuestion;
 

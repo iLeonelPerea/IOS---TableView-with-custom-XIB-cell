@@ -78,6 +78,56 @@
     return dictToReturn;
 }
 
+#pragma mark -- Insert User method
++(UserObject*)insertUser:(UserObject *)userObject
+{
+    //Insert a User into database and returns de Is assigned.
+    sqlite3 *appDB = nil;
+    sqlite3_stmt *statement;
+    const char *dbPath = [[DBManager getDBPath] UTF8String];
+    
+    if (sqlite3_open(dbPath, &appDB) == SQLITE_OK) {
+        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO USERS (FIRST_NAME, LAST_NAME, COMPANY, POSITION) VALUES (\"%@\", \"%@\", \"%@\", \"%@\")",[userObject firstName], [userObject lastName], [userObject company], [userObject position]];
+        const char *sqlInsert = [insertSQL UTF8String];
+        
+        sqlite3_prepare_v2(appDB, sqlInsert, -1, &statement, NULL);
+        if (sqlite3_step(statement) != SQLITE_DONE) {
+            NSLog(@"Error %s", sqlite3_errmsg(appDB));
+        }else{
+            //Get the assigned id to user
+            [userObject setIdUser:(NSInteger)sqlite3_last_insert_rowid(appDB)];
+            //Check if the user has skills to insert into DB
+            if ([[userObject skills] count] > 0) {
+                [self insertUserSkills:[userObject skills] withUserId:[userObject idUser]];
+            }
+        }
+        [DBManager finalizeStatements:statement withDB:appDB];
+    }
+    return userObject;
+}
+
+#pragma mark -- Insert User skills method
++(void)insertUserSkills:(NSMutableArray*)arrUserSkills withUserId:(int)userId;
+{
+    //Insert the user skills into database
+    sqlite3 *appDB = nil;
+    sqlite3_stmt *statement;
+    const char *dbPath = [[DBManager getDBPath] UTF8String];
+    NSString *insertSQL = @"";
+    //Loop to insert each of the user skills
+    for (SkillObject *userSkill in arrUserSkills) {
+        if(sqlite3_open(dbPath, &appDB) == SQLITE_OK){
+            insertSQL = [NSString stringWithFormat:@"INSERT INTO USER_SKILLS (ID_USER, ID_SKILL) VALUES (\"%d\", \"%d\")", userId, [userSkill idSkill]];
+            const char *sqlInsert = [insertSQL UTF8String];
+            sqlite3_prepare_v2(appDB, sqlInsert, -1, &statement, NULL);
+            if (sqlite3_step(statement) != SQLITE_DONE) {
+                NSLog(@"Error %s", sqlite3_errmsg(appDB));
+            }
+        }
+        [DBManager finalizeStatements:statement withDB:appDB];
+    }
+}
+
 #pragma mark -- Get feedback questions from database
 //Get the questions store in local DB.
 +(NSMutableArray*)getQuestions
@@ -126,24 +176,5 @@
     }
     return dictToReturn;
 }
-
-/*
-#pragma mark -- User methods
-+(void)insertUser:(UserObject *)user{
-    sqlite3 *inventoryDB = nil;
-    const char *dbpath = [[DBManager getDBPath] UTF8String];
-    if (sqlite3_open(dbpath, &inventoryDB) == SQLITE_OK) {
-        sqlite3_stmt *statement;
-        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO USERS (ID_USER, FIRST_NAME, LAST_NAME) VALUES (\"%d\", \"%@\", \"%@\")", user.idUser, user.firstName, user.lastName];
-        const char *insert_stmt = [insertSQL UTF8String];
-        sqlite3_prepare_v2(inventoryDB, insert_stmt, -1, &statement, NULL);
-        if (sqlite3_step(statement) != SQLITE_DONE) {
-            NSLog(@"fiel error... %s - %d", sqlite3_errmsg(inventoryDB),user.idUser);
-        }
-        [DBManager finalizeStatements:statement withDB:inventoryDB];
-    }
-}
-*/
-
 
 @end

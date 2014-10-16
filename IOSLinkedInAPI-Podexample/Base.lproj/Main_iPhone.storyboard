@@ -83,17 +83,26 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IIV-Cu-Afu">
                                 <rect key="frame" x="16" y="118" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <connections>
+                                    <action selector="textFieldDidChange:" destination="2nR-I5-UUY" eventType="editingChanged" id="cGj-6u-tQp"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vTY-0x-ZVm">
                                 <rect key="frame" x="16" y="194" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <connections>
+                                    <action selector="textFieldDidChange:" destination="2nR-I5-UUY" eventType="editingChanged" id="6s0-Il-lct"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Position" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tIV-YY-QET">
                                 <rect key="frame" x="16" y="232" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <connections>
+                                    <action selector="textFieldDidChange:" destination="2nR-I5-UUY" eventType="editingChanged" id="maV-Ck-NdI"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1c-mt-NEC">
                                 <rect key="frame" x="16" y="270" width="176" height="30"/>
@@ -107,10 +116,13 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RjR-Bd-dgb">
                                 <rect key="frame" x="16" y="156" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <connections>
+                                    <action selector="textFieldDidChange:" destination="2nR-I5-UUY" eventType="editingChanged" id="Uln-aW-7ag"/>
+                                </connections>
                             </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4oX-Na-rqL">
-                                <rect key="frame" x="16" y="303" width="288" height="245"/>
+                                <rect key="frame" x="16" y="332" width="288" height="216"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="jZF-zY-h8O">
                                     <size key="itemSize" width="252" height="42"/>
@@ -152,12 +164,23 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Razorfish Skills" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWD-qo-llJ">
+                                <rect key="frame" x="107" y="308" width="106" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="aJj-2U-E0b"/>
                     <connections>
                         <outlet property="collSkills" destination="4oX-Na-rqL" id="neQ-ql-hMe"/>
+                        <outlet property="lblTitle" destination="lWD-qo-llJ" id="Jyi-9l-vPi"/>
+                        <outlet property="txtCompany" destination="vTY-0x-ZVm" id="AQk-lj-yZG"/>
+                        <outlet property="txtFirstName" destination="IIV-Cu-Afu" id="JSa-HK-Txs"/>
+                        <outlet property="txtLastName" destination="RjR-Bd-dgb" id="CYh-TV-MSy"/>
+                        <outlet property="txtPosition" destination="tIV-YY-QET" id="vQQ-YL-LQt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JVz-hm-eHG" userLabel="First Responder" sceneMemberID="firstResponder"/>
