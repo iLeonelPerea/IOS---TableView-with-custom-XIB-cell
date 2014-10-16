@@ -1,6 +1,9 @@
 .DS_Store
 testTableView/.DS_Store
 IOSLinkedInAPI-Podexample.xcworkspace/xcshareddata/
+IOSLinkedInAPI-Podexample.xcworkspace/xcuserdata/leonelrobertopereatrejo.xcuserdatad/UserInterfaceState.xcuserstate
+Pods/Pods.xcodeproj/xcuserdata/leonelrobertopereatrejo.xcuserdatad/xcschemes/xcschememanagement.plist
+Pods/Pods.xcodeproj/xcuserdata/leonelrobertopereatrejo.xcuserdatad/xcschemes/Pods-APLKeyboardControls.xcschemePods/Pods.xcodeproj/xcuserdata/leonelrobertopereatrejo.xcuserdatad/xcschemes/Pods-NSData+Base64.xcscheme
 Pods/APLKeyboardControls/
 Pods/BuildHeaders/APLKeyboardControls/
 Pods/BuildHeaders/NSData+Base64/
@@ -17,3 +20,4 @@ Pods/Pods-NSData+Base64-prefix.pch
 Pods/Pods-NSData+Base64.xcconfig
 Pods/Pods.xcodeproj/xcuserdata/omarguzman.xcuserdatad/xcschemes/Pods-APLKeyboardControls.xcscheme
 Pods/Pods.xcodeproj/xcuserdata/omarguzman.xcuserdatad/xcschemes/Pods-NSData+Base64.xcscheme
+
