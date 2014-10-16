@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <APLKeyboardControls.h>
 #import "SkillObject.h"
 #import "DBManager.h"
 #import "SkillCell.h"
@@ -15,9 +16,22 @@
 -(void)doSetSelectedSkills:(NSMutableArray*)arrReceivedSelectedSkills;
 @end
 
-@interface ManualProfileViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIAlertViewDelegate>
+@interface ManualProfileViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIAlertViewDelegate, UITextFieldDelegate>
+
+@property (nonatomic, strong) IBOutlet UITextField *txtFirstName;
+@property (nonatomic, strong) IBOutlet UITextField *txtLastName;
+@property (nonatomic, strong) IBOutlet UITextField *txtCompany;
+@property (nonatomic, strong) IBOutlet UITextField *txtPosition;
 @property (nonatomic, strong) NSMutableArray *arrSelectedSkills;
 @property (nonatomic, strong) IBOutlet UICollectionView *collSkills;
 @property (nonatomic, strong) IBOutlet UILabel *lblTitle;
+@property (nonatomic, strong) APLKeyboardControls *kbcontrols;
+@property (nonatomic, assign) BOOL isFirstNameValid;
+@property (nonatomic, assign) BOOL isLastNameValid;
+@property (nonatomic, assign) BOOL isCompanyValid;
+@property (nonatomic, assign) BOOL isPositionValid;
+
+-(IBAction)textFieldDidChange:(UITextField *)textField;
+-(void)doEnableSaveButton;
 
 @end

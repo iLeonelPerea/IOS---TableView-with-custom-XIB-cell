@@ -79,11 +79,102 @@
 }
 
 #pragma mark -- Insert User method
-+(int)insertUser:(UserObject *)userObject
++(UserObject*)insertUser:(UserObject *)userObject
 {
     //Insert a User into database and returns de Is assigned.
+    sqlite3 *appDB = nil;
+    sqlite3_stmt *statement;
+    const char *dbPath = [[DBManager getDBPath] UTF8String];
     
-    return nil;
+    if (sqlite3_open(dbPath, &appDB) == SQLITE_OK) {
+        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO USERS (FIRST_NAME, LAST_NAME, COMPANY, POSITION) VALUES (\"%@\", \"%@\", \"%@\", \"%@\")",[userObject firstName], [userObject lastName], [userObject company], [userObject position]];
+        const char *sqlInsert = [insertSQL UTF8String];
+        
+        sqlite3_prepare_v2(appDB, sqlInsert, -1, &statement, NULL);
+        if (sqlite3_step(statement) != SQLITE_DONE) {
+            NSLog(@"Error %s", sqlite3_errmsg(appDB));
+        }else{
+            //Get the assigned id to user
+            [userObject setIdUser:(NSInteger)sqlite3_last_insert_rowid(appDB)];
+            //Check if the user has skills to insert into DB
+            if ([[userObject skills] count] > 0) {
+                [self insertUserSkills:[userObject skills] withUserId:[userObject idUser]];
+            }
+        }
+        [DBManager finalizeStatements:statement withDB:appDB];
+    }
+    return userObject;
+}
+
+#pragma mark -- Insert User skills method
++(void)insertUserSkills:(NSMutableArray*)arrUserSkills withUserId:(int)userId;
+{
+    //Insert the user skills into database
+    sqlite3 *appDB = nil;
+    sqlite3_stmt *statement;
+    const char *dbPath = [[DBManager getDBPath] UTF8String];
+    NSString *insertSQL = @"";
+    //Loop to insert each of the user skills
+    for (SkillObject *userSkill in arrUserSkills) {
+        if(sqlite3_open(dbPath, &appDB) == SQLITE_OK){
+            insertSQL = [NSString stringWithFormat:@"INSERT INTO USER_SKILLS (ID_USER, ID_SKILL) VALUES (\"%d\", \"%d\")", userId, [userSkill idSkill]];
+            const char *sqlInsert = [insertSQL UTF8String];
+            sqlite3_prepare_v2(appDB, sqlInsert, -1, &statement, NULL);
+            if (sqlite3_step(statement) != SQLITE_DONE) {
+                NSLog(@"Error %s", sqlite3_errmsg(appDB));
+            }
+        }
+        [DBManager finalizeStatements:statement withDB:appDB];
+    }
+}
+
+#pragma mark -- Get feedback questions from database
+//Get the questions store in local DB.
++(NSMutableArray*)getQuestions
+{
+    sqlite3 *appDB = nil;
+    sqlite3_stmt *statement;
+    const char *dbPath = [[DBManager getDBPath] UTF8String] ;
+    NSMutableArray *dictToReturn = [[NSMutableArray alloc] init];
+    
+    if (sqlite3_open(dbPath, &appDB) == SQLITE_OK) {
+        NSString *selectSQL = @"SELECT * FROM FEEDBACK_QUESTIONS";
+        const char *selectStmt = [selectSQL UTF8String];
+        sqlite3_prepare_v2(appDB, selectStmt, -1, &statement, nil);
+        while (sqlite3_step(statement) != SQLITE_DONE) {
+            QuestionObject *newQuestionObject = [[QuestionObject alloc] init];
+            [newQuestionObject setIdQuestion:sqlite3_column_int(statement, 0)];
+            [newQuestionObject setDescription:[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 1)]];
+            newQuestionObject.questionAnswerObject = [self getQuestionsAnswers:newQuestionObject.idQuestion];
+            [dictToReturn addObject:newQuestionObject];
+        }
+        [DBManager finalizeStatements:statement withDB:appDB];
+    }
+    return dictToReturn;
+}
+
+//Get the answers store in local DB.
++(NSMutableArray*)getQuestionsAnswers:(int)idQuestion
+{
+    sqlite3 *appDB = nil;
+    sqlite3_stmt *statement;
+    const char *dbPath = [[DBManager getDBPath] UTF8String] ;
+    NSMutableArray *dictToReturn = [[NSMutableArray alloc] init];
+    
+    if (sqlite3_open(dbPath, &appDB) == SQLITE_OK) {
+        NSString *selectSQL = [NSString stringWithFormat:@"SELECT * FROM FEEDBACK_QUESTIONS_ANSWERS WHERE ID_QUESTION = %d",idQuestion];
+        const char *selectStmt = [selectSQL UTF8String];
+        sqlite3_prepare_v2(appDB, selectStmt, -1, &statement, nil);
+        while (sqlite3_step(statement) != SQLITE_DONE) {
+            QuestionAnswerObject *newAnswerQuestionObject = [[QuestionAnswerObject alloc] init];
+            [newAnswerQuestionObject setIdQuestion:sqlite3_column_int(statement, 0)];
+            [newAnswerQuestionObject setIdAnswer:sqlite3_column_int(statement, 1)];
+            [newAnswerQuestionObject setAnswerDescription:[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 2)]];
+            [dictToReturn addObject:newAnswerQuestionObject];
+        }
+        [DBManager finalizeStatements:statement withDB:appDB];
+    }
+    return dictToReturn;
 }
 
 @end

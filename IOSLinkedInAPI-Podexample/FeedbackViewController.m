@@ -14,10 +14,14 @@
 
 @implementation FeedbackViewController
 
+@synthesize arrQuestions;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setTitle:@"Interview feedback"];
+    arrQuestions = [DBManager getQuestions];
+    
 }
 
 - (void)didReceiveMemoryWarning {

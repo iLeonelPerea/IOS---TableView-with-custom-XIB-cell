@@ -10,6 +10,6 @@
 
 @implementation FeedbackObject
 
-@synthesize idUser, idInterview, idFeedback, date, questionObject, questionAnswerObject;
+@synthesize idUser, idInterview, idFeedback, date, questionObject;
 
 @end

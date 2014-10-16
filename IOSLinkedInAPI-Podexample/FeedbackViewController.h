@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBManager.h"
 
 @interface FeedbackViewController : UIViewController
+
+@property (nonatomic, strong) NSMutableArray * arrQuestions;
 
 @end

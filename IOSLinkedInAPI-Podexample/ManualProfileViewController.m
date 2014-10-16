@@ -14,15 +14,33 @@
 @end
 
 @implementation ManualProfileViewController
-@synthesize arrSelectedSkills, collSkills, lblTitle;
+@synthesize arrSelectedSkills, collSkills, lblTitle,
+            txtFirstName, txtLastName, txtCompany, txtPosition,
+            kbcontrols,
+            isFirstNameValid, isLastNameValid, isCompanyValid, isPositionValid;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //Set controls delegates
+    [txtFirstName setDelegate:self];
+    [txtLastName setDelegate:self];
+    [txtCompany setDelegate:self];
+    [txtPosition setDelegate:self];
     [collSkills setDataSource:self];
     [collSkills setDelegate:self];
     [self setTitle:@"Profile"];
     arrSelectedSkills = [[NSMutableArray alloc] init];
+    //Initialize APLKeyboardControls
+    NSMutableArray *kbFields = [[NSMutableArray alloc] initWithObjects:txtFirstName,txtLastName,txtCompany,txtPosition, nil];
+    kbcontrols = [[APLKeyboardControls alloc] initWithInputFields:kbFields];
+    [kbcontrols setHasPreviousNext:YES];
+    [[kbcontrols doneButton] setTarget:self];
+    [[kbcontrols doneButton] setAction:@selector(closeMePlease:)];
+    //Create a Save button into navigation bar
+    UIBarButtonItem *btnSave = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(doSaveUser:)];
+    [[self navigationItem] setRightBarButtonItem:btnSave];
+    [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -34,6 +52,89 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark -- Save button delegate
+-(void)doSaveUser:(UIBarButtonItem*)sender
+{
+    if ([arrSelectedSkills count] > 0) {
+        //Create an userObject and set it properties
+        UserObject *userObject = [[UserObject alloc] init];
+        [userObject setFirstName:[txtFirstName text]];
+        [userObject setLastName:[txtLastName text]];
+        [userObject setCompany:[txtCompany text]];
+        [userObject setPosition:[txtPosition text]];
+        [userObject setSkills:[arrSelectedSkills mutableCopy]];
+        //Call the method to insert the user, if receive 0, the user wasn't added into DB
+        userObject = [DBManager insertUser:userObject];
+        if (![userObject idUser] > 0) {
+            UIAlertView *alertInsertError = [[UIAlertView alloc] initWithTitle:@"Attention" message:@"Check your information to perform the action again" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] ;
+            [alertInsertError show];
+        }else{
+            [[self navigationController] popViewControllerAnimated:YES];
+        }
+    }else{
+        UIAlertView *skillsAlert = [[UIAlertView alloc] initWithTitle:@"Attention" message:@"Select skills (1 at least)" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [skillsAlert show];
+    }
+}
+
+-(void)closeMePlease:(id)sender
+{
+    //Hide on-screen keyboard
+    [txtFirstName resignFirstResponder];
+    [txtLastName resignFirstResponder];
+    [txtCompany resignFirstResponder];
+    [txtPosition resignFirstResponder];
+    //Check which fields are valid to set the error message
+    NSString *msgInvalidFields = @"";
+    if (!isFirstNameValid) {
+        msgInvalidFields = [msgInvalidFields stringByAppendingString:@" First Name -"];
+    }
+    if (!isLastNameValid) {
+        msgInvalidFields = [msgInvalidFields stringByAppendingString:@" Last Name" ];
+    }
+    if (!isCompanyValid) {
+        msgInvalidFields = [msgInvalidFields stringByAppendingString:@" Company -"];
+    }
+    if (!isPositionValid) {
+        msgInvalidFields = [msgInvalidFields stringByAppendingString:@" Position -"];
+    }
+    if ([msgInvalidFields length] > 1) {
+        msgInvalidFields = [msgInvalidFields stringByAppendingString:@" Are Required"];
+        UIAlertView *alertRequiredFields = [[UIAlertView alloc] initWithTitle:@"Attention" message:msgInvalidFields delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alertRequiredFields show];
+    }
+    [self doEnableSaveButton];
+}
+
+#pragma mark -- Do enable Save button method
+-(void)doEnableSaveButton
+{
+    [[[self navigationItem] rightBarButtonItem] setEnabled:(isFirstNameValid && isLastNameValid && isCompanyValid && isPositionValid)];
+}
+
+#pragma mark -- Textfield delegate
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    return YES;
+}
+
+-(IBAction)textFieldDidChange:(UITextField *)textField;
+{
+    if (textField == txtFirstName) {
+        isFirstNameValid = ([[txtFirstName text] length] > 2);
+    }
+    if (textField == txtLastName) {
+        isLastNameValid = ([[txtLastName text] length] > 2);
+    }
+    if (textField == txtCompany) {
+        isCompanyValid = ([[txtCompany text] length]);
+    }
+    if (textField == txtPosition) {
+        isPositionValid = ([[txtPosition text] length]);
+    }
+    [self doEnableSaveButton];
 }
 
 #pragma mark -- Set selected skills delegate

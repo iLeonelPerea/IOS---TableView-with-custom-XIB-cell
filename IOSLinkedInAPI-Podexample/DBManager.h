@@ -9,12 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "UserObject.h"
 #import "SkillObject.h"
+#import "QuestionObject.h"
+#import "QuestionAnswerObject.h"
 
 @interface DBManager : NSObject
 
 +(BOOL)checkOrCreateDataBase;
 +(NSString*)getDBPath;
 +(NSMutableArray*)getSkills;
-+(int)insertUser:(UserObject*)userObject;
++(UserObject*)insertUser:(UserObject*)userObject;
++(void)insertUserSkills:(NSMutableArray*)arrUserSkills withUserId:(int)userId;
++(NSMutableArray*)getQuestions;
++(NSMutableArray*)getQuestionsAnswers:(int)idQuestion;
 
 @end
