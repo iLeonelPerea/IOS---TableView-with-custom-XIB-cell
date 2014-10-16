@@ -78,23 +78,12 @@
     return dictToReturn;
 }
 
-/*
-#pragma mark -- User methods
-+(void)insertUser:(UserObject *)user{
-    sqlite3 *inventoryDB = nil;
-    const char *dbpath = [[DBManager getDBPath] UTF8String];
-    if (sqlite3_open(dbpath, &inventoryDB) == SQLITE_OK) {
-        sqlite3_stmt *statement;
-        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO USERS (ID_USER, FIRST_NAME, LAST_NAME) VALUES (\"%d\", \"%@\", \"%@\")", user.idUser, user.firstName, user.lastName];
-        const char *insert_stmt = [insertSQL UTF8String];
-        sqlite3_prepare_v2(inventoryDB, insert_stmt, -1, &statement, NULL);
-        if (sqlite3_step(statement) != SQLITE_DONE) {
-            NSLog(@"fiel error... %s - %d", sqlite3_errmsg(inventoryDB),user.idUser);
-        }
-        [DBManager finalizeStatements:statement withDB:inventoryDB];
-    }
+#pragma mark -- Insert User method
++(int)insertUser:(UserObject *)userObject
+{
+    //Insert a User into database and returns de Is assigned.
+    
+    return nil;
 }
-*/
-
 
 @end
