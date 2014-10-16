@@ -7,7 +7,6 @@
 //
 
 #import "LinkedInProfileViewController.h"
-#import "SkillCell.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define LINKEDIN_CLIENT_ID @"753l2vlirmrzay"
@@ -125,33 +124,6 @@
     cell.layer.borderWidth = 0.6f;
     cell.layer.borderColor = [UIColor grayColor].CGColor;
     return cell;
-    /*UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:strIdentifier forIndexPath:indexPath];
-    cell = nil;
-    if(cell == nil)
-        cell = [collectionView dequeueReusableCellWithReuseIdentifier:strIdentifier forIndexPath:indexPath];
-    NSDictionary * dictSkill = [arrSkills objectAtIndex:indexPath.row];
-    NSString * strSkill = [[dictSkill objectForKey:@"skill"] objectForKey:@"name"];
-
-    UIView * viewSkill = [[UIView alloc] initWithFrame:CGRectZero];
-    UILabel * lblSkill = [[UILabel alloc] initWithFrame:CGRectZero];
-    [lblSkill setLineBreakMode:NSLineBreakByWordWrapping];
-    lblSkill.text = strSkill;
-    [lblSkill setFont:[UIFont systemFontOfSize:14.0f]];
-    [lblSkill sizeToFit];
-    [lblSkill setBackgroundColor:[UIColor clearColor]];
-    [viewSkill addSubview:lblSkill];
-    [viewSkill sizeToFit];
-    [cell addSubview:viewSkill];
-    cell.layer.borderWidth = 1.0f;
-    cell.layer.borderColor = [UIColor grayColor].CGColor;
-    return cell;
-    */
-    /*
-     UIButton * btnX = [UIButton buttonWithType:UIButtonTypeSystem];
-     [btnX setTitle:@"X" forState:UIControlStateNormal];
-     [btnX setFrame:CGRectMake(cell.layer.bounds.size.width-40, 3, 40, 40)];
-     [cell addSubview:btnX];
-     */
 }
 
 -(void)doRemoveSkill:(id)sender
@@ -181,26 +153,14 @@
     size.width += 34;
     return size;
 }
-/*
-#pragma mark -- UITableViewDelegate
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    return (NSInteger)[arrSkills count];
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString * strReusableIdentifier = @"CellSkill";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:strReusableIdentifier];
-    cell = nil;
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:strReusableIdentifier];
+    if(segue.identifier != nil)
+    {
+        RazorFishSkillsViewController * rfSVC = [segue destinationViewController];
+        [rfSVC setDelegate:(id)self];
+        [rfSVC doLoadSkills:[DBManager getSkills] withSelectedSkills:nil];
     }
-    NSDictionary * dictSkill = [arrSkills objectAtIndex:indexPath.row];
-    cell.textLabel.text = [[dictSkill objectForKey:@"skill"] objectForKey:@"name"];
-    
-    return cell;
 }
- */
 @end

@@ -12,6 +12,8 @@
 #import "LIALinkedInApplication.h"
 #import <NZCircularImageView.h>
 #import <JGProgressHUD.h>
+#import "SkillCell.h"
+#import "RazorFishSkillsViewController.h"
 
 @interface LinkedInProfileViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIAlertViewDelegate>
 @property (nonatomic, strong) NSString * accessToken;
