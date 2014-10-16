@@ -95,7 +95,7 @@
             QuestionObject *newQuestionObject = [[QuestionObject alloc] init];
             [newQuestionObject setIdQuestion:sqlite3_column_int(statement, 0)];
             [newQuestionObject setDescription:[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 1)]];
-            newQuestionObject.questionAnswerObject = [self getQuestionsAnswers:newQuestionObject.idQuestion];
+            newQuestionObject.arrQuestionAnswerObject = [self getQuestionsAnswers:newQuestionObject.idQuestion];
             [dictToReturn addObject:newQuestionObject];
         }
         [DBManager finalizeStatements:statement withDB:appDB];

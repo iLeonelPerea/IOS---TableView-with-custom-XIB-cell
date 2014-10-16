@@ -12,6 +12,6 @@
 
 @property (nonatomic, assign) int idQuestion;
 @property (nonatomic, strong) NSString * description;
-@property (nonatomic, strong) NSMutableArray * questionAnswerObject;
+@property (nonatomic, strong) NSMutableArray * arrQuestionAnswerObject;
 
 @end

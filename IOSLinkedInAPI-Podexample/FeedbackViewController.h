@@ -8,9 +8,25 @@
 
 #import <UIKit/UIKit.h>
 #import "DBManager.h"
+#import "QuestionObject.h"
+#import "QuestionAnswerObject.h"
 
 @interface FeedbackViewController : UIViewController
 
+@property (nonatomic, strong) IBOutlet UIPageControl *pageControl;
 @property (nonatomic, strong) NSMutableArray * arrQuestions;
+@property (nonatomic, strong) IBOutlet UIView *vFeedback;
+@property (nonatomic, strong) IBOutlet UIImageView *imgProfile;
+@property (nonatomic, strong) IBOutlet UILabel *lblQuestion;
+@property (nonatomic, strong) IBOutlet UIButton *btnFirstAnswer;
+@property (nonatomic, strong) IBOutlet UIButton *btnSecondAnswer;
+@property (nonatomic, strong) IBOutlet UIButton *btnThirdAnswer;
+@property (nonatomic, strong) NSMutableArray *arrButtons;
+@property (nonatomic, strong) IBOutlet UIButton *btnSkip;
+@property (nonatomic, assign) int directionChangePageControl; //0:Left 1:Rigth
+@property (nonatomic, assign) BOOL isPageControlInUse;
+
+- (IBAction)doChangePage;
+- (IBAction)doSkip;
 
 @end
