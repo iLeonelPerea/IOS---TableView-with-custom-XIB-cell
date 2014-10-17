@@ -54,6 +54,8 @@
 
 -(void)doSaveProfile:(id)sender
 {
+    //Add the linked skills into UserObject
+    [userObject setSkills:arrSkills];
     //Insert the user data into DB, specify that skills are from LinkedIn
     userObject = [DBManager insertUser:userObject withLinkedInSkills:YES];
     //Check if the insert operation was successfully, if not, display an alert to the user.
@@ -98,8 +100,6 @@
                 [linkedInSkillObject setIsLinkedInSkill:YES];
                 [arrSkills addObject:linkedInSkillObject];
             }
-            //Add the linked skills into UserObject
-            [userObject setSkills:arrSkills];
             //todo: add collection view logic
             [collSkills reloadData];
             [self requestProfilePicture];
