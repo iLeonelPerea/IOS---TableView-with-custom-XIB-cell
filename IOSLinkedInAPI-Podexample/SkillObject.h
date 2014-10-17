@@ -14,6 +14,7 @@
 @property (nonatomic, assign) int idSkill;
 @property (nonatomic, strong) NSString *skillName;
 @property (nonatomic, strong) SkillCategoryObject *skillCategoryObject;
+@property (nonatomic, assign) BOOL isLinkedInSkill;
 @property (nonatomic, assign) BOOL isSelected;
 
 @end

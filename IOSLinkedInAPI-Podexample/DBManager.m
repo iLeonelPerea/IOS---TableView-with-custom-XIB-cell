@@ -79,7 +79,7 @@
 }
 
 #pragma mark -- Insert User method
-+(UserObject*)insertUser:(UserObject *)userObject
++(UserObject*)insertUser:(UserObject*)userObject withLinkedInSkills:(BOOL)isWithLinkedInSkills;
 {
     //Insert a User into database and returns de Is assigned.
     sqlite3 *appDB = nil;
@@ -98,6 +98,11 @@
             [userObject setIdUser:(NSInteger)sqlite3_last_insert_rowid(appDB)];
             //Check if the user has skills to insert into DB
             if ([[userObject skills] count] > 0) {
+                //Check if the user skills are from LinkedIn, if they are, then the skills are inserted into catalog LinkedIn_Skills for future references
+                if (isWithLinkedInSkills) {
+                    [self insertLinkedInUserSkills:[userObject skills]];
+                }
+                //Insert the relation of user skills
                 [self insertUserSkills:[userObject skills] withUserId:[userObject idUser]];
             }
         }
@@ -117,7 +122,29 @@
     //Loop to insert each of the user skills
     for (SkillObject *userSkill in arrUserSkills) {
         if(sqlite3_open(dbPath, &appDB) == SQLITE_OK){
-            insertSQL = [NSString stringWithFormat:@"INSERT INTO USER_SKILLS (ID_USER, ID_SKILL) VALUES (\"%d\", \"%d\")", userId, [userSkill idSkill]];
+            insertSQL = [NSString stringWithFormat:@"INSERT INTO USER_SKILLS (ID_USER, ID_SKILL, LINKEDIN_SKILL) VALUES (\"%d\", \"%d\", \"%d\")", userId, [userSkill idSkill], ([userSkill isLinkedInSkill])?1:0];
+            const char *sqlInsert = [insertSQL UTF8String];
+            sqlite3_prepare_v2(appDB, sqlInsert, -1, &statement, NULL);
+            if (sqlite3_step(statement) != SQLITE_DONE) {
+                NSLog(@"Error %s", sqlite3_errmsg(appDB));
+            }
+        }
+        [DBManager finalizeStatements:statement withDB:appDB];
+    }
+}
+
+#pragma mark -- Insert LinkedIn skills method
++(void)insertLinkedInUserSkills:(NSMutableArray*)arrLinkedInSkills;
+{
+    //Insert the LinkedIn skills into DB, properlly into LinkedIn_Skills table.
+    sqlite3 *appDB = nil;
+    sqlite3_stmt *statement;
+    const char *dbPath = [[DBManager getDBPath] UTF8String];
+    NSString *insertSQL = @"";
+    //Loop to insert each of the LinkedIn skills
+    for (SkillObject *linkedInSkillObject in arrLinkedInSkills) {
+        if (sqlite3_open(dbPath, &appDB) == SQLITE_OK) {
+            insertSQL = [NSString stringWithFormat:@"INSERT INTO LINKEDIN_SKILLS (ID_SKILL, SKILL_NAME) VALUES (\"%d\", \"%@\")",[linkedInSkillObject idSkill],[linkedInSkillObject skillName]];
             const char *sqlInsert = [insertSQL UTF8String];
             sqlite3_prepare_v2(appDB, sqlInsert, -1, &statement, NULL);
             if (sqlite3_step(statement) != SQLITE_DONE) {

@@ -17,8 +17,9 @@
 +(BOOL)checkOrCreateDataBase;
 +(NSString*)getDBPath;
 +(NSMutableArray*)getSkills;
-+(UserObject*)insertUser:(UserObject*)userObject;
++(UserObject*)insertUser:(UserObject*)userObject withLinkedInSkills:(BOOL)isWithLinkedInSkills;
 +(void)insertUserSkills:(NSMutableArray*)arrUserSkills withUserId:(int)userId;
++(void)insertLinkedInUserSkills:(NSMutableArray*)arrLinkedInSkills;
 +(NSMutableArray*)getQuestions;
 +(NSMutableArray*)getQuestionsAnswers:(int)idQuestion;
 

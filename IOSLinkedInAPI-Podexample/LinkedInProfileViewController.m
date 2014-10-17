@@ -18,15 +18,16 @@
 @end
 
 @implementation LinkedInProfileViewController
-@synthesize accessToken, arrSkills, collSkills, lblCurrentSkills, lblFullName, lblPosition, imgProfile, client, progressHUD;
+@synthesize accessToken, arrSkills, collSkills, lblCurrentSkills, lblFullName, lblPosition, imgProfile, client, progressHUD, userObject;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //Initialize UserObject
+    userObject = [[UserObject alloc] init];
     UIBarButtonItem * btnSave = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(doSaveProfile:)];
     self.navigationItem.rightBarButtonItem = btnSave;
     client = [self client];
     [self setTitle:@"Linked In Profile"];
-    //todo: check collection view logic
     [collSkills setDataSource:self];
     [collSkills setDelegate:self];
     [client getAuthorizationCode:^(NSString *code) {
@@ -53,35 +54,60 @@
 
 -(void)doSaveProfile:(id)sender
 {
-    NSLog(@"do save and post notification...");
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.fireDate = [[NSDate alloc] initWithTimeIntervalSinceNow:10];
-    notification.alertBody = @"Feedback on your recent Razorfish interview.";
-    notification.soundName = UILocalNotificationDefaultSoundName;
-    notification.alertAction = @"View";
-    notification.hasAction = YES;
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    //Insert the user data into DB, specify that skills are from LinkedIn
+    userObject = [DBManager insertUser:userObject withLinkedInSkills:YES];
+    //Check if the insert operation was successfully, if not, display an alert to the user.
+    if (![userObject idUser] > 0) {
+        UIAlertView *alertInertError = [[UIAlertView alloc] initWithTitle:@"Attention" message:@"Check your information to perform the action again" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertInertError show];
+    }else{
+        //Create a local notification to show the user that someone has seen his profile.
+        UILocalNotification *notification = [[UILocalNotification alloc] init];
+        notification.fireDate = [[NSDate alloc] initWithTimeIntervalSinceNow:10];
+        notification.alertBody = @"Feedback on your recent Razorfish interview.";
+        notification.soundName = UILocalNotificationDefaultSoundName;
+        notification.alertAction = @"View";
+        notification.hasAction = YES;
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 - (void)requestMe
 {
-    [self.client GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~:(id,first-name,last-name,maiden-name,formatted-name,phonetic-last-name,location:(country:(code)),industry,distance,current-status,skills,phone-numbers,date-of-birth,main-address,positions,educations:(school-name,field-of-study,start-date,end-date,degree,activities))?oauth2_access_token=%@&format=json", accessToken] parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
-        NSLog(@"current user %@", result);
-        NSDictionary * dictPositions = [result objectForKey:@"positions"];
-        NSArray * arrPositions = [dictPositions objectForKey:@"values"];
-        lblFullName.text = [NSString stringWithFormat:@"%@", [result objectForKey:@"formattedName"]];
-        NSDictionary * currentPosition = [arrPositions objectAtIndex:0];
-        lblPosition.text = [NSString stringWithFormat:@"%@ @ %@", [currentPosition objectForKey:@"title"], [[currentPosition objectForKey:@"company"] objectForKey:@"name"]];
-        arrSkills = [NSMutableArray new];
-        arrSkills = [[result objectForKey:@"skills"] objectForKey:@"values"];
-        //todo: add collection view logic
-        [collSkills reloadData];
-        [self requestProfilePicture];
-    }
-             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                 NSLog(@"failed to fetch current user %@", error);
-             }
+    [self.client GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~:(id,first-name,last-name,maiden-name,formatted-name,phonetic-last-name,location:(country:(code)),industry,distance,current-status,skills,phone-numbers,date-of-birth,main-address,positions,educations:(school-name,field-of-study,start-date,end-date,degree,activities))?oauth2_access_token=%@&format=json", accessToken] parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *result)
+        {
+            NSLog(@"current user %@", result);
+            //Set the properties values to the UserObject
+            userObject = [[UserObject alloc] init];
+            [userObject setFirstName:[result objectForKey:@"firstName"]];
+            [userObject setLastName:[result objectForKey:@"lastName"]];
+            NSDictionary * dictPositions = [result objectForKey:@"positions"];
+            NSArray * arrPositions = [dictPositions objectForKey:@"values"];
+            NSDictionary * currentPosition = [arrPositions objectAtIndex:0];
+            [userObject setCompany:[[currentPosition objectForKey:@"company"] objectForKey:@"name"]];
+            [userObject setPosition:[currentPosition objectForKey:@"title"]];
+            lblFullName.text = [NSString stringWithFormat:@"%@ %@",[userObject firstName],[userObject lastName]];
+            lblPosition.text = [NSString stringWithFormat:@"%@ @ %@", [userObject position],[userObject company]];
+            //Extract the user skills from the result dictionary
+            arrSkills = [NSMutableArray new];
+            for (NSMutableDictionary *dictSkillsValues in [[result objectForKey:@"skills"] objectForKey:@"values"]) {
+                SkillObject *linkedInSkillObject = [[SkillObject alloc] init];
+                [linkedInSkillObject setIdSkill:[[dictSkillsValues objectForKey:@"id"] intValue]];
+                [linkedInSkillObject setSkillName:[[dictSkillsValues objectForKey:@"skill"] objectForKey:@"name"]];
+                [linkedInSkillObject setIsLinkedInSkill:YES];
+                [arrSkills addObject:linkedInSkillObject];
+            }
+            //Add the linked skills into UserObject
+            [userObject setSkills:arrSkills];
+            //todo: add collection view logic
+            [collSkills reloadData];
+            [self requestProfilePicture];
+        }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error)
+        {
+            NSLog(@"failed to fetch current user %@", error);
+        }
      ];
 }
 
@@ -106,101 +132,51 @@
 }
 
 #pragma mark -- UICollectionViewDelegate
-
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return (NSInteger)[arrSkills count];
+    return [arrSkills count];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * strIdentifier = @"SkillCell";
     SkillCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:strIdentifier forIndexPath:indexPath];
-    NSDictionary * dictSkill = [arrSkills objectAtIndex:indexPath.row];
-    NSString * strSkill = [[dictSkill objectForKey:@"skill"] objectForKey:@"name"];
-    cell.lblSkill.text = strSkill;
-    [cell.btnRemove setFrame:CGRectMake(10, 0, 40, 40)];
-    [cell.btnRemove setTag:indexPath.row];
-    [cell.btnRemove addTarget:self action:@selector(doRemoveSkill:) forControlEvents:UIControlEventTouchUpInside];
-    cell.layer.borderWidth = 0.6f;
-    cell.layer.borderColor = [UIColor grayColor].CGColor;
+    //Set the SkillObject
+    SkillObject *cellSkillObject = [arrSkills objectAtIndex:indexPath.row];
+    [[cell lblSkill] setText:[cellSkillObject skillName]];
+    [[cell btnRemove] setFrame:CGRectMake(10, 0, 40, 40)];
+    [[cell btnRemove] setTag: [indexPath row]];
+    [[cell btnRemove] addTarget:self action:@selector(doRemoveSkill:) forControlEvents:UIControlEventTouchUpInside];
+    [[cell layer] setBorderWidth: 0.6f];
+    [[cell layer] setBorderColor:[[UIColor grayColor] CGColor]];
     return cell;
-    /*UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:strIdentifier forIndexPath:indexPath];
-    cell = nil;
-    if(cell == nil)
-        cell = [collectionView dequeueReusableCellWithReuseIdentifier:strIdentifier forIndexPath:indexPath];
-    NSDictionary * dictSkill = [arrSkills objectAtIndex:indexPath.row];
-    NSString * strSkill = [[dictSkill objectForKey:@"skill"] objectForKey:@"name"];
+}
 
-    UIView * viewSkill = [[UIView alloc] initWithFrame:CGRectZero];
-    UILabel * lblSkill = [[UILabel alloc] initWithFrame:CGRectZero];
-    [lblSkill setLineBreakMode:NSLineBreakByWordWrapping];
-    lblSkill.text = strSkill;
-    [lblSkill setFont:[UIFont systemFontOfSize:14.0f]];
-    [lblSkill sizeToFit];
-    [lblSkill setBackgroundColor:[UIColor clearColor]];
-    [viewSkill addSubview:lblSkill];
-    [viewSkill sizeToFit];
-    [cell addSubview:viewSkill];
-    cell.layer.borderWidth = 1.0f;
-    cell.layer.borderColor = [UIColor grayColor].CGColor;
-    return cell;
-    */
-    /*
-     UIButton * btnX = [UIButton buttonWithType:UIButtonTypeSystem];
-     [btnX setTitle:@"X" forState:UIControlStateNormal];
-     [btnX setFrame:CGRectMake(cell.layer.bounds.size.width-40, 3, 40, 40)];
-     [cell addSubview:btnX];
-     */
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    CGSize size = [(NSString*)[[arrSkills objectAtIndex:[indexPath row]] skillName] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14.0f]}];
+    size.width += 34;
+    return size;
 }
 
 -(void)doRemoveSkill:(id)sender
 {
-    NSMutableDictionary * tmpDictSkill = [arrSkills objectAtIndex:[(UIButton*)sender tag]];
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Confirmation!" message:[NSString stringWithFormat:@"Are You sure You want to delete: %@ from skills list?", [[tmpDictSkill objectForKey:@"skill"] objectForKey:@"name"]] delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
-    alert.tag = [(UIButton*)sender tag];
+    //Ask for user confirmation to delete a skill from the list
+    SkillObject * tmpSkillObject = [arrSkills objectAtIndex:[(UIButton*)sender tag]];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention" message:[NSString stringWithFormat:@"Do you want to delete: %@ from skills list?",[tmpSkillObject skillName]] delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+    [alert setTag:[(UIButton*)sender tag]];
     [alert show];
 }
 
 #pragma mark -- UIAlertViewDelegate
-
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 1)
     {
         NSMutableArray * tmpArrSkills = [arrSkills mutableCopy];
-        [tmpArrSkills removeObjectAtIndex:alertView.tag];
+        [tmpArrSkills removeObjectAtIndex:[alertView tag]];
         arrSkills = tmpArrSkills;
         [collSkills reloadData];
     }
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSString * strSkill = [[[arrSkills objectAtIndex:indexPath.row] objectForKey:@"skill"] objectForKey:@"name"];
-    CGSize size = [(NSString*)strSkill sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14.0f]}];
-    size.width += 34;
-    return size;
-}
-/*
-#pragma mark -- UITableViewDelegate
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return (NSInteger)[arrSkills count];
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString * strReusableIdentifier = @"CellSkill";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:strReusableIdentifier];
-    cell = nil;
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:strReusableIdentifier];
-    }
-    NSDictionary * dictSkill = [arrSkills objectAtIndex:indexPath.row];
-    cell.textLabel.text = [[dictSkill objectForKey:@"skill"] objectForKey:@"name"];
-    
-    return cell;
-}
- */
 @end
