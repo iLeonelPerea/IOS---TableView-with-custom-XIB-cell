@@ -9,6 +9,7 @@
 #import "LinkedInProfileViewController.h"
 #import "SkillCell.h"
 #import <QuartzCore/QuartzCore.h>
+#import "RazorFishSkillsViewController.h"
 
 #define LINKEDIN_CLIENT_ID @"753l2vlirmrzay"
 #define LINKEDIN_CLIENT_SECRET @"pgBfsLhgCKBCZPdn"
@@ -18,12 +19,16 @@
 @end
 
 @implementation LinkedInProfileViewController
-@synthesize accessToken, arrSkills, collSkills, lblCurrentSkills, lblFullName, lblPosition, imgProfile, client, progressHUD, userObject;
+@synthesize accessToken, arrSkills, collSkills, lblCurrentSkills, lblFullName, lblPosition, imgProfile, client, progressHUD, userObject, arrLinkedInSkills, arrSelectedSkills;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     //Initialize UserObject
     userObject = [[UserObject alloc] init];
+    //Initialize skills arrays
+    arrLinkedInSkills = [[NSMutableArray alloc] init];
+    arrSelectedSkills = [[NSMutableArray alloc] init];
+    arrSkills = [[NSMutableArray alloc] init];
     UIBarButtonItem * btnSave = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(doSaveProfile:)];
     self.navigationItem.rightBarButtonItem = btnSave;
     client = [self client];
@@ -45,6 +50,11 @@
     }                     failure:^(NSError *error) {
         NSLog(@"Authorization failed %@", error);
     }];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [collSkills reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -92,14 +102,15 @@
             lblFullName.text = [NSString stringWithFormat:@"%@ %@",[userObject firstName],[userObject lastName]];
             lblPosition.text = [NSString stringWithFormat:@"%@ @ %@", [userObject position],[userObject company]];
             //Extract the user skills from the result dictionary
-            arrSkills = [NSMutableArray new];
             for (NSMutableDictionary *dictSkillsValues in [[result objectForKey:@"skills"] objectForKey:@"values"]) {
                 SkillObject *linkedInSkillObject = [[SkillObject alloc] init];
                 [linkedInSkillObject setIdSkill:[[dictSkillsValues objectForKey:@"id"] intValue]];
                 [linkedInSkillObject setSkillName:[[dictSkillsValues objectForKey:@"skill"] objectForKey:@"name"]];
                 [linkedInSkillObject setIsLinkedInSkill:YES];
-                [arrSkills addObject:linkedInSkillObject];
+                [arrLinkedInSkills addObject:linkedInSkillObject];
             }
+            //Copy LinkedInSkills into general Skills array
+            arrSkills = [arrLinkedInSkills mutableCopy];
             //todo: add collection view logic
             [collSkills reloadData];
             [self requestProfilePicture];
@@ -176,6 +187,39 @@
         [tmpArrSkills removeObjectAtIndex:[alertView tag]];
         arrSkills = tmpArrSkills;
         [collSkills reloadData];
+    }
+}
+
+#pragma mark -- Set selected skills delegate
+-(void)doSetSelectedRazorFishSkills:(NSMutableArray*)arrReceivedSelectedSkills;
+{
+    //Check for selected Skills from arrReceivedSelectedSkills which cointans all the skills displayed to select by user
+    if ([arrReceivedSelectedSkills count] > 0) {
+        //Clean the main skills array
+        [arrSkills removeAllObjects];
+        [arrSelectedSkills removeAllObjects];
+        //Insert the skills selected by user from Razorfish to main skills array
+        for (SkillObject *razorfishSkillObject in arrReceivedSelectedSkills) {
+            [arrSkills addObject:razorfishSkillObject];
+        }
+        //Insert the LinkedIn skills to main skills array
+        for (SkillObject *linkedinSkillObject in arrLinkedInSkills) {
+            [arrSkills addObject:linkedinSkillObject];
+        }
+        //Store the skills selected by user in another array, and it the user returns to select skills, it will possible to display selected ones
+        arrSelectedSkills = [arrReceivedSelectedSkills mutableCopy];
+    }
+}
+
+#pragma mark -- Delegate
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if(segue.identifier != nil)
+    {
+        RazorFishSkillsViewController * rfSVC = [segue destinationViewController];
+        [rfSVC setDelegate:(id)self];
+        [rfSVC setViewOrigin:@"LinkedInProfileViewController"];
+        [rfSVC doLoadSkills:[DBManager getSkills] withSelectedSkills:arrSelectedSkills];
     }
 }
 

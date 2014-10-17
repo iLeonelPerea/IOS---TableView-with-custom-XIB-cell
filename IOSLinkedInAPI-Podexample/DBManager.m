@@ -100,7 +100,13 @@
             if ([[userObject skills] count] > 0) {
                 //Check if the user skills are from LinkedIn, if they are, then the skills are inserted into catalog LinkedIn_Skills for future references
                 if (isWithLinkedInSkills) {
-                    [self insertLinkedInUserSkills:[userObject skills]];
+                    NSMutableArray *tmpLinkedSkillsArray = [[NSMutableArray alloc] init];
+                    for (SkillObject *tmpSkillObject in [userObject skills]) {
+                        if ([tmpSkillObject isLinkedInSkill]) {
+                            [tmpLinkedSkillsArray addObject:tmpSkillObject];
+                        }
+                    }
+                    [self insertLinkedInUserSkills:tmpLinkedSkillsArray];
                 }
                 //Insert the relation of user skills
                 [self insertUserSkills:[userObject skills] withUserId:[userObject idUser]];

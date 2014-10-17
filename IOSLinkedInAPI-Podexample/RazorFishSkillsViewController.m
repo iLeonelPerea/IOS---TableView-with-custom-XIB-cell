@@ -14,7 +14,7 @@
 @end
 
 @implementation RazorFishSkillsViewController
-@synthesize tblSkills, arrSkills, arrSkillsSearched, isSearching, isSearchVisible, searchBar;
+@synthesize tblSkills, arrSkills, arrSkillsSearched, isSearching, isSearchVisible, searchBar, viewOrigin;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,7 +34,12 @@
 #pragma mark -- Save button delegate
 -(void)doSaveSelectedSkills:(UIBarButtonItem*)sender
 {
-    [self.delegate doSetSelectedSkills:arrSkills];
+    if ([viewOrigin isEqualToString:@"ManualViewProfileViewController"]) {
+        [self.delegate doSetSelectedSkills:arrSkills];
+    }
+    if ([viewOrigin isEqualToString:@"LinkedInProfileViewController"]) {
+        [self.linkedInDelegate doSetSelectedRazorFishSkills:arrSkills];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

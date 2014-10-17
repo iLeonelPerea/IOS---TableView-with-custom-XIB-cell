@@ -210,6 +210,7 @@
     {
         RazorFishSkillsViewController * rfSVC = [segue destinationViewController];
         [rfSVC setDelegate:(id)self];
+        [rfSVC setViewOrigin:@"ManualViewProfileViewController"];
         [rfSVC doLoadSkills:[DBManager getSkills] withSelectedSkills:arrSelectedSkills];
     }
 }
