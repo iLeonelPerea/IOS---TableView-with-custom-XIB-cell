@@ -78,7 +78,56 @@
     return dictToReturn;
 }
 
-#pragma mark -- Get feedback questions from database
+#pragma mark -- Feedbak methods
+//Insert feedback in local DB.
++(int)insertFeedback: (FeedbackObject *)feedbackObject
+{
+    sqlite3 *appDB = nil;
+    sqlite3_stmt *statement;
+    const char *dbPath = [[DBManager getDBPath] UTF8String] ;
+    int insertedFeedback = 0;
+    
+    if (sqlite3_open(dbPath, &appDB) == SQLITE_OK) {
+        NSString *selectSQL;
+        if (feedbackObject.idFeedback != 0) {
+            selectSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO FEEDBACK (ID_FEEDBACK, ID_USER, ID_INTERVIEWER, DATE_FEEDBACK) VALUES (\"%d\", \"%d\",\"%d\",\"%f\")", feedbackObject.idFeedback, feedbackObject.idInterview, feedbackObject.idUser, (double)[[NSDate date] timeIntervalSince1970]];
+        }else{
+            selectSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO FEEDBACK (ID_USER, ID_INTERVIEWER, DATE_FEEDBACK) VALUES (\"%d\",\"%d\",\"%f\")",feedbackObject.idInterview, feedbackObject.idUser, (double)[[NSDate date] timeIntervalSince1970]];
+        }
+        const char *selectStmt = [selectSQL UTF8String];
+        sqlite3_prepare_v2(appDB, selectStmt, -1, &statement, nil);
+        if (sqlite3_step(statement) != SQLITE_DONE)
+        {
+            NSLog(@"Fail error %s - %d", sqlite3_errmsg(appDB), feedbackObject.idInterview);
+        }else
+        {
+            insertedFeedback = (NSInteger)sqlite3_last_insert_rowid(appDB);
+        }
+        [DBManager finalizeStatements:statement withDB:appDB];
+    }
+    return insertedFeedback;
+}
+
+#pragma mark -- Questions methods
+//Insert feedback in local DB.
++(void)insertQuestionsAnswer: (int)idFeedback withIdQuestion:(int)idQuestion withIdAnswer:(int)idAnswer
+{
+    sqlite3 *appDB = nil;
+    sqlite3_stmt *statement;
+    const char *dbPath = [[DBManager getDBPath] UTF8String];
+    
+    if (sqlite3_open(dbPath, &appDB) == SQLITE_OK) {
+        NSString *selectSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO FEEDBACK_DETAIL (ID_FEEDBACK, ID_QUESTION, ID_ANSWER) VALUES (\"%d\",\"%d\",\"%d\")",idFeedback, idQuestion, idAnswer];
+        const char *selectStmt = [selectSQL UTF8String];
+        sqlite3_prepare_v2(appDB, selectStmt, -1, &statement, nil);
+        if (sqlite3_step(statement) != SQLITE_DONE)
+        {
+            NSLog(@"Fail error %s - %d", sqlite3_errmsg(appDB), idFeedback);
+        }
+        [DBManager finalizeStatements:statement withDB:appDB];
+    }
+}
+
 //Get the questions store in local DB.
 +(NSMutableArray*)getQuestions
 {
@@ -95,6 +144,7 @@
             QuestionObject *newQuestionObject = [[QuestionObject alloc] init];
             [newQuestionObject setIdQuestion:sqlite3_column_int(statement, 0)];
             [newQuestionObject setDescription:[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 1)]];
+            [newQuestionObject setActiveAnswer:-1];
             newQuestionObject.arrQuestionAnswerObject = [self getQuestionsAnswers:newQuestionObject.idQuestion];
             [dictToReturn addObject:newQuestionObject];
         }

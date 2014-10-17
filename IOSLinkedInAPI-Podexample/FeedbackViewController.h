@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DBManager.h"
+#import "FeedbackObject.h"
 #import "QuestionObject.h"
 #import "QuestionAnswerObject.h"
 
@@ -25,7 +26,9 @@
 @property (nonatomic, strong) IBOutlet UIButton *btnSkip;
 @property (nonatomic, assign) int directionChangePageControl; //0:Left 1:Rigth
 @property (nonatomic, assign) BOOL isPageControlInUse;
+@property (nonatomic, strong) FeedbackObject *feedbackObject;
 
+- (IBAction)doAnswerQuestion:(id)sender;
 - (IBAction)doChangePage;
 - (IBAction)doSkip;
 

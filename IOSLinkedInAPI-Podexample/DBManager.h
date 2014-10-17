@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FeedbackObject.h"
 #import "UserObject.h"
 #import "SkillObject.h"
 #import "QuestionObject.h"
@@ -21,5 +22,7 @@
 +(NSMutableArray*)getSkills;
 +(NSMutableArray*)getQuestions;
 +(NSMutableArray*)getQuestionsAnswers:(int)idQuestion;
++(int)insertFeedback: (FeedbackObject *)feedbackOubject;
++(void)insertQuestionsAnswer: (int)idFeedback withIdQuestion:(int)idQuestion withIdAnswer:(int)idAnswer;
 
 @end

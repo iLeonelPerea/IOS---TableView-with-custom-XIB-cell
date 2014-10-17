@@ -10,6 +10,6 @@
 
 @implementation QuestionObject
 
-@synthesize idQuestion, description, arrQuestionAnswerObject;
+@synthesize idQuestion, description, arrQuestionAnswerObject, activeAnswer;
 
 @end
