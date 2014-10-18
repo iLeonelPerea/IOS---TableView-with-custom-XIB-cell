@@ -61,6 +61,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -- Save profile delegate
 -(void)doSaveProfile:(id)sender
 {
     //Add the linked skills into UserObject
@@ -110,7 +111,6 @@
             }
             //Copy LinkedInSkills into general Skills array
             arrSkills = [arrLinkedInSkills mutableCopy];
-            //todo: add collection view logic
             [collSkills reloadData];
             [self requestProfilePicture];
         }
@@ -185,37 +185,38 @@
         NSMutableArray * tmpArrSkills = [arrSkills mutableCopy];
         [tmpArrSkills removeObjectAtIndex:[alertView tag]];
         arrSkills = tmpArrSkills;
+        //Update orignal arrays before push the RazorFishViewController
+        [arrSelectedSkills removeAllObjects];
+        [arrLinkedInSkills removeAllObjects];
+        for (SkillObject *tmpSkillObject in arrSkills) {
+            if ([tmpSkillObject isLinkedInSkill]) {
+                [arrLinkedInSkills addObject:tmpSkillObject];
+            }else{
+                [arrSelectedSkills addObject:tmpSkillObject];
+            }
+        }
         [collSkills reloadData];
     }
 }
-/*
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSString * strSkill = [[[arrSkills objectAtIndex:indexPath.row] objectForKey:@"skill"] objectForKey:@"name"];
-    CGSize size = [(NSString*)strSkill sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14.0f]}];
-    size.width += 34;
-    return size;
-}
-*/
 
 #pragma mark -- Set selected skills delegate
 -(void)doSetSelectedRazorFishSkills:(NSMutableArray*)arrReceivedSelectedSkills;
 {
     //Check for selected Skills from arrReceivedSelectedSkills which cointans all the skills displayed to select by user
-    //@Paco: todo: fix skills collection, they are multiplied by n.
     if ([arrReceivedSelectedSkills count] > 0) {
         //Clean the main skills array
         [arrSkills removeAllObjects];
-        [arrSelectedSkills removeAllObjects];
         //Insert the skills selected by user from Razorfish to main skills array
         for (SkillObject *razorfishSkillObject in arrReceivedSelectedSkills) {
-            [arrSkills addObject:razorfishSkillObject];
+            if ([razorfishSkillObject isSelected])
+            {
+                [arrSkills addObject:razorfishSkillObject];
+            }
         }
         //Insert the LinkedIn skills to main skills array
         for (SkillObject *linkedinSkillObject in arrLinkedInSkills) {
             [arrSkills addObject:linkedinSkillObject];
         }
-        //Store the skills selected by user in another array, and it the user returns to select skills, it will possible to display selected ones
-        arrSelectedSkills = [arrReceivedSelectedSkills mutableCopy];
     }
 }
 
@@ -225,9 +226,7 @@
     if(segue.identifier != nil)
     {
         RazorFishSkillsViewController * rfSVC = [segue destinationViewController];
-        //[rfSVC setDelegate:(id)self]; //@Paco, check this assignation is for manual profile ;)
         [rfSVC setLinkedInDelegate:(id)self];
-        [rfSVC doLoadSkills:[DBManager getSkills] withSelectedSkills:nil];
         [rfSVC setViewOrigin:@"LinkedInProfileViewController"];
         [rfSVC doLoadSkills:[DBManager getSkills] withSelectedSkills:arrSelectedSkills];
     }
