@@ -10,7 +10,7 @@
 
 @implementation SkillObject
 
-@synthesize idSkill, skillName, skillCategoryObject, isSelected;
+@synthesize idSkill, skillName, skillCategoryObject, isLinkedInSkill, isSelected;
 
 #pragma mark -- Custom init method
 //Modify Init method to set defaults properties values
@@ -22,6 +22,7 @@
         self.skillName = @"";
         SkillCategoryObject *newSkillCategoryObject = [[SkillCategoryObject alloc] init];
         self.skillCategoryObject = newSkillCategoryObject;
+        self.isLinkedInSkill = NO;
         self.isSelected = NO;
     }
     return self;
@@ -34,6 +35,7 @@
     if (self) {
         self.idSkill = [coder decodeIntForKey:@"idSkill"];
         self.skillName = [coder decodeObjectForKey:@"skillName"];
+        self.isLinkedInSkill = [coder decodeBoolForKey:@"isLinkedInSkill"];
         self.isSelected = [coder decodeBoolForKey:@"isSelected"];
     }
     return self;
@@ -44,6 +46,7 @@
 {
     [coder encodeInt:idSkill forKey:@"idSkill"];
     [coder encodeObject:skillName forKey:@"skillName"];
+    [coder encodeBool:isLinkedInSkill forKey:@"isLinkedInSkill"];
     [coder encodeBool:isSelected forKey:@"isSelected"];
 }
 

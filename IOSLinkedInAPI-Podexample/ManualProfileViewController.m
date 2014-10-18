@@ -65,8 +65,8 @@
         [userObject setCompany:[txtCompany text]];
         [userObject setPosition:[txtPosition text]];
         [userObject setSkills:[arrSelectedSkills mutableCopy]];
-        //Call the method to insert the user, if receive 0, the user wasn't added into DB
-        userObject = [DBManager insertUser:userObject];
+        //Call the method to insert the user, if receive 0, the user wasn't added into DB. Specify that skills aren't from LinkedIn
+        userObject = [DBManager insertUser:userObject withLinkedInSkills:NO];
         if (![userObject idUser] > 0) {
             UIAlertView *alertInsertError = [[UIAlertView alloc] initWithTitle:@"Attention" message:@"Check your information to perform the action again" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] ;
             [alertInsertError show];
@@ -186,11 +186,8 @@
 }
 
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    SkillObject *collectionSkillObject = [arrSelectedSkills objectAtIndex:[indexPath row]];
-    NSString *strSkill = [collectionSkillObject skillName];
-    CGSize size = [(NSString*)strSkill sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14.0f]}];
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    CGSize size = [(NSString*)[[arrSelectedSkills objectAtIndex:[indexPath row]] skillName] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14.0f]}];
     size.width += 34;
     return size;
 }
@@ -213,6 +210,7 @@
     {
         RazorFishSkillsViewController * rfSVC = [segue destinationViewController];
         [rfSVC setDelegate:(id)self];
+        [rfSVC setViewOrigin:@"ManualViewProfileViewController"];
         [rfSVC doLoadSkills:[DBManager getSkills] withSelectedSkills:arrSelectedSkills];
     }
 }

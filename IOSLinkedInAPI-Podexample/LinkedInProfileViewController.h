@@ -12,10 +12,20 @@
 #import "LIALinkedInApplication.h"
 #import <NZCircularImageView.h>
 #import <JGProgressHUD.h>
+/*
 #import "SkillCell.h"
 #import "RazorFishSkillsViewController.h"
+*/
+#import "SkillObject.h"
+#import "UserObject.h"
+#import "DBManager.h"
+
+@protocol iLinkedInDelegate <NSObject>
+-(void)doSetSelectedRazorFishSkills:(NSMutableArray*)arrReceivedSelectedSkills;
+@end
 
 @interface LinkedInProfileViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIAlertViewDelegate>
+
 @property (nonatomic, strong) NSString * accessToken;
 @property (nonatomic, strong) LIALinkedInHttpClient * client;
 @property (nonatomic, strong) IBOutlet NZCircularImageView * imgProfile;
@@ -25,4 +35,8 @@
 @property (nonatomic, strong) JGProgressHUD * progressHUD;
 @property (nonatomic, strong) IBOutlet UICollectionView * collSkills;
 @property (nonatomic, strong) NSMutableArray * arrSkills;
+@property (nonatomic, strong) UserObject *userObject;
+@property (nonatomic, strong) NSMutableArray *arrLinkedInSkills;
+@property (nonatomic, strong) NSMutableArray *arrSelectedSkills;
+
 @end
